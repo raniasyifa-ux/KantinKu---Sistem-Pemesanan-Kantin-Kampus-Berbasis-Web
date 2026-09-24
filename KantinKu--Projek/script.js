@@ -1,51 +1,36 @@
-// Mengambil elemen tombol dari HTML
-const btnMenu = document.getElementById("btnMenu");
-const btnBayar = document.getElementById("btnBayar");
-const btnStatus = document.getElementById("btnStatus");
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartBadge();
+  checkLoginStatus();
+});
 
-// Mengambil elemen pop-up
-const popup = document.getElementById("popup");
-const popupTitle = document.getElementById("popupTitle");
-const popupMessage = document.getElementById("popupMessage");
-const btnClose = document.getElementById("btnClose");
+// Memperbarui indikator jumlah item pada badge navbar
+function updateCartBadge() {
+  const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+  const totalItems = keranjang.reduce((sum, item) => sum + (item.jumlah || item.quantity || 1), 0);
 
-
-// Fungsi untuk menampilkan pop-up
-function tampilkanPopup(judul, pesan) {
-    popupTitle.textContent = judul;
-    popupMessage.textContent = pesan;
-    popup.style.display = "flex";
+  const cartBadge = document.getElementById('cart-badge');
+  if (cartBadge) {
+    cartBadge.textContent = totalItems;
+    cartBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+  }
 }
 
+// Memeriksa status login sesi pengguna
+function checkLoginStatus() {
+  const currentUser = JSON.parse(localStorage.getItem('kantinku_session'));
+  const authContainer = document.querySelector('.nav-auth');
 
-// Tombol Menu
-btnMenu.addEventListener("click", function() {
-    tampilkanPopup(
-        "🍜 Menu KantinKu",
-        "Halaman Menu masih dalam tahap pengembangan. Coming soon ya!"
-    );
-});
+  if (currentUser && authContainer) {
+    authContainer.innerHTML = `
+      <span style="color: var(--text-color); font-weight: 600; margin-right: 10px;">
+        Hai, ${currentUser.username}
+      </span>
+      <button id="btn-logout" class="btn-login" style="cursor: pointer; background: transparent;">Logout</button>
+    `;
 
-
-// Tombol Pembayaran
-btnBayar.addEventListener("click", function() {
-    tampilkanPopup(
-        "💳 Pembayaran KantinKu",
-        "Halaman Pembayaran masih dalam tahap pengembangan. Coming soon ya!"
-    );
-});
-
-
-// Tombol Status
-btnStatus.addEventListener("click", function() {
-    tampilkanPopup(
-        "📦 Status Pesanan",
-        "Halaman Status masih dalam tahap pengembangan. Coming soon ya!"
-    );
-});
-
-
-// Tombol tutup pop-up
-btnClose.addEventListener("click", function() {
-    popup.style.display = "none";
-}); 
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      localStorage.removeItem('kantinku_session');
+      window.location.reload();
+    });
+  }
+}
