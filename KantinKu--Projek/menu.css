@@ -1,0 +1,491 @@
+:root{  
+    --bg:#DDEBF4;  
+    --card:#FFFDF9;  
+    --btn:#D98F9D;  
+    --btn2:#C77887;  
+    --text:#4A4144;  
+    --muted:#746B6E;  
+    --border:#E5DADD;  
+}  
+  
+*{  
+    margin:0;  
+    padding:0;  
+    box-sizing:border-box;  
+}  
+  
+html{  
+    scroll-behavior:smooth;  
+}  
+  
+body{  
+    background:var(--bg);  
+    color:var(--text);  
+    font-family:Arial,sans-serif;  
+}  
+  
+button{  
+    font:inherit;  
+    cursor:pointer;  
+}  
+  
+  
+/* HEADER */  
+  
+header{  
+    padding:22px 6%;  
+    background:var(--card);  
+    border-bottom:1px solid var(--border);  
+    display:flex;  
+    align-items:center;  
+    justify-content:space-between;  
+}  
+  
+header h1{  
+    font-size:34px;  
+}  
+  
+nav{  
+    display:flex;  
+    align-items:center;  
+    gap:28px;  
+}  
+  
+nav a{  
+    color:var(--text);  
+    text-decoration:none;  
+    font-weight:bold;  
+}  
+  
+nav a:hover{  
+    color:var(--btn2);  
+}  
+  
+nav a:last-child{  
+    padding:11px 17px;  
+    border-radius:25px;  
+    background:var(--btn);  
+    color:white;  
+}  
+  
+  
+/* MAIN */  
+  
+main{  
+    width:min(1380px,90%);  
+    margin:auto;  
+    padding:45px 0 80px;  
+}  
+  
+main>h2{  
+    font-size:34px;  
+    margin-bottom:8px;  
+}  
+  
+main>p{  
+    color:var(--muted);  
+    margin-bottom:35px;  
+}  
+  
+  
+/* BEST SELLER */  
+  
+.best-seller{  
+    margin-bottom:55px;  
+}  
+  
+.best-seller>h2,  
+main>section>h2{  
+    margin-bottom:20px;  
+    font-family:Georgia,serif;  
+    font-size:32px;  
+}  
+  
+.best-seller .menu-container{  
+    grid-template-columns:repeat(3,1fr);  
+}  
+  
+.best-badge{  
+    display:inline-block;  
+    margin-bottom:8px;  
+    padding:5px 10px;  
+    border-radius:20px;  
+    background:#F5E1E5;  
+    color:var(--btn2);  
+    font-size:11px;  
+    font-weight:bold;  
+}  
+
+
+/* RAPIN CARD ATAS */  
+
+.best-seller .menu-container > *{  
+    padding:20px 22px;  
+}  
+
+.best-seller .menu-container > * h3{  
+    margin:0 0 7px;  
+    font-size:21px;  
+}  
+
+.best-seller .menu-container > * p{  
+    margin:0;  
+    min-height:42px;  
+    color:var(--muted);  
+    font-size:14px;  
+    line-height:1.5;  
+}  
+
+.best-seller .menu-container > * h4{  
+    margin:10px 0 0;  
+    color:var(--btn2);  
+    font-size:18px;  
+    font-weight:bold;  
+}  
+  
+  
+/* CARD CONTAINER */  
+  
+.menu-container{  
+    display:grid;  
+    grid-template-columns:repeat(3,1fr);  
+    gap:28px;  
+}  
+  
+  
+/* CARD */  
+  
+.menu-card{  
+    position:relative;  
+    overflow:hidden;  
+    background:var(--card);  
+    border:1px solid var(--border);  
+    border-radius:22px;  
+    padding-bottom:20px;  
+    transition:.2s;  
+}  
+  
+.menu-card:hover{  
+    transform:translateY(-5px);  
+}  
+  
+  
+/* IMAGE */  
+  
+.menu-card>img{  
+    width:100%;  
+    height:285px;  
+    display:block;  
+    object-fit:cover;  
+    background:#EEF5F8;  
+}  
+  
+  
+/* CONTENT */  
+  
+.menu-card>h3,  
+.menu-card>p,  
+.menu-card>h4,  
+.quantity-control,  
+.btn-pesan{  
+    margin-left:22px;  
+    margin-right:22px;  
+}  
+  
+.menu-card>h3{  
+    margin-top:18px;  
+    font-size:21px;  
+}  
+  
+.menu-card>p{  
+    min-height:42px;  
+    margin-top:7px;  
+    color:var(--muted);  
+    font-size:14px;  
+    line-height:1.5;  
+}  
+  
+.menu-card>h4{  
+    margin-top:10px;  
+    color:var(--btn2);  
+    font-size:18px;  
+}  
+  
+  
+/* QUANTITY */  
+  
+.quantity-control{  
+    margin-top:15px;  
+    margin-bottom:15px;  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+    gap:15px;  
+}  
+  
+.quantity-control button{  
+    width:40px;  
+    height:40px;  
+    border:0;  
+    border-radius:9px;  
+    background:var(--bg);  
+    color:var(--text);  
+    font-weight:bold;  
+    font-size:18px;  
+}  
+  
+.quantity-control span{  
+    min-width:20px;  
+    text-align:center;  
+}  
+  
+  
+/* BUTTON */  
+  
+.btn-pesan{  
+    width:calc(100% - 44px);  
+    padding:13px;  
+    border:0;  
+    border-radius:12px;  
+    background:var(--btn);  
+    color:white;  
+    font-weight:bold;  
+}  
+  
+.btn-pesan:hover{  
+    background:var(--btn2);  
+}  
+  
+  
+/* LINK */  
+  
+.keranjang-link{  
+    margin-top:35px;  
+    text-align:center;  
+}  
+  
+.keranjang-link a{  
+    display:inline-block;  
+    padding:12px 22px;  
+    border-radius:12px;  
+    background:var(--card);  
+    color:var(--text);  
+    text-decoration:none;  
+    border:1px solid var(--border);  
+    font-weight:bold;  
+}  
+ 
+ 
+/* TAMBAHAN KERANJANG */ 
+ 
+.cart{ 
+    display:flex; 
+    align-items:center; 
+    gap:7px; 
+} 
+ 
+.cart-count{ 
+    min-width:22px; 
+    height:22px; 
+    padding:2px 6px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    border-radius:50%; 
+    background:var(--card); 
+    color:var(--btn2); 
+    font-size:12px; 
+    font-weight:bold; 
+} 
+ 
+.payment-btn{ 
+    padding:11px 17px; 
+    border:0; 
+    border-radius:25px; 
+    background:var(--btn); 
+    color:white; 
+} 
+ 
+.payment-btn:hover{ 
+    background:var(--btn2); 
+} 
+ 
+ 
+/* POPUP */ 
+ 
+.overlay{ 
+    position:fixed; 
+    inset:0; 
+    display:none; 
+    align-items:center; 
+    justify-content:center; 
+    background:rgba(74,65,68,.35); 
+    z-index:1000; 
+} 
+ 
+.overlay.show{ 
+    display:flex; 
+} 
+ 
+.popup{ 
+    position:relative; 
+    width:380px; 
+    max-width:90%; 
+    max-height:85vh; 
+    overflow:auto; 
+    padding:30px; 
+    background:var(--card); 
+    border:1px solid var(--border); 
+    border-radius:22px; 
+    box-shadow:0 10px 30px rgba(0,0,0,.15); 
+} 
+ 
+.popup h2{ 
+    margin-bottom:20px; 
+    font-family:Georgia,serif; 
+} 
+ 
+.close{ 
+    position:absolute; 
+    top:10px; 
+    right:17px; 
+    border:0; 
+    background:none; 
+    color:var(--text); 
+    font-size:28px; 
+} 
+ 
+.cart-item{ 
+    display:flex; 
+    justify-content:space-between; 
+    gap:10px; 
+    padding:12px 0; 
+    border-bottom:1px solid var(--border); 
+    font-size:14px; 
+} 
+ 
+.cart-item strong{ 
+    color:var(--btn2); 
+} 
+ 
+.cart-total{ 
+    display:flex; 
+    justify-content:space-between; 
+    margin:20px 0; 
+    font-size:18px; 
+} 
+ 
+.cart-total strong, 
+.popup h3{ 
+    color:var(--btn2); 
+} 
+ 
+.btn-popup, 
+.btn-bayar{ 
+    width:100%; 
+    padding:13px; 
+    border:0; 
+    border-radius:12px; 
+    background:var(--btn); 
+    color:white; 
+    font-weight:bold; 
+} 
+ 
+.btn-popup:hover, 
+.btn-bayar:hover{ 
+    background:var(--btn2); 
+} 
+ 
+.payment-text{ 
+    color:var(--muted); 
+} 
+ 
+.popup h3{ 
+    margin:8px 0 20px; 
+    font-size:24px; 
+} 
+ 
+.popup label{ 
+    display:block; 
+    margin-bottom:7px; 
+    font-weight:bold; 
+} 
+ 
+.popup select{ 
+    width:100%; 
+    padding:12px; 
+    margin-bottom:18px; 
+    border:1px solid var(--border); 
+    border-radius:10px; 
+    background:white; 
+    color:var(--text); 
+} 
+ 
+ 
+/* NOTIFIKASI */ 
+ 
+.notif{ 
+    position:fixed; 
+    right:25px; 
+    bottom:25px; 
+    padding:12px 18px; 
+    background:var(--text); 
+    color:white; 
+    border-radius:10px; 
+    font-size:14px; 
+    opacity:0; 
+    transform:translateY(15px); 
+    pointer-events:none; 
+    transition:.25s; 
+    z-index:1100; 
+} 
+ 
+.notif.show{ 
+    opacity:1; 
+    transform:translateY(0); 
+} 
+  
+  
+/* RESPONSIVE */  
+  
+@media(max-width:950px){  
+    .menu-container,  
+    .best-seller .menu-container{  
+        grid-template-columns:repeat(2,1fr);  
+    }  
+}  
+  
+@media(max-width:650px){  
+    header{  
+        padding:18px 5%;  
+        flex-direction:column;  
+        gap:15px;  
+    }  
+  
+    header h1{  
+        font-size:30px;  
+    }  
+  
+    nav{  
+        gap:18px;  
+        flex-wrap:wrap;  
+        justify-content:center; 
+    }  
+  
+    main{  
+        width:90%;  
+    }  
+  
+    .menu-container,  
+    .best-seller .menu-container{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .menu-card>img{  
+        height:250px;  
+    }  
+  
+    main>h2{  
+        font-size:28px;  
+    }  
+}
