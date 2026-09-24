@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu KantinKu</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+
+<body>
+
+<header>
+    <h1>KantinKu</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+
+        <a href="#keranjang" class="cart" onclick="bukaKeranjang(event)">
+            Keranjang <span class="cart-count">0</span>
+        </a>
+
+        <button class="payment-btn" onclick="bukaPembayaran()">
+            Pembayaran
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <h2>Menu KantinKu</h2>
+    <p>Pilih makanan dan minuman favoritmu.</p>
+
+
+    <!-- BEST SELLER -->
+
+    <section class="best-seller">
+        <h2>Best Seller</h2>
+
+        <div class="menu-container">
+
+            <div class="menu-card">
+                <img src="PEMPEK.jpeg" alt="Pempek">
+                <div class="best-content">
+                    <span class="best-badge">Best Seller</span>
+                    <h3>Pempek</h3>
+                    <p>Pempek ikan dengan kuah cuko khas.</p>
+                    <h4>Rp15.000</h4>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="NASI GORENG.jpeg" alt="Nasi Goreng">
+                <div class="best-content">
+                    <span class="best-badge">Best Seller</span>
+                    <h3>Nasi Goreng</h3>
+                    <p>Nasi goreng gurih dengan telur dan ayam.</p>
+                    <h4>Rp15.000</h4>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="KOPI SUSU.jpeg" alt="Es Kopi Susu">
+                <div class="best-content">
+                    <span class="best-badge">Best Seller</span>
+                    <h3>Es Kopi Susu</h3>
+                    <p>Kopi susu dingin dengan rasa creamy.</p>
+                    <h4>Rp12.000</h4>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MAKANAN -->
+
+    <section>
+        <h2>Makanan</h2>
+
+        <div class="menu-container">
+
+            <div class="menu-card">
+                <img src="NASI GORENG.jpeg" alt="Nasi Goreng">
+                <h3>Nasi Goreng</h3>
+                <p>Nasi goreng gurih dengan telur dan ayam.</p>
+                <h4>Rp15.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('nasi-goreng')">−</button>
+                    <span id="jumlah-nasi-goreng">1</span>
+                    <button onclick="tambahJumlah('nasi-goreng')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('nasi-goreng','Nasi Goreng',15000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="MIE AYAM.jpeg" alt="Mie Ayam">
+                <h3>Mie Ayam</h3>
+                <p>Mie lembut dengan ayam gurih dan kuah.</p>
+                <h4>Rp14.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('mie-ayam')">−</button>
+                    <span id="jumlah-mie-ayam">1</span>
+                    <button onclick="tambahJumlah('mie-ayam')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('mie-ayam','Mie Ayam',14000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="PEMPEK.jpeg" alt="Pempek">
+                <h3>Pempek</h3>
+                <p>Pempek ikan dengan kuah cuko khas.</p>
+                <h4>Rp15.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('pempek')">−</button>
+                    <span id="jumlah-pempek">1</span>
+                    <button onclick="tambahJumlah('pempek')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('pempek','Pempek',15000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="SIOMAY.jpeg" alt="Siomay">
+                <h3>Siomay</h3>
+                <p>Siomay lengkap dengan saus kacang.</p>
+                <h4>Rp13.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('siomay')">−</button>
+                    <span id="jumlah-siomay">1</span>
+                    <button onclick="tambahJumlah('siomay')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('siomay','Siomay',13000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="BATAGOR.jpeg" alt="Batagor">
+                <h3>Batagor</h3>
+                <p>Batagor crispy dengan saus kacang.</p>
+                <h4>Rp13.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('batagor')">−</button>
+                    <span id="jumlah-batagor">1</span>
+                    <button onclick="tambahJumlah('batagor')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('batagor','Batagor',13000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="RISOL MAYO.jpeg" alt="Risol Mayo">
+                <h3>Risol Mayo</h3>
+                <p>Risol renyah berisi mayo dan smoked beef.</p>
+                <h4>Rp10.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('risol-mayo')">−</button>
+                    <span id="jumlah-risol-mayo">1</span>
+                    <button onclick="tambahJumlah('risol-mayo')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('risol-mayo','Risol Mayo',10000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="GEPREK.jpeg" alt="Ayam Geprek">
+                <h3>Ayam Geprek</h3>
+                <p>Ayam crispy dengan sambal pedas.</p>
+                <h4>Rp18.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('ayam-geprek')">−</button>
+                    <span id="jumlah-ayam-geprek">1</span>
+                    <button onclick="tambahJumlah('ayam-geprek')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('ayam-geprek','Ayam Geprek',18000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="SOTO.jpeg" alt="Soto Ayam">
+                <h3>Soto Ayam</h3>
+                <p>Soto ayam hangat dengan kuah gurih.</p>
+                <h4>Rp15.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('soto-ayam')">−</button>
+                    <span id="jumlah-soto-ayam">1</span>
+                    <button onclick="tambahJumlah('soto-ayam')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('soto-ayam','Soto Ayam',15000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="AYAM BAKAR.jpeg" alt="Nasi Ayam Bakar">
+                <h3>Nasi Ayam Bakar</h3>
+                <p>Nasi dengan ayam bakar berbumbu khas.</p>
+                <h4>Rp20.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('nasi-ayam-bakar')">−</button>
+                    <span id="jumlah-nasi-ayam-bakar">1</span>
+                    <button onclick="tambahJumlah('nasi-ayam-bakar')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('nasi-ayam-bakar','Nasi Ayam Bakar',20000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="KENTANG GORENG.jpeg" alt="Kentang Goreng">
+                <h3>Kentang Goreng</h3>
+                <p>Kentang goreng renyah dengan saus.</p>
+                <h4>Rp10.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('kentang-goreng')">−</button>
+                    <span id="jumlah-kentang-goreng">1</span>
+                    <button onclick="tambahJumlah('kentang-goreng')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('kentang-goreng','Kentang Goreng',10000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MINUMAN -->
+
+    <section>
+        <h2>Minuman</h2>
+
+        <div class="menu-container">
+
+            <div class="menu-card">
+                <img src="ES TEH.jpeg" alt="Es Teh">
+                <h3>Es Teh</h3>
+                <p>Es teh manis yang segar.</p>
+                <h4>Rp5.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('es-teh')">−</button>
+                    <span id="jumlah-es-teh">1</span>
+                    <button onclick="tambahJumlah('es-teh')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('es-teh','Es Teh',5000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="ES JERUK.jpeg" alt="Es Jeruk">
+                <h3>Es Jeruk</h3>
+                <p>Perasan jeruk segar dengan es.</p>
+                <h4>Rp7.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('es-jeruk')">−</button>
+                    <span id="jumlah-es-jeruk">1</span>
+                    <button onclick="tambahJumlah('es-jeruk')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('es-jeruk','Es Jeruk',7000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="milo.jpeg" alt="Es Milo">
+                <h3>Es Milo</h3>
+                <p>Milo dingin dengan rasa cokelat.</p>
+                <h4>Rp9.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('es-milo')">−</button>
+                    <span id="jumlah-es-milo">1</span>
+                    <button onclick="tambahJumlah('es-milo')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('es-milo','Es Milo',9000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="REGAL.jpeg" alt="Milky Regal">
+                <h3>Milky Regal</h3>
+                <p>Susu creamy dengan biskuit regal.</p>
+                <h4>Rp12.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('milky-regal')">−</button>
+                    <span id="jumlah-milky-regal">1</span>
+                    <button onclick="tambahJumlah('milky-regal')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('milky-regal','Milky Regal',12000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="KOPI SUSU.jpeg" alt="Es Kopi Susu">
+                <h3>Es Kopi Susu</h3>
+                <p>Kopi susu dingin dengan rasa creamy.</p>
+                <h4>Rp12.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('es-kopi-susu')">−</button>
+                    <span id="jumlah-es-kopi-susu">1</span>
+                    <button onclick="tambahJumlah('es-kopi-susu')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('es-kopi-susu','Es Kopi Susu',12000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="THAI TEA.jpeg" alt="Thai Tea">
+                <h3>Thai Tea</h3>
+                <p>Thai tea manis dan creamy.</p>
+                <h4>Rp10.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('thai-tea')">−</button>
+                    <span id="jumlah-thai-tea">1</span>
+                    <button onclick="tambahJumlah('thai-tea')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('thai-tea','Thai Tea',10000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="MATCHA.jpeg" alt="Matcha Latte">
+                <h3>Matcha Latte</h3>
+                <p>Matcha lembut dengan susu.</p>
+                <h4>Rp13.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('matcha-latte')">−</button>
+                    <span id="jumlah-matcha-latte">1</span>
+                    <button onclick="tambahJumlah('matcha-latte')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('matcha-latte','Matcha Latte',13000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="CAPPUCINO.jpeg" alt="Cappuccino">
+                <h3>Cappuccino</h3>
+                <p>Kopi cappuccino dengan foam lembut.</p>
+                <h4>Rp14.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('cappuccino')">−</button>
+                    <span id="jumlah-cappuccino">1</span>
+                    <button onclick="tambahJumlah('cappuccino')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('cappuccino','Cappuccino',14000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="COKLAT.jpeg" alt="Chocolate">
+                <h3>Chocolate</h3>
+                <p>Minuman cokelat manis dan creamy.</p>
+                <h4>Rp11.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('chocolate')">−</button>
+                    <span id="jumlah-chocolate">1</span>
+                    <button onclick="tambahJumlah('chocolate')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('chocolate','Chocolate',11000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="menu-card">
+                <img src="ALPUKAT.jpeg" alt="Jus Alpukat">
+                <h3>Jus Alpukat</h3>
+                <p>Jus alpukat segar dan lembut.</p>
+                <h4>Rp12.000</h4>
+
+                <div class="quantity-control">
+                    <button onclick="kurangiJumlah('jus-alpukat')">−</button>
+                    <span id="jumlah-jus-alpukat">1</span>
+                    <button onclick="tambahJumlah('jus-alpukat')">+</button>
+                </div>
+
+                <button class="btn-pesan"
+                    onclick="tambahKeKeranjang('jus-alpukat','Jus Alpukat',12000)">
+                    Tambahkan ke Keranjang
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- KERANJANG -->
+
+<div class="overlay" id="cartOverlay" onclick="tutupKeranjang(event)">
+    <div class="popup">
+        <button class="close" onclick="tutupKeranjang()">×</button>
+
+        <h2>Keranjang</h2>
+
+        <div id="cartList"></div>
+
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">Rp0</strong>
+        </div>
+
+        <button class="btn-popup" onclick="bukaPembayaran()">
+            Lanjut ke Pembayaran
+        </button>
+    </div>
+</div>
+
+
+<!-- PEMBAYARAN -->
+
+<div class="overlay" id="paymentOverlay" onclick="tutupPembayaran(event)">
+    <div class="popup">
+        <button class="close" onclick="tutupPembayaran()">×</button>
+
+        <h2>Pembayaran</h2>
+
+        <p class="payment-text">Total pembayaran</p>
+        <h3 id="paymentTotal">Rp0</h3>
+
+        <label>Metode Pembayaran</label>
+
+        <select id="metodePembayaran">
+            <option>QRIS</option>
+            <option>Transfer Bank</option>
+            <option>Cash / Bayar di Kantin</option>
+        </select>
+
+        <button class="btn-bayar" onclick="prosesPembayaran()">
+            Bayar Sekarang
+        </button>
+    </div>
+</div>
+
+
+<!-- NOTIFIKASI -->
+
+<div class="notif" id="notif"></div>
+
+
+<script src="menu.js"></script>
+
+</body>
+</html>
