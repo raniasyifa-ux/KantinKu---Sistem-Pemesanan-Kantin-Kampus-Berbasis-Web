@@ -41,8 +41,26 @@
                 <button class="btn-primary" onclick="ubahStatus()">Perbarui Status</button>
                 <button class="btn-secondary" onclick="kembaliKeHome()">Kembali ke Home</button>
             </div>
+
+            <hr>
+
+            <h2>Pesanan Aktif</h2>
+            <div id="pesananAktif" class="summary-box"></div>
+
+            <hr>
+
+            <h2>Riwayat Pesanan</h2>
+            <div id="riwayatPesanan" class="summary-box"></div>
         </div>
     </main>
+
+    <div id="detailOrderModal" class="detail-overlay" style="display: none;" onclick="if (event.target.id === 'detailOrderModal') tutupDetailPesanan();">
+        <div class="detail-modal">
+            <button class="detail-close" onclick="tutupDetailPesanan()" aria-label="Tutup detail">×</button>
+            <h2 id="detailOrderTitle">Detail Pesanan</h2>
+            <div id="detailOrderContent" class="detail-content"></div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p>

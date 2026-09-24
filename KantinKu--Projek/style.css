@@ -359,6 +359,83 @@ footer {
   border: 1px solid var(--primary-btn);
 }
 
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 65, 68, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.detail-modal {
+  position: relative;
+  width: min(480px, 90vw);
+  max-height: 85vh;
+  overflow: auto;
+  background: var(--card-bg);
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  padding: 30px 25px 20px;
+  border: 1px solid var(--border-color);
+}
+
+.detail-modal h2 {
+  margin-bottom: 18px;
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.detail-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.detail-order-item strong {
+  color: var(--text-color);
+}
+
+.detail-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.detail-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px solid var(--border-color);
+  font-weight: bold;
+  color: var(--primary-btn);
+}
+
 .action-buttons {
   display: flex;
   gap: 15px;

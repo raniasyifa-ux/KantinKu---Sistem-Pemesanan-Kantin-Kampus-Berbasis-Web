@@ -71,7 +71,19 @@ function konfirmasiPembayaran() {
         return;
     }
 
-    localStorage.setItem("pesananAktif", JSON.stringify(keranjang));
+    const total = keranjang.reduce((sum, item) => sum + Number(item.harga || 0) * Number(item.jumlah || 1), 0);
+    const orderId = "ORD" + Date.now().toString().slice(-6);
+
+    const pesananAktif = {
+        id: orderId,
+        tanggal: new Date().toISOString(),
+        items: keranjang,
+        total: total,
+        metode: metode.value,
+        status: "Diproses"
+    };
+
+    localStorage.setItem("pesananAktif", JSON.stringify(pesananAktif));
     localStorage.setItem("metodePembayaran", metode.value);
     localStorage.setItem("statusPesanan", "Diproses");
     localStorage.removeItem("keranjang");
