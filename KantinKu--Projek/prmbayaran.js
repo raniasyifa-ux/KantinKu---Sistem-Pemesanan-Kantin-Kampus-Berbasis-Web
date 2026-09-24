@@ -71,8 +71,10 @@ function konfirmasiPembayaran() {
         return;
     }
 
+    localStorage.setItem("pesananAktif", JSON.stringify(keranjang));
     localStorage.setItem("metodePembayaran", metode.value);
     localStorage.setItem("statusPesanan", "Diproses");
+    localStorage.removeItem("keranjang");
 
     alert("Pembayaran berhasil dikonfirmasi menggunakan " + metode.value);
     window.location.href = "status.html";

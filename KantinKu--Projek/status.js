@@ -11,7 +11,20 @@ function getKeranjang() {
     }));
 }
 
-const keranjang = getKeranjang();
+function getPesananAktif() {
+    const stored = JSON.parse(localStorage.getItem("pesananAktif"));
+
+    if (!stored) return getKeranjang();
+    if (Array.isArray(stored)) return stored;
+
+    return Object.values(stored).map(item => ({
+        ...item,
+        jumlah: Number(item.jumlah || item.quantity || 1),
+        harga: Number(item.harga || 0)
+    }));
+}
+
+const keranjang = getPesananAktif();
 const metode = localStorage.getItem("metodePembayaran");
 let statusPesananVal = localStorage.getItem("statusPesanan") || "Menunggu Pembayaran";
 
