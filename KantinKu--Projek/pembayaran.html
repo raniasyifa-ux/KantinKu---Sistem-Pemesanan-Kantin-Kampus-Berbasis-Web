@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KantinKu - Pembayaran</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <h1>Kantin<span>Ku</span></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu <span id="cart-badge" class="badge" style="display:none;">0</span></a>
+            <a href="pembayaran.html" class="active">Pembayaran</a>
+            <a href="status.html">Status Pemesanan</a>
+        </nav>
+        <div class="nav-auth">
+            <a href="auth.html" class="btn-login">Login</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Pembayaran KantinKu</h1>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Silakan periksa pesanan dan pilih metode pembayaran.</p>
+
+        <div class="pembayaran-card">
+            <h2>Ringkasan Pesanan</h2>
+            <div id="ringkasanPesanan" class="summary-box" style="margin-top: 15px;"></div>
+
+            <hr>
+
+            <h2>Metode Pembayaran</h2>
+            <div class="payment-methods">
+                <label class="payment-option">
+                    <input type="radio" name="metode" value="QRIS"> QRIS
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="metode" value="Tunai"> Tunai / COD
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="metode" value="Transfer Bank"> Transfer Bank
+                </label>
+            </div>
+
+            <div class="total-container">
+                <h3>Total Pembayaran: <span id="totalPembayaran" style="color: var(--primary-btn);">Rp0</span></h3>
+            </div>
+
+            <div class="action-buttons" style="margin-top: 25px;">
+                <button class="btn-primary" onclick="konfirmasiPembayaran()">Konfirmasi Pembayaran</button>
+                <button class="btn-secondary" onclick="kembaliKeHome()">Kembali</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="prmbayaran.js"></script>
+</body>
+</html>

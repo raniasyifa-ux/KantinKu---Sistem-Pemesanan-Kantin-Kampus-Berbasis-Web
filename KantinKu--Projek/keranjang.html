@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang - KantinKu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Keranjang Belanja</h1>
+        <nav>
+            <a href="index.html">Beranda</a>
+            <a href="menu.html">Menu</a>
+            <a href="keranjang.html" class="active">Keranjang</a>
+            <a href="pembayaran.html">Pembayaran</a>
+            <a href="status.html">Status Pesanan</a>
+        </nav>
+    </header>
+
+    <main style="padding: 20px;">
+        <h2>Daftar Pesanan Anda</h2>
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Menu</th>
+                    <th>Jumlah</th>
+                    <th>Harga Satuan</th>
+                    <th>Subtotal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-keranjang">
+                <!-- Data diisi oleh script.js / menu.js -->
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; text-align: right;">
+            <h3>Total: <span id="total-keranjang">Rp 0</span></h3>
+            <button onclick="window.location.href='pembayaran.html'" style="padding: 10px 20px; cursor: pointer;">Lanjutkan Pembayaran</button>
+        </div>
+    </main>
+
+    <script src="menu.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataKeranjang = JSON.parse(localStorage.getItem('keranjangKantin')) || [];
+            const tabelKeranjang = document.getElementById('tabel-keranjang');
+            const totalElement = document.getElementById('total-keranjang');
+            
+            let htmlContent = '';
+            let total = 0;
+
+            if (dataKeranjang.length === 0) {
+                tabelKeranjang.innerHTML = '<tr><td colspan="6" style="text-align:center;">Keranjang kosong</td></tr>';
+                return;
+            }
+
+            dataKeranjang.forEach((item, index) => {
+                const subtotal = item.harga * item.jumlah;
+                total += subtotal;
+                htmlContent += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.nama}</td>
+                        <td>${item.jumlah}</td>
+                        <td>Rp ${item.harga.toLocaleString()}</td>
+                        <td>Rp ${subtotal.toLocaleString()}</td>
+                        <td><button onclick="hapusItem(${index})">Hapus</button></td>
+                    </tr>
+                `;
+            });
+
+            tabelKeranjang.innerHTML = htmlContent;
+            totalElement.innerText = `Rp ${total.toLocaleString()}`;
+        });
+
+        function hapusItem(index) {
+            let dataKeranjang = JSON.parse(localStorage.getItem('keranjangKantin')) || [];
+            dataKeranjang.splice(index, 1);
+            localStorage.setItem('keranjangKantin', JSON.stringify(dataKeranjang));
+            location.reload();
+        }
+    </script>
+</body>
+</html>
