@@ -1,5 +1,17 @@
 let keranjang = JSON.parse(localStorage.getItem("keranjang")) || {};
 
+function filterMenu() {
+    const keyword = document.getElementById("searchMenu").value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".menu-card");
+
+    cards.forEach(card => {
+        const nama = card.querySelector("h3")?.textContent.toLowerCase() || "";
+        const deskripsi = card.querySelector("p")?.textContent.toLowerCase() || "";
+        const cocok = nama.includes(keyword) || deskripsi.includes(keyword);
+        card.style.display = cocok ? "flex" : "none";
+    });
+}
+
 function simpan(){
     localStorage.setItem("keranjang", JSON.stringify(keranjang));
     updateCart();
@@ -146,4 +158,10 @@ function tampilNotif(teks){
     },2000);
 }
 
-updateCart();
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchMenu");
+    if (searchInput) {
+        searchInput.addEventListener("input", filterMenu);
+    }
+    updateCart();
+});
