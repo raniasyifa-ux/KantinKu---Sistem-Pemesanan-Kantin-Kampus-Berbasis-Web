@@ -84,7 +84,29 @@ main>h2{
   
 main>p{  
     color:var(--muted);  
+    margin-bottom:18px;  
+}  
+
+.search-box{  
     margin-bottom:35px;  
+}  
+
+.search-box input{  
+    width:100%;  
+    max-width:500px;  
+    padding:14px 18px;  
+    border:1px solid var(--border);  
+    border-radius:999px;  
+    outline:none;  
+    background:#fff;  
+    color:var(--text);  
+    font-size:15px;  
+    box-shadow:0 4px 12px rgba(0,0,0,.04);  
+}  
+
+.search-box input:focus{  
+    border-color:var(--btn);  
+    box-shadow:0 0 0 3px rgba(217,143,157,.14);  
 }  
   
   
