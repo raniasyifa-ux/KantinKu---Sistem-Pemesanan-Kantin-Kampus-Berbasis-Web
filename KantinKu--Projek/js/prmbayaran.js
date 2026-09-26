@@ -93,5 +93,5 @@ function konfirmasiPembayaran() {
 }
 
 function kembaliKeHome() {
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 }

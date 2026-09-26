@@ -94,7 +94,7 @@ function handleLogin(e) {
     localStorage.setItem('kantinku_session', JSON.stringify(activeUser));
 
     showToast("Login berhasil!", "success");
-    setTimeout(() => window.location.href = 'index.html', 1000);
+    setTimeout(() => window.location.href = "../index.html", 1000);
 
   } catch (err) {
     showToast(err, "error");

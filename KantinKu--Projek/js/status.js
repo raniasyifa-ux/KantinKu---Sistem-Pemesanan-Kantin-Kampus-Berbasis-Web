@@ -223,5 +223,5 @@ function formatRupiah(angka) {
 }
 
 function kembaliKeHome() {
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 }
