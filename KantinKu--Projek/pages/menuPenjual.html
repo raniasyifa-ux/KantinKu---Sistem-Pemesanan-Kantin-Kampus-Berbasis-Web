@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menu Penjual - KantinKu</title>
+<link rel="stylesheet" href="../css/menuPenjual.css">
+</head>
+<body>
+
+<header>
+    <h1>Kantin<span>Ku</span></h1>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="menuPenjual.html">Menu</a>
+        <a href="#">Pesanan</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Kelola Menu</h2>
+    <p>Kelola makanan dan minuman yang tersedia di kantinmu.</p>
+
+    <div class="top">
+        <div class="search-box">
+            <input id="searchMenu" type="text" placeholder="Cari makanan atau minuman...">
+        </div>
+        <button class="btn-tambah" onclick="bukaTambahMenu()">+ Tambah Menu</button>
+    </div>
+
+    <div class="filter">
+        <button class="filter-btn active" data-filter="semua">Semua</button>
+        <button class="filter-btn" data-filter="Makanan">Makanan</button>
+        <button class="filter-btn" data-filter="Minuman">Minuman</button>
+    </div>
+
+    <section class="menu-section makanan-section">
+        <h2>Makanan</h2>
+        <div class="menu-container">
+
+            <div class="menu-card" data-id="nasi-goreng" data-category="Makanan">
+                <img src="../images/NASI GORENG.jpeg" alt="Nasi Goreng">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Nasi Goreng</h3>
+                    <p>Nasi goreng gurih dengan telur dan ayam.</p>
+                    <h4>Rp15.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('nasi-goreng',-1)">−</button>
+                            <button onclick="ubahStok('nasi-goreng',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('nasi-goreng')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('nasi-goreng')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="mie-ayam" data-category="Makanan">
+                <img src="../images/MIE AYAM.jpeg" alt="Mie Ayam">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Mie Ayam</h3>
+                    <p>Mie lembut dengan ayam gurih dan kuah.</p>
+                    <h4>Rp14.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('mie-ayam',-1)">−</button>
+                            <button onclick="ubahStok('mie-ayam',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('mie-ayam')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('mie-ayam')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="pempek" data-category="Makanan">
+                <img src="../images/PEMPEK.jpeg" alt="Pempek">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Pempek</h3>
+                    <p>Pempek ikan dengan kuah cuko khas.</p>
+                    <h4>Rp15.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('pempek',-1)">−</button>
+                            <button onclick="ubahStok('pempek',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('pempek')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('pempek')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="siomay" data-category="Makanan">
+                <img src="../images/SIOMAY.jpeg" alt="Siomay">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Siomay</h3>
+                    <p>Siomay lengkap dengan saus kacang.</p>
+                    <h4>Rp13.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('siomay',-1)">−</button>
+                            <button onclick="ubahStok('siomay',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('siomay')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('siomay')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="batagor" data-category="Makanan">
+                <img src="../images/BATAGOR.jpeg" alt="Batagor">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Batagor</h3>
+                    <p>Batagor crispy dengan saus kacang.</p>
+                    <h4>Rp13.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('batagor',-1)">−</button>
+                            <button onclick="ubahStok('batagor',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('batagor')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('batagor')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="risol-mayo" data-category="Makanan">
+                <img src="../images/RISOL MAYO.jpeg" alt="Risol Mayo">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Risol Mayo</h3>
+                    <p>Risol renyah berisi mayo dan smoked beef.</p>
+                    <h4>Rp10.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('risol-mayo',-1)">−</button>
+                            <button onclick="ubahStok('risol-mayo',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('risol-mayo')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('risol-mayo')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="ayam-geprek" data-category="Makanan">
+                <img src="../images/GEPREK.jpeg" alt="Ayam Geprek">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Ayam Geprek</h3>
+                    <p>Ayam crispy dengan sambal pedas.</p>
+                    <h4>Rp18.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('ayam-geprek',-1)">−</button>
+                            <button onclick="ubahStok('ayam-geprek',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('ayam-geprek')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('ayam-geprek')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="soto-ayam" data-category="Makanan">
+                <img src="../images/SOTO.jpeg" alt="Soto Ayam">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Soto Ayam</h3>
+                    <p>Soto ayam hangat dengan kuah gurih.</p>
+                    <h4>Rp15.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('soto-ayam',-1)">−</button>
+                            <button onclick="ubahStok('soto-ayam',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('soto-ayam')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('soto-ayam')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="nasi-ayam-bakar" data-category="Makanan">
+                <img src="../images/AYAM BAKAR.jpeg" alt="Nasi Ayam Bakar">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Nasi Ayam Bakar</h3>
+                    <p>Nasi dengan ayam bakar berbumbu khas.</p>
+                    <h4>Rp20.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('nasi-ayam-bakar',-1)">−</button>
+                            <button onclick="ubahStok('nasi-ayam-bakar',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('nasi-ayam-bakar')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('nasi-ayam-bakar')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="kentang-goreng" data-category="Makanan">
+                <img src="../images/KENTANG GORENG.jpeg" alt="Kentang Goreng">
+                <div class="content">
+                    <span class="category-badge">Makanan</span>
+                    <h3>Kentang Goreng</h3>
+                    <p>Kentang goreng renyah dengan saus.</p>
+                    <h4>Rp10.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">10 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('kentang-goreng',-1)">−</button>
+                            <button onclick="ubahStok('kentang-goreng',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('kentang-goreng')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('kentang-goreng')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="menu-section minuman-section">
+        <h2>Minuman</h2>
+        <div class="menu-container">
+
+            <div class="menu-card" data-id="es-teh" data-category="Minuman">
+                <img src="../images/ES TEH.jpeg" alt="Es Teh">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Es Teh</h3>
+                    <p>Es teh manis yang segar.</p>
+                    <h4>Rp5.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('es-teh',-1)">−</button>
+                            <button onclick="ubahStok('es-teh',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('es-teh')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('es-teh')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="es-jeruk" data-category="Minuman">
+                <img src="../images/ES JERUK.jpeg" alt="Es Jeruk">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Es Jeruk</h3>
+                    <p>Perasan jeruk segar dengan es.</p>
+                    <h4>Rp7.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('es-jeruk',-1)">−</button>
+                            <button onclick="ubahStok('es-jeruk',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('es-jeruk')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('es-jeruk')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="es-milo" data-category="Minuman">
+                <img src="../images/milo.jpeg" alt="Es Milo">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Es Milo</h3>
+                    <p>Milo dingin dengan rasa cokelat.</p>
+                    <h4>Rp9.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('es-milo',-1)">−</button>
+                            <button onclick="ubahStok('es-milo',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('es-milo')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('es-milo')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="milky-regal" data-category="Minuman">
+                <img src="../images/REGAL.jpeg" alt="Milky Regal">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Milky Regal</h3>
+                    <p>Susu creamy dengan biskuit regal.</p>
+                    <h4>Rp12.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('milky-regal',-1)">−</button>
+                            <button onclick="ubahStok('milky-regal',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('milky-regal')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('milky-regal')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="es-kopi-susu" data-category="Minuman">
+                <img src="../images/KOPI SUSU.jpeg" alt="Es Kopi Susu">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Es Kopi Susu</h3>
+                    <p>Kopi susu dingin dengan rasa creamy.</p>
+                    <h4>Rp12.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('es-kopi-susu',-1)">−</button>
+                            <button onclick="ubahStok('es-kopi-susu',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('es-kopi-susu')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('es-kopi-susu')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="thai-tea" data-category="Minuman">
+                <img src="../images/THAI TEA.jpeg" alt="Thai Tea">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Thai Tea</h3>
+                    <p>Thai tea manis dan creamy.</p>
+                    <h4>Rp10.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('thai-tea',-1)">−</button>
+                            <button onclick="ubahStok('thai-tea',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('thai-tea')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('thai-tea')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="matcha-latte" data-category="Minuman">
+                <img src="../images/MATCHA.jpeg" alt="Matcha Latte">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Matcha Latte</h3>
+                    <p>Matcha lembut dengan susu.</p>
+                    <h4>Rp13.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('matcha-latte',-1)">−</button>
+                            <button onclick="ubahStok('matcha-latte',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('matcha-latte')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('matcha-latte')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="cappuccino" data-category="Minuman">
+                <img src="../images/CAPPUCINO.jpeg" alt="Cappuccino">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Cappuccino</h3>
+                    <p>Kopi cappuccino dengan foam lembut.</p>
+                    <h4>Rp14.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('cappuccino',-1)">−</button>
+                            <button onclick="ubahStok('cappuccino',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('cappuccino')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('cappuccino')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="chocolate" data-category="Minuman">
+                <img src="../images/COKLAT.jpeg" alt="Chocolate">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Chocolate</h3>
+                    <p>Minuman cokelat manis dan creamy.</p>
+                    <h4>Rp11.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('chocolate',-1)">−</button>
+                            <button onclick="ubahStok('chocolate',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('chocolate')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('chocolate')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card" data-id="jus-alpukat" data-category="Minuman">
+                <img src="../images/ALPUKAT.jpeg" alt="Jus Alpukat">
+                <div class="content">
+                    <span class="category-badge">Minuman</span>
+                    <h3>Jus Alpukat</h3>
+                    <p>Jus alpukat segar dan lembut.</p>
+                    <h4>Rp12.000</h4>
+                    <div class="stock-info">
+                        <span>Stok</span>
+                        <strong class="stock-value">20 tersedia</strong>
+                        <div class="stock-control">
+                            <button onclick="ubahStok('jus-alpukat',-1)">−</button>
+                            <button onclick="ubahStok('jus-alpukat',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="seller-buttons">
+                        <button onclick="bukaEditMenu('jus-alpukat')">Edit</button>
+                        <button class="hapus" onclick="hapusMenu('jus-alpukat')">Hapus</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+<div class="overlay" id="menuOverlay" onclick="tutupMenu(event)">
+    <div class="popup">
+        <button class="close" onclick="tutupMenu()">×</button>
+        <h2 id="formTitle">Tambah Menu</h2>
+
+        <form id="menuForm">
+            <label>Nama Menu</label>
+            <input id="namaMenu" required>
+
+            <label>Kategori</label>
+            <select id="kategoriMenu" required>
+                <option value="">Pilih kategori</option>
+                <option>Makanan</option>
+                <option>Minuman</option>
+            </select>
+
+            <label>Deskripsi</label>
+            <textarea id="deskripsiMenu" required></textarea>
+
+            <label>Harga</label>
+            <input type="number" id="hargaMenu" min="0" required>
+
+            <label>Stok</label>
+            <input type="number" id="stokMenu" min="0" required>
+
+            <label>Path Gambar</label>
+            <input id="gambarMenu" placeholder="../images/contoh.jpeg" required>
+
+            <button class="btn-simpan">Simpan Menu</button>
+        </form>
+    </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script src="../js/menuPenjual.js"></script>
+</body>
+</html>
