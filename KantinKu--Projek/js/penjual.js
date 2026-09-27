@@ -163,7 +163,7 @@ function saveMenuFromForm(event) {
   const updated = {
     id, nama: name, deskripsi: form.elements.namedItem('deskripsi').value.trim(),
     harga: Number(form.elements.namedItem('harga').value), kategori: form.elements.namedItem('kategori').value,
-    gambar: imageName || previous?.gambar || (form.elements.namedItem('kategori').value === 'Makanan' ? 'PEMPEK.jpeg' : 'ES TEH.jpeg'),
+    gambar: imageName || previous?.gambar || (form.elements.namedItem('kategori').value === 'Makanan' ? '../images/PEMPEK.jpeg' : '../images/ES TEH.jpeg'),
     aktif: previous?.aktif !== false,
     sellerId: KantinKu.storeId, toko: 'KantinKu'
   };

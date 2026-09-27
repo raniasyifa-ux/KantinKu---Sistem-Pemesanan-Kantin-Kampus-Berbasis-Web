@@ -656,6 +656,7 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .menu-card-footer {

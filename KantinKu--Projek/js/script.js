@@ -4,26 +4,26 @@ const KantinKu = (() => {
   const catalogKey = 'kantinku_catalog';
   const storeId = 'kantinku';
   const defaultCatalog = [
-    ['nasi-goreng', 'Nasi Goreng', 15000, 'Nasi goreng gurih dengan telur dan ayam.', 'Makanan', 'NASI GORENG.jpeg'],
-    ['mie-ayam', 'Mie Ayam', 14000, 'Mie lembut dengan ayam gurih dan kuah.', 'Makanan', 'MIE AYAM.jpeg'],
-    ['pempek', 'Pempek', 15000, 'Pempek ikan dengan kuah cuko khas.', 'Makanan', 'PEMPEK.jpeg'],
-    ['siomay', 'Siomay', 13000, 'Siomay lengkap dengan saus kacang.', 'Makanan', 'SIOMAY.jpeg'],
-    ['batagor', 'Batagor', 13000, 'Batagor crispy dengan saus kacang.', 'Makanan', 'BATAGOR.jpeg'],
-    ['risol-mayo', 'Risol Mayo', 10000, 'Risol renyah berisi mayo dan smoked beef.', 'Makanan', 'RISOL MAYO.jpeg'],
-    ['ayam-geprek', 'Ayam Geprek', 18000, 'Ayam crispy dengan sambal pedas.', 'Makanan', 'GEPREK.jpeg'],
-    ['soto-ayam', 'Soto Ayam', 15000, 'Soto ayam hangat dengan kuah gurih.', 'Makanan', 'SOTO.jpeg'],
-    ['nasi-ayam-bakar', 'Nasi Ayam Bakar', 20000, 'Nasi dengan ayam bakar berbumbu khas.', 'Makanan', 'AYAM BAKAR.jpeg'],
-    ['kentang-goreng', 'Kentang Goreng', 10000, 'Kentang goreng renyah dengan saus.', 'Makanan', 'KENTANG GORENG.jpeg'],
-    ['es-teh', 'Es Teh', 5000, 'Es teh manis yang segar.', 'Minuman', 'ES TEH.jpeg'],
-    ['es-jeruk', 'Es Jeruk', 7000, 'Perasan jeruk segar dengan es.', 'Minuman', 'ES JERUK.jpeg'],
-    ['es-milo', 'Es Milo', 9000, 'Milo dingin dengan rasa cokelat.', 'Minuman', 'milo.jpeg'],
-    ['milky-regal', 'Milky Regal', 12000, 'Susu creamy dengan biskuit regal.', 'Minuman', 'REGAL.jpeg'],
-    ['es-kopi-susu', 'Es Kopi Susu', 12000, 'Kopi susu dingin dengan rasa creamy.', 'Minuman', 'KOPI SUSU.jpeg'],
-    ['thai-tea', 'Thai Tea', 10000, 'Thai tea manis dan creamy.', 'Minuman', 'THAI TEA.jpeg'],
-    ['matcha-latte', 'Matcha Latte', 13000, 'Matcha lembut dengan susu.', 'Minuman', 'MATCHA.jpeg'],
-    ['cappuccino', 'Cappuccino', 14000, 'Kopi cappuccino dengan foam lembut.', 'Minuman', 'CAPPUCINO.jpeg'],
-    ['chocolate', 'Chocolate', 11000, 'Minuman cokelat manis dan creamy.', 'Minuman', 'COKLAT.jpeg'],
-    ['jus-alpukat', 'Jus Alpukat', 12000, 'Jus alpukat segar dan lembut.', 'Minuman', 'ALPUKAT.jpeg']
+    ['nasi-goreng', 'Nasi Goreng', 15000, 'Nasi goreng gurih dengan telur dan ayam.', 'Makanan', '../images/NASI GORENG.jpeg'],
+    ['mie-ayam', 'Mie Ayam', 14000, 'Mie lembut dengan ayam gurih dan kuah.', 'Makanan', '../images/MIE AYAM.jpeg'],
+    ['pempek', 'Pempek', 15000, 'Pempek ikan dengan kuah cuko khas.', 'Makanan', '../images/PEMPEK.jpeg'],
+    ['siomay', 'Siomay', 13000, 'Siomay lengkap dengan saus kacang.', 'Makanan', '../images/SIOMAY.jpeg'],
+    ['batagor', 'Batagor', 13000, 'Batagor crispy dengan saus kacang.', 'Makanan', '../images/BATAGOR.jpeg'],
+    ['risol-mayo', 'Risol Mayo', 10000, 'Risol renyah berisi mayo dan smoked beef.', 'Makanan', '../images/RISOL MAYO.jpeg'],
+    ['ayam-geprek', 'Ayam Geprek', 18000, 'Ayam crispy dengan sambal pedas.', 'Makanan', '../images/GEPREK.jpeg'],
+    ['soto-ayam', 'Soto Ayam', 15000, 'Soto ayam hangat dengan kuah gurih.', 'Makanan', '../images/SOTO.jpeg'],
+    ['nasi-ayam-bakar', 'Nasi Ayam Bakar', 20000, 'Nasi dengan ayam bakar berbumbu khas.', 'Makanan', '../images/AYAM BAKAR.jpeg'],
+    ['kentang-goreng', 'Kentang Goreng', 10000, 'Kentang goreng renyah dengan saus.', 'Makanan', '../images/KENTANG GORENG.jpeg'],
+    ['es-teh', 'Es Teh', 5000, 'Es teh manis yang segar.', 'Minuman', '../images/ES TEH.jpeg'],
+    ['es-jeruk', 'Es Jeruk', 7000, 'Perasan jeruk segar dengan es.', 'Minuman', '../images/ES JERUK.jpeg'],
+    ['es-milo', 'Es Milo', 9000, 'Milo dingin dengan rasa cokelat.', 'Minuman', '../images/milo.jpeg'],
+    ['milky-regal', 'Milky Regal', 12000, 'Susu creamy dengan biskuit regal.', 'Minuman', '../images/REGAL.jpeg'],
+    ['es-kopi-susu', 'Es Kopi Susu', 12000, 'Kopi susu dingin dengan rasa creamy.', 'Minuman', '../images/KOPI SUSU.jpeg'],
+    ['thai-tea', 'Thai Tea', 10000, 'Thai tea manis dan creamy.', 'Minuman', '../images/THAI TEA.jpeg'],
+    ['matcha-latte', 'Matcha Latte', 13000, 'Matcha lembut dengan susu.', 'Minuman', '../images/MATCHA.jpeg'],
+    ['cappuccino', 'Cappuccino', 14000, 'Kopi cappuccino dengan foam lembut.', 'Minuman', '../images/CAPPUCINO.jpeg'],
+    ['chocolate', 'Chocolate', 11000, 'Minuman cokelat manis dan creamy.', 'Minuman', '../images/COKLAT.jpeg'],
+    ['jus-alpukat', 'Jus Alpukat', 12000, 'Jus alpukat segar dan lembut.', 'Minuman', '../images/ALPUKAT.jpeg']
   ].map(([id, nama, harga, deskripsi, kategori, gambar]) => ({
     id, nama, harga, deskripsi, kategori, gambar, aktif: true, sellerId: storeId, toko: 'KantinKu'
   }));
@@ -137,10 +137,10 @@ const KantinKu = (() => {
     const page = header.dataset.page;
     const sellerPortal = account?.role === 'penjual' || document.body.dataset.portal === 'penjual';
     const links = sellerPortal
-      ? [['index-penjual.html', 'Beranda Toko', 'seller-home'], ['penjual.html', 'Dashboard Toko', 'seller']]
-      : [['index.html', 'Beranda', 'home'], ['menu.html', 'Menu', 'menu'], ['keranjang.html', 'Keranjang', 'cart'], ['pembayaran.html', 'Pembayaran', 'payment'], ['status.html', 'Pesanan Saya', 'status']];
+      ? [['../index-penjual.html', 'Beranda Toko', 'seller-home'], ['../pages/penjual.html', 'Dashboard Toko', 'seller']]
+      : [['../index.html', 'Beranda', 'home'], ['../pages/menu.html', 'Menu', 'menu'], ['../pages/keranjang.html', 'Keranjang', 'cart'], ['../pages/pembayaran.html', 'Pembayaran', 'payment'], ['../pages/status.html', 'Pesanan Saya', 'status']];
 
-    const homeUrl = sellerPortal ? 'index-penjual.html' : 'index.html';
+    const homeUrl = sellerPortal ? '../index-penjual.html' : '../index.html';
     header.innerHTML = `
       <a class="logo" href="${homeUrl}" aria-label="KantinKu Beranda"><span>Kantin</span>Ku</a>
       <nav class="nav-links" aria-label="Navigasi utama">
@@ -150,8 +150,8 @@ const KantinKu = (() => {
         ${account
           ? `<span class="nav-greeting">Hai, ${escapeHtml(account.username)}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
           : sellerPortal
-            ? '<a class="btn-login" href="auth-penjual.html">Masuk / Daftar Penjual</a>'
-              : '<a class="btn-login" href="auth.html">Masuk / Daftar Pembeli</a>'}
+            ? '<a class="btn-login" href="../pages/auth-penjual.html">Masuk / Daftar Penjual</a>'
+              : '<a class="btn-login" href="../pages/auth.html">Masuk / Daftar Pembeli</a>'}
       </div>`;
     updateCartBadge();
   }
@@ -162,11 +162,11 @@ const KantinKu = (() => {
 
     const account = user();
     if (account?.role === 'penjual') {
-      location.replace('index-penjual.html');
+      location.replace('../index-penjual.html');
       return;
     }
 
-    buyerAction.href = 'menu.html';
+    buyerAction.href = '../pages/menu.html';
     buyerAction.textContent = 'Jelajahi menu';
   }
 
@@ -185,8 +185,8 @@ const KantinKu = (() => {
 
     content.hidden = true;
     if (!account) {
-      const next = encodeURIComponent(location.pathname.split('/').pop() || 'index.html');
-      const authPage = requiredRole === 'penjual' ? 'auth-penjual.html' : 'auth.html';
+      const next = encodeURIComponent(location.pathname.split('/').pop() || '../index.html');
+      const authPage = requiredRole === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
       notify('Silakan masuk atau daftar terlebih dahulu untuk membuka halaman ini.', 'warning', {
         href: `${authPage}?next=${next}`,
         label: `Masuk sebagai ${requiredRole}`
@@ -209,7 +209,7 @@ const KantinKu = (() => {
   function logout() {
     const account = user();
     localStorage.removeItem(sessionKey);
-    location.href = account?.role === 'penjual' ? 'auth-penjual.html' : 'auth.html';
+    location.href = account?.role === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
   }
 
   document.addEventListener('DOMContentLoaded', () => {

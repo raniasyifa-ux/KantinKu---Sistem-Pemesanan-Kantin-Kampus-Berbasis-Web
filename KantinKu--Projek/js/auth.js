@@ -72,7 +72,7 @@ function handleLogin(event) {
       showMessage(`Sesi ${activeSession.role} masih aktif. Keluar terlebih dahulu untuk masuk sebagai ${roleLabel}.`, 'error');
       return;
     }
-    location.href = selectedRole === 'penjual' ? 'penjual.html' : 'pembeli.html';
+    location.href = selectedRole === 'penjual' ? '../pages/penjual.html' : '../pages/pembeli.html';
     return;
   }
   const form = event.currentTarget;
@@ -91,10 +91,10 @@ function handleLogin(event) {
 
   localStorage.setItem('kantinku_session', JSON.stringify(account));
   const allowedPages = selectedRole === 'penjual'
-    ? ['penjual.html']
-    : ['index.html', 'pembeli.html', 'menu.html', 'keranjang.html', 'pembayaran.html', 'status.html'];
+    ? ['../pages/penjual.html']
+    : ['../index.html', '../pages/pembeli.html', '../pages/menu.html', '../pages/keranjang.html', '../pages/pembayaran.html', '../pages/status.html'];
   const next = authParams.get('next');
-  location.href = allowedPages.includes(next) ? next : (selectedRole === 'penjual' ? 'penjual.html' : 'index.html');
+  location.href = allowedPages.includes(next) ? next : (selectedRole === 'penjual' ? '../pages/penjual.html' : '../index.html');
 }
 
 function getActiveSession() {

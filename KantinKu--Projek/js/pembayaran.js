@@ -7,7 +7,7 @@ function renderPaymentSummary() {
     const safe = KantinKu.escapeHtml;
 
     if (!items.length) {
-        summary.innerHTML = '<p>Keranjang kosong. Tambahkan menu sebelum membayar.</p><a href="menu.html">Pilih menu</a>';
+        summary.innerHTML = '<p>Keranjang kosong. Tambahkan menu sebelum membayar.</p><a href="../pages/menu.html">Pilih menu</a>';
     } else {
         summary.innerHTML = items.map(item => `
             <div class="order-line">
@@ -23,7 +23,7 @@ function konfirmasiPembayaran() {
     const items = KantinKu.cart();
     const method = document.querySelector('input[name="metode"]:checked');
     if (!items.length) {
-        KantinKu.notify('Keranjang masih kosong. Pilih menu terlebih dahulu.', 'warning', { href: 'menu.html', label: 'Pilih menu' });
+        KantinKu.notify('Keranjang masih kosong. Pilih menu terlebih dahulu.', 'warning', { href: '../pages/menu.html', label: 'Pilih menu' });
         return;
     }
     if (!method) {
@@ -51,9 +51,9 @@ function konfirmasiPembayaran() {
     };
     KantinKu.saveOrders([order, ...KantinKu.orders()]);
     KantinKu.saveCart([]);
-    location.href = 'status.html';
+    location.href = '../pages/status.html';
 }
 
 function kembaliKeHome() {
-    location.href = 'keranjang.html';
+    location.href = '../pages/keranjang.html';
 }
