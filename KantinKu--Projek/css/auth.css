@@ -3,7 +3,7 @@
 :root {
   --primary-pink: #D98F9D;
   --primary-hover: #C57B89;
-  --light-pink: #DDEBF4;
+  --light-pink: #F7F0F3;
   --text-dark: #4A4144;
   --text-muted: #6C6265;
   --soft-white: #FFFDF9;
@@ -22,7 +22,9 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #DDEBF4;
+  background: var(--light-pink);
+  background-image: repeating-linear-gradient(135deg, rgba(176, 115, 129, 0.035) 0, rgba(176, 115, 129, 0.035) 1px, transparent 1px, transparent 18px);
+  background-attachment: fixed;
   padding: 20px;
 }
 
@@ -65,8 +67,7 @@
   color: var(--text-dark);
 }
 
-.form-group input,
-.form-group select {
+.form-group input {
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid #E2E8F0;
@@ -77,8 +78,7 @@
   color: var(--text-dark);
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-group input:focus {
   border-color: var(--primary-pink);
   background: var(--soft-white);
 }
@@ -120,29 +120,45 @@
   background: var(--primary-hover);
 }
 
-#toast {
-  visibility: hidden;
-  min-width: 300px;
-  background-color: var(--text-dark);
-  color: var(--soft-white);
+.auth-role-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.auth-role-links a {
+  padding: 9px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: var(--text-muted);
   text-align: center;
-  border-radius: 8px;
-  padding: 14px 20px;
-  position: fixed;
-  z-index: 1000;
-  left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-#toast.show {
-  visibility: visible;
+.auth-role-links a.active {
+  border-color: var(--primary-pink);
+  background: #f7e9eb;
+  color: var(--text-dark);
 }
 
-#toast.error {
-  background-color: var(--danger);
+.auth-message {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-left: 4px solid #4d8054;
+  border-radius: 5px;
+  background: #f0f7ef;
+  color: var(--text-dark);
+  font-size: 13px;
 }
 
-#toast.success {
-  background-color: var(--primary-pink);
+.auth-message.is-error {
+  border-left-color: #b44c4c;
+  background: #fff0ef;
+}
+
+.auth-submit {
+  width: 100%;
 }

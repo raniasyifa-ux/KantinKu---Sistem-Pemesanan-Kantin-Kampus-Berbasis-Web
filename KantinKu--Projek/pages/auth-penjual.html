@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akun Penjual - KantinKu</title>
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-body seller-auth-body" data-auth-role="penjual">
+  <div class="auth-card">
+    <div id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></div>
+    <div id="login-box">
+      <div class="auth-header"><h2>Masuk ke toko</h2><p id="login-description">Kelola menu dan pesanan KantinKu</p></div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group"><label>Username / Email</label><input type="text" name="userOrEmail" placeholder="Username atau email penjual" required></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" placeholder="Password" required></div>
+        <div class="form-options"><a href="#" class="forgot-link" onclick="switchAuth('reset')">Lupa Password?</a></div>
+        <button type="submit" class="btn-primary auth-submit">Masuk ke dashboard</button>
+      </form>
+      <p class="switch-auth">Belum punya akun toko? <a href="#" onclick="switchAuth('register')">Daftarkan toko</a></p>
+      <p class="switch-auth portal-back"><a href="../index-penjual.html">Kembali ke Portal Penjual</a></p>
+    </div>
+    <div id="register-box" hidden>
+      <div class="auth-header"><h2>Daftarkan toko</h2><p id="register-description">Buat akun penjual untuk mengelola menu dan menerima pesanan.</p></div>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group"><label>Nama toko / Username (4-12 karakter)</label><input type="text" name="username" placeholder="Contoh: KantinBunda" required></div>
+        <div class="form-group"><label>Email toko</label><input type="email" name="email" placeholder="toko@email.com" required></div>
+        <div class="form-group"><label>Password (min. 8 karakter, huruf dan angka)</label><input type="password" name="password" placeholder="Buat password" required></div>
+        <button type="submit" class="btn-primary auth-submit">Buat akun penjual</button>
+      </form>
+      <p class="switch-auth">Sudah punya akun toko? <a href="#" onclick="switchAuth('login')">Masuk di sini</a></p>
+    </div>
+    <div id="reset-box" hidden>
+      <div class="auth-header"><h2>Atur ulang password toko</h2><p>Masukkan email akun penjual dan password baru.</p></div>
+      <form onsubmit="handleResetPassword(event)">
+        <div class="form-group"><label>Email toko</label><input type="email" name="resetEmail" placeholder="Email terdaftar" required></div>
+        <div class="form-group"><label>Password baru</label><input type="password" name="newPassword" placeholder="Password baru" required></div>
+        <button type="submit" class="btn-primary auth-submit">Simpan password</button>
+      </form>
+      <p class="switch-auth"><a href="#" onclick="switchAuth('login')">Kembali ke login toko</a></p>
+    </div>
+  </div>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

@@ -6,29 +6,29 @@
   <title>KantinKu - Home</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-page" data-portal="pembeli">
 
-  <header class="navbar">
-    <div class="logo">
-      <h1>Kantin<span>Ku</span></h1>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="pages/menu.html">Menu <span id="cart-badge" class="badge" style="display: none;">0</span></a>
-      <a href="pages/pembayaran.html">Pembayaran</a>
-      <a href="pages/status.html">Status Pemesanan</a>
-    </nav>
-    <div class="nav-auth">
-      <a href="pages/auth.html" class="btn-login">Login</a>
-    </div>
-  </header>
+  <header class="navbar" data-app-header data-page="home"></header>
 
   <section class="hero">
     <div class="hero-content">
-      <h2>Pesan Makanan Kantin Tanpa Perlu Antre!</h2>
+      <p class="eyebrow">KANTIN KAMPUS, LEBIH PRAKTIS</p>
+      <h2>Menu favoritmu, siap dipesan.</h2>
       <p>Nikmati kemudahan memesan makanan dan minuman favoritmu di KantinKu. Pilih menu, bayar online, dan tinggal ambil!</p>
-      <a href="pages/menu.html" class="btn-primary">Lihat Menu & Pesan</a>
+      <div class="hero-actions">
+        <a id="home-buyer-action" href="pages/menu.html" class="btn-primary">Jelajahi menu</a>
+        <a id="home-dashboard-action" href="pages/pembeli.html" class="btn-secondary">Lihat pesanan saya</a>
+      </div>
     </div>
+  </section>
+
+  <section class="home-order-callout">
+    <div>
+      <p class="eyebrow">PESANANMU, SELALU TERPANTAU</p>
+      <h2>Pesan dulu, cek progresnya kapan saja.</h2>
+      <p>Riwayat pembayaran dan pembaruan dari toko tersimpan di halaman pesananmu.</p>
+    </div>
+    <a class="btn-primary" href="pages/pembeli.html">Buka pesanan</a>
   </section>
 
   <section class="features">
@@ -37,7 +37,7 @@
       <div class="card">
         <div class="icon">⚡</div>
         <h4>Cepat & Praktis</h4>
-        <p>Pesan langsung dari HP tanpa antre.</p>
+        <p>Pesan langsung tanpa antre.</p>
       </div>
       <div class="card">
         <div class="icon">🍱</div>

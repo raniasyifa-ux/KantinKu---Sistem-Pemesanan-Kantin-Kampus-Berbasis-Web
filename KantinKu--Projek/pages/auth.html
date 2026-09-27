@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akses Akun - KantinKu</title>
+  <title>Akun Pembeli - KantinKu</title>
   <link rel="stylesheet" href="../css/auth.css">
 </head>
-<body class="auth-body">
-
-  <div id="toast"></div>
+<body class="auth-body" data-auth-role="pembeli">
 
   <div class="auth-card">
+    <div id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></div>
     
     <!-- ================= FORM LOGIN ================= -->
     <div id="login-box">
       <div class="auth-header">
         <h2>Selamat Datang!</h2>
-        <p>Masuk ke akun KantinKu Anda</p>
+        <p id="login-description">Masuk ke akun pembeli KantinKu</p>
       </div>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
@@ -30,23 +29,17 @@
         <div class="form-options">
           <a href="#" class="forgot-link" onclick="switchAuth('reset')">Lupa Password?</a>
         </div>
-        <div class="form-group">
-          <label>Masuk Sebagai (Role)</label>
-          <select name="role">
-            <option value="pembeli">Pembeli</option>
-            <option value="penjual">Penjual</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">Masuk Sekarang</button>
+        <button type="submit" class="btn-primary auth-submit">Masuk sebagai Pembeli</button>
       </form>
       <p class="switch-auth">Belum punya akun? <a href="#" onclick="switchAuth('register')">Daftar Akun</a></p>
+      <p class="switch-auth portal-back"><a href="../index.html">Kembali ke KantinKu</a></p>
     </div>
 
     <!-- ================= FORM REGISTER ================= -->
-    <div id="register-box" style="display: none;">
+    <div id="register-box" hidden>
       <div class="auth-header">
         <h2>Daftar Akun</h2>
-        <p>Buat akun baru untuk mulai melakukan transaksi sebagai pembeli atau penjual</p>
+        <p id="register-description">Buat akun pembeli untuk mulai memesan</p>
       </div>
       <form onsubmit="handleRegister(event)">
         <div class="form-group">
@@ -61,20 +54,13 @@
           <label>Password (Min. 8 Karakter & Kombinasi Angka)</label>
           <input type="password" name="password" placeholder="••••••••" required>
         </div>
-        <div class="form-group">
-          <label>Daftar Sebagai (Role)</label>
-          <select name="role">
-            <option value="pembeli">Pembeli</option>
-            <option value="penjual">Penjual</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">Daftar Akun</button>
+        <button type="submit" class="btn-primary auth-submit">Daftar sebagai Pembeli</button>
       </form>
       <p class="switch-auth">Sudah punya akun? <a href="#" onclick="switchAuth('login')">Masuk di sini</a></p>
     </div>
 
     <!-- ================= FORM LUPA / RESET PASSWORD ================= -->
-    <div id="reset-box" style="display: none;">
+    <div id="reset-box" hidden>
       <div class="auth-header">
         <h2>Atur Ulang Password</h2>
         <p>Masukkan email terdaftar dan password baru Anda</p>

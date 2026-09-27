@@ -5,40 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu KantinKu</title>
     <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
+<body data-portal="pembeli">
 
-<header>
-    <h1>KantinKu</h1>
+<header class="navbar" data-app-header data-page="menu"></header>
 
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="menu.html">Menu</a>
-
-        <a href="#keranjang" class="cart" onclick="bukaKeranjang(event)">
-            Keranjang <span class="cart-count">0</span>
-        </a>
-
-        <button class="payment-btn" onclick="bukaPembayaran()">
-            Pembayaran
-        </button>
-    </nav>
-</header>
-
-<main>
-
-    <h2>Menu KantinKu</h2>
-    <p>Pilih makanan dan minuman favoritmu.</p>
-
-    <div class="search-box">
-        <input type="text" id="searchMenu" placeholder="Cari makanan atau minuman..." aria-label="Cari menu">
+<main data-protected-page="pembeli">
+    <div class="menu-toolbar">
+        <div>
+            <p class="eyebrow">MENU HARI INI</p>
+            <h1>Temukan yang kamu suka</h1>
+            <p class="menu-intro">Dimasak dan disajikan oleh KantinKu.</p>
+        </div>
+        <label class="menu-search"><span>Cari menu</span><input id="menu-search" type="search" placeholder="Cari nasi, minuman..." autocomplete="off"></label>
     </div>
+    <div class="category-tabs" role="group" aria-label="Filter kategori menu">
+        <button type="button" class="active" data-category="Semua">Semua</button>
+        <button type="button" data-category="Makanan">Makanan</button>
+        <button type="button" data-category="Minuman">Minuman</button>
+    </div>
+    <p class="menu-results" id="menu-results" aria-live="polite"></p>
 
 
     <!-- BEST SELLER -->
 
-    <section class="best-seller">
+    <section class="best-seller" hidden>
         <h2>Best Seller</h2>
 
         <div class="menu-container">
@@ -79,7 +72,7 @@
 
     <!-- MAKANAN -->
 
-    <section>
+    <section id="makanan">
         <h2>Makanan</h2>
 
         <div class="menu-container">
@@ -279,7 +272,7 @@
 
     <!-- MINUMAN -->
 
-    <section>
+    <section id="minuman">
         <h2>Minuman</h2>
 
         <div class="menu-container">
@@ -476,62 +469,28 @@
         </div>
     </section>
 
-</main>
+<div class="keranjang-link"><a href="../pages/keranjang.html">Lihat keranjang dan lanjutkan pembayaran</a></div>
 
-
-<!-- KERANJANG -->
-
-<div class="overlay" id="cartOverlay" onclick="tutupKeranjang(event)">
-    <div class="popup">
-        <button class="close" onclick="tutupKeranjang()">×</button>
-
-        <h2>Keranjang</h2>
-
-        <div id="cartList"></div>
-
-        <div class="cart-total">
-            <span>Total</span>
-            <strong id="cartTotal">Rp0</strong>
+<dialog class="add-order-dialog" id="add-order-dialog" aria-labelledby="add-order-title">
+    <form method="dialog" class="dialog-dismiss-form"><button class="dialog-close" aria-label="Tutup">×</button></form>
+    <div class="dialog-product">
+        <img id="dialog-product-image" alt="">
+        <div><p class="eyebrow">PESAN DARI KANTINKU</p><h2 id="add-order-title"></h2><p id="dialog-product-price"></p></div>
+    </div>
+    <div class="dialog-quantity-row">
+        <span>Jumlah porsi</span>
+        <div class="quantity-control">
+            <button type="button" id="dialog-quantity-minus" aria-label="Kurangi jumlah">−</button>
+            <output id="dialog-quantity" aria-live="polite">1</output>
+            <button type="button" id="dialog-quantity-plus" aria-label="Tambah jumlah">+</button>
         </div>
-
-        <button class="btn-popup" onclick="bukaPembayaran()">
-            Lanjut ke Pembayaran
-        </button>
     </div>
-</div>
+    <div class="dialog-total-row"><span>Subtotal</span><strong id="dialog-subtotal"></strong></div>
+    <div class="dialog-actions"><button type="button" class="btn-secondary" id="dialog-cancel">Batal</button><button type="button" class="btn-primary" id="dialog-confirm">Tambah ke keranjang</button></div>
+</dialog>
 
-
-<!-- PEMBAYARAN -->
-
-<div class="overlay" id="paymentOverlay" onclick="tutupPembayaran(event)">
-    <div class="popup">
-        <button class="close" onclick="tutupPembayaran()">×</button>
-
-        <h2>Pembayaran</h2>
-
-        <p class="payment-text">Total pembayaran</p>
-        <h3 id="paymentTotal">Rp0</h3>
-
-        <label>Metode Pembayaran</label>
-
-        <select id="metodePembayaran">
-            <option>QRIS</option>
-            <option>Transfer Bank</option>
-            <option>Cash / Bayar di Kantin</option>
-        </select>
-
-        <button class="btn-bayar" onclick="prosesPembayaran()">
-            Bayar Sekarang
-        </button>
-    </div>
-</div>
-
-
-<!-- NOTIFIKASI -->
-
-<div class="notif" id="notif"></div>
-
-
+<footer><p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p></footer>
+<script src="../js/script.js"></script>
 <script src="../js/menu.js"></script>
 
 </body>

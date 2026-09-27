@@ -1,146 +1,137 @@
-// Database Sederhana via LocalStorage
-let users = JSON.parse(localStorage.getItem('kantinku_db')) || [];
-let activeUser = JSON.parse(localStorage.getItem('kantinku_session')) || null;
+const authParams = new URLSearchParams(location.search);
+const selectedRole = document.body.dataset.authRole === 'penjual' ? 'penjual' : 'pembeli';
+const roleLabel = selectedRole === 'penjual' ? 'penjual' : 'pembeli';
 
-// Notifikasi Toast
-function showToast(msg, type = 'success') {
-  const toast = document.getElementById('toast');
-  toast.innerText = msg;
-  toast.className = `show ${type}`;
-  setTimeout(() => { 
-    toast.className = toast.className.replace(`show ${type}`, ''); 
-  }, 3000);
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('login-description').textContent = `Masuk ke akun ${roleLabel} KantinKu`;
+  document.getElementById('register-description').textContent = `Buat akun ${roleLabel} untuk mulai ${selectedRole === 'penjual' ? 'menerima pesanan' : 'memesan'}`;
+  document.querySelectorAll('.auth-submit').forEach(button => {
+    button.textContent = `${button.closest('#login-box') ? 'Masuk' : 'Daftar'} sebagai ${roleLabel}`;
+  });
+  if (authParams.get('view') === 'register') switchAuth('register');
+});
+
+function showMessage(message, type = 'success') {
+  const element = document.getElementById('auth-message');
+  element.textContent = message;
+  element.className = `auth-message is-${type}`;
+  element.hidden = false;
 }
 
-// Proteksi Halaman
-function guardAction(event, pageName) {
-  if (!activeUser) {
-    event.preventDefault();
-    showToast(`Silakan Login dulu untuk membuka menu ${pageName}!`, 'error');
-  }
-}
-
-// Inisialisasi Tampilan Home
-function initHome() {
-  const navAuth = document.getElementById('nav-auth');
-  const dashSection = document.getElementById('dashboard');
-
-  if (activeUser) {
-    navAuth.innerHTML = `
-      <span>Hai, <b>${activeUser.username}</b></span>
-      <button onclick="logout()" class="btn-nav" style="margin-left:10px;">Keluar</button>
-    `;
-    if (dashSection) {
-      dashSection.style.display = 'block';
-      dashSection.innerHTML = `
-        <div class="dash-header">
-          <h2>Dashboard ${activeUser.role === 'penjual' ? 'Penjual (Stan Kantin)' : 'Pembeli'}</h2>
-          <span class="badge">${activeUser.role.toUpperCase()}</span>
-        </div>
-        <p>Selamat datang <b>${activeUser.username}</b>! Anda terhubung sebagai <b>${activeUser.role}</b>.</p>
-      `;
-    }
-  }
-}
-
-// Registrasi Akun
-function handleRegister(e) {
-  e.preventDefault();
-  const form = e.target;
-  const username = form.username.value.trim();
-  const email = form.email.value.trim();
-  const password = form.password.value;
-  const role = form.role.value;
-
+function getUsers() {
   try {
-    if (!/^[a-zA-Z0-9]{4,12}$/.test(username)) {
-      throw "Username harus 4-12 karakter huruf/angka!";
-    }
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      throw "Password min. 8 karakter (kombinasi huruf & angka)!";
-    }
-    if (users.some(u => u.email === email || u.username === username)) {
-      throw "Username atau Email sudah terdaftar!";
-    }
-
-    users.push({ username, email, password, role });
-    localStorage.setItem('kantinku_db', JSON.stringify(users));
-
-    showToast("Pendaftaran berhasil! Mengalihkan ke Login...", "success");
-    form.reset();
-    setTimeout(() => switchAuth('login'), 1200);
-
-  } catch (err) {
-    showToast(err, "error");
-    form.reset();
+    const stored = JSON.parse(localStorage.getItem('kantinku_db'));
+    return Array.isArray(stored) ? stored : [];
+  } catch {
+    return [];
   }
 }
 
-// Login Akun
-function handleLogin(e) {
-  e.preventDefault();
-  const form = e.target;
-  const userOrEmail = form.userOrEmail.value.trim();
-  const password = form.password.value;
-  const role = form.role.value;
+function isValidPassword(password) {
+  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+}
 
+function handleRegister(event) {
+  event.preventDefault();
+  const activeSession = getActiveSession();
+  if (activeSession) {
+    showMessage(`Keluar dari sesi ${activeSession.role} terlebih dahulu sebelum membuat akun baru.`, 'error');
+    return;
+  }
+  const form = event.currentTarget;
+  const username = form.elements.namedItem('username').value.trim();
+  const email = form.elements.namedItem('email').value.trim().toLowerCase();
+  const password = form.elements.namedItem('password').value;
+  const users = getUsers();
+
+  if (!/^[a-zA-Z0-9]{4,12}$/.test(username)) {
+    showMessage('Username harus 4-12 karakter huruf atau angka.', 'error');
+    return;
+  }
+  if (!isValidPassword(password)) {
+    showMessage('Password minimal 8 karakter dan harus mengandung huruf serta angka.', 'error');
+    return;
+  }
+  if (users.some(account => account.email.toLowerCase() === email || account.username.toLowerCase() === username.toLowerCase())) {
+    showMessage('Username atau email sudah terdaftar. Gunakan data lain.', 'error');
+    return;
+  }
+
+  users.push({ username, email, password, role: selectedRole });
+  localStorage.setItem('kantinku_db', JSON.stringify(users));
+  form.reset();
+  switchAuth('login');
+  showMessage(`Akun ${roleLabel} berhasil dibuat. Silakan masuk.`, 'success');
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  const activeSession = getActiveSession();
+  if (activeSession) {
+    if (activeSession.role !== selectedRole) {
+      showMessage(`Sesi ${activeSession.role} masih aktif. Keluar terlebih dahulu untuk masuk sebagai ${roleLabel}.`, 'error');
+      return;
+    }
+    location.href = selectedRole === 'penjual' ? '../pages/penjual.html' : '../pages/pembeli.html';
+    return;
+  }
+  const form = event.currentTarget;
+  const userOrEmail = form.elements.namedItem('userOrEmail').value.trim().toLowerCase();
+  const password = form.elements.namedItem('password').value;
+  const account = getUsers().find(item => item.username.toLowerCase() === userOrEmail || item.email.toLowerCase() === userOrEmail);
+
+  if (!account || account.password !== password) {
+    showMessage('Username/email atau password tidak cocok.', 'error');
+    return;
+  }
+  if (account.role !== selectedRole) {
+    showMessage(`Akun ini terdaftar sebagai ${account.role}. Gunakan tautan akun ${account.role}.`, 'error');
+    return;
+  }
+
+  localStorage.setItem('kantinku_session', JSON.stringify(account));
+  const allowedPages = selectedRole === 'penjual'
+    ? ['../pages/penjual.html']
+    : ['../index.html', '../pages/pembeli.html', '../pages/menu.html', '../pages/keranjang.html', '../pages/pembayaran.html', '../pages/status.html'];
+  const next = authParams.get('next');
+  location.href = allowedPages.includes(next) ? next : (selectedRole === 'penjual' ? '../pages/penjual.html' : '../index.html');
+}
+
+function getActiveSession() {
   try {
-    const user = users.find(u => (u.username === userOrEmail || u.email === userOrEmail));
-    if (!user) throw "Akun tidak ditemukan!";
-    if (user.password !== password) throw "Password salah!";
-    if (user.role !== role) throw `Akun ini terdaftar sebagai role '${user.role}'!`;
-
-    activeUser = user;
-    localStorage.setItem('kantinku_session', JSON.stringify(activeUser));
-
-    showToast("Login berhasil!", "success");
-    setTimeout(() => window.location.href = "../index.html", 1000);
-
-  } catch (err) {
-    showToast(err, "error");
-    form.password.value = '';
+    const session = JSON.parse(localStorage.getItem('kantinku_session') || 'null');
+    return session?.role === 'pembeli' || session?.role === 'penjual' ? session : null;
+  } catch {
+    return null;
   }
 }
 
-// Fitur Reset / Lupa Password
-function handleResetPassword(e) {
-  e.preventDefault();
-  const form = e.target;
-  const email = form.resetEmail.value.trim();
-  const newPassword = form.newPassword.value;
+function handleResetPassword(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const email = form.elements.namedItem('resetEmail').value.trim().toLowerCase();
+  const password = form.elements.namedItem('newPassword').value;
+  const users = getUsers();
+  const account = users.find(item => item.email.toLowerCase() === email && item.role === selectedRole);
 
-  try {
-    const userIndex = users.findIndex(u => u.email === email);
-    if (userIndex === -1) {
-      throw "Email tidak ditemukan dalam sistem!";
-    }
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(newPassword)) {
-      throw "Password baru min. 8 karakter (kombinasi huruf & angka)!";
-    }
-
-    // Update password
-    users[userIndex].password = newPassword;
-    localStorage.setItem('kantinku_db', JSON.stringify(users));
-
-    showToast("Password berhasil diubah! Silakan login kembali.", "success");
-    form.reset();
-    setTimeout(() => switchAuth('login'), 1200);
-
-  } catch (err) {
-    showToast(err, "error");
-    form.reset();
+  if (!account) {
+    showMessage(`Email tidak ditemukan pada akun ${roleLabel}.`, 'error');
+    return;
   }
+  if (!isValidPassword(password)) {
+    showMessage('Password minimal 8 karakter dan harus mengandung huruf serta angka.', 'error');
+    return;
+  }
+  account.password = password;
+  localStorage.setItem('kantinku_db', JSON.stringify(users));
+  form.reset();
+  switchAuth('login');
+  showMessage('Password berhasil diubah. Silakan masuk kembali.', 'success');
 }
 
-// Logout
-function logout() {
-  localStorage.removeItem('kantinku_session');
-  location.reload();
-}
-
-// Navigasi Tampilan Form di auth.html
 function switchAuth(type) {
-  document.getElementById('login-box').style.display = type === 'login' ? 'block' : 'none';
-  document.getElementById('register-box').style.display = type === 'register' ? 'block' : 'none';
-  document.getElementById('reset-box').style.display = type === 'reset' ? 'block' : 'none';
+  document.getElementById('login-box').hidden = type !== 'login';
+  document.getElementById('register-box').hidden = type !== 'register';
+  document.getElementById('reset-box').hidden = type !== 'reset';
+  document.getElementById('auth-message').hidden = true;
 }

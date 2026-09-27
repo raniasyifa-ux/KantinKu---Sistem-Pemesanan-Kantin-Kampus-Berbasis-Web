@@ -6,24 +6,11 @@
     <title>KantinKu - Pembayaran</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body data-portal="pembeli">
 
-    <header class="navbar">
-        <div class="logo">
-            <h1>Kantin<span>Ku</span></h1>
-        </div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="menu.html">Menu <span id="cart-badge" class="badge" style="display:none;">0</span></a>
-            <a href="pembayaran.html" class="active">Pembayaran</a>
-            <a href="status.html">Status Pemesanan</a>
-        </nav>
-        <div class="nav-auth">
-            <a href="auth.html" class="btn-login">Login</a>
-        </div>
-    </header>
+    <header class="navbar" data-app-header data-page="payment"></header>
 
-    <main class="container">
+    <main class="container" data-protected-page="pembeli">
         <h1>Pembayaran KantinKu</h1>
         <p style="color: var(--text-muted); margin-bottom: 20px;">Silakan periksa pesanan dan pilih metode pembayaran.</p>
 
@@ -62,6 +49,6 @@
     </footer>
 
     <script src="../js/script.js"></script>
-    <script src="../js/prmbayaran.js"></script>
+    <script src="../js/pembayaran.js"></script>
 </body>
 </html>

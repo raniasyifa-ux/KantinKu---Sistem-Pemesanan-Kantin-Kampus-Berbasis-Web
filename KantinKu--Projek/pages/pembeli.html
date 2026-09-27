@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Pembeli - KantinKu</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="buyer-dashboard" data-portal="pembeli">
+  <header class="navbar" data-app-header data-page="buyer"></header>
+  <main class="container buyer-dashboard-main" data-protected-page="pembeli">
+    <div class="page-heading buyer-welcome">
+      <div><p class="eyebrow">AREA PEMBELI</p><h1>Pesanan dan aktivitasmu</h1><p>Semua pesanan KantinKu tersimpan di sini.</p></div>
+      <a class="btn-primary buyer-shop-link" href="../pages/menu.html">＋ Pesan menu</a>
+    </div>
+    <section class="buyer-overview-grid" aria-label="Ringkasan aktivitas pembeli">
+      <article class="buyer-overview-stat"><span>Pesanan aktif</span><strong id="buyer-active-count">0</strong><small>Pesanan yang sedang berjalan</small></article>
+      <article class="buyer-overview-stat"><span>Pesanan selesai</span><strong id="buyer-history-count">0</strong><small>Tersimpan di riwayatmu</small></article>
+      <article class="buyer-payment-total"><div><span>Total pembayaran</span><small>Akumulasi semua pesanan</small></div><strong id="buyer-total-spent">Rp0</strong></article>
+    </section>
+    <section class="buyer-orders-panel">
+      <div class="section-heading"><div><h2>Pesanan aktif</h2><span>Pembayaran dan progres dari toko</span></div><a href="../pages/status.html">Lihat halaman pesanan</a></div>
+      <div id="detailPesanan" class="buyer-latest-order"></div>
+      <div id="statusPesanan" class="buyer-latest-status">Belum ada pesanan</div>
+      <div id="pesananAktif" class="buyer-orders-list"></div>
+    </section>
+    <section class="buyer-orders-panel">
+      <div class="section-heading"><div><h2>Riwayat pembelian</h2><span>Pesanan yang sudah selesai</span></div></div>
+      <div id="riwayatPesanan" class="buyer-orders-list"></div>
+    </section>
+  </main>
+  <footer><p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p></footer>
+  <script src="../js/script.js"></script>
+  <script src="../js/status.js"></script>
+</body>
+</html>
