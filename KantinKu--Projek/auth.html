@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akun Pembeli - KantinKu</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-body" data-auth-role="pembeli">
+
+  <div class="auth-card">
+    <div id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></div>
+    
+    <!-- ================= FORM LOGIN ================= -->
+    <div id="login-box">
+      <div class="auth-header">
+        <h2>Selamat Datang!</h2>
+        <p id="login-description">Masuk ke akun pembeli KantinKu</p>
+      </div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Username / Email</label>
+          <input type="text" name="userOrEmail" placeholder="Masukkan username atau email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="••••••••" required>
+        </div>
+        <div class="form-options">
+          <a href="#" class="forgot-link" onclick="switchAuth('reset')">Lupa Password?</a>
+        </div>
+        <button type="submit" class="btn-primary auth-submit">Masuk sebagai Pembeli</button>
+      </form>
+      <p class="switch-auth">Belum punya akun? <a href="#" onclick="switchAuth('register')">Daftar Akun</a></p>
+      <p class="switch-auth portal-back"><a href="index.html">Kembali ke KantinKu</a></p>
+    </div>
+
+    <!-- ================= FORM REGISTER ================= -->
+    <div id="register-box" hidden>
+      <div class="auth-header">
+        <h2>Daftar Akun</h2>
+        <p id="register-description">Buat akun pembeli untuk mulai memesan</p>
+      </div>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Username (4-12 Karakter)</label>
+          <input type="text" name="username" placeholder="Contoh: Budi123" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="nama@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password (Min. 8 Karakter & Kombinasi Angka)</label>
+          <input type="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary auth-submit">Daftar sebagai Pembeli</button>
+      </form>
+      <p class="switch-auth">Sudah punya akun? <a href="#" onclick="switchAuth('login')">Masuk di sini</a></p>
+    </div>
+
+    <!-- ================= FORM LUPA / RESET PASSWORD ================= -->
+    <div id="reset-box" hidden>
+      <div class="auth-header">
+        <h2>Atur Ulang Password</h2>
+        <p>Masukkan email terdaftar dan password baru Anda</p>
+      </div>
+      <form onsubmit="handleResetPassword(event)">
+        <div class="form-group">
+          <label>Email Terdaftar</label>
+          <input type="email" name="resetEmail" placeholder="Masukkan email akun Anda" required>
+        </div>
+        <div class="form-group">
+          <label>Password Baru</label>
+          <input type="password" name="newPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Simpan Password Baru</button>
+      </form>
+      <p class="switch-auth"><a href="#" onclick="switchAuth('login')">← Kembali ke Login</a></p>
+    </div>
+
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

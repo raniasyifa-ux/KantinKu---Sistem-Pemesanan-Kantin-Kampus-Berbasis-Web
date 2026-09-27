@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang - KantinKu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-portal="pembeli">
+    <header class="navbar" data-app-header data-page="cart"></header>
+
+    <main class="container" data-protected-page="pembeli">
+        <h2>Daftar Pesanan Anda</h2>
+        <div class="cart-table-wrap">
+        <table class="cart-table" border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Menu</th>
+                    <th>Jumlah</th>
+                    <th>Harga Satuan</th>
+                    <th>Subtotal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-keranjang"></tbody>
+        </table>
+        </div>
+
+        <div class="cart-checkout-bar">
+            <div class="cart-total-block"><span>Total pesanan</span><strong id="total-keranjang">Rp 0</strong></div>
+            <a class="btn-primary" href="pembayaran.html">Lanjutkan pembayaran</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="keranjang.js"></script>
+</body>
+</html>
