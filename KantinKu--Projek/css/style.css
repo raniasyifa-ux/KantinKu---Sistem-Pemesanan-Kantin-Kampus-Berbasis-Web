@@ -1,23 +1,34 @@
 /* PALET WARNA & VARIABEL GLOBAL */
 :root {
-  --bg-color: #F7F0F3;
-  --card-bg: #FFFDF9;
-  --primary-btn: #D98F9D;
-  --primary-btn-hover: #C57B89;
-  --text-color: #4A4144;
-  --text-muted: #6C6265;
-  --navbar-bg: #FFFDF9;
-  --footer-bg: #4A4144;
-  --danger: #E53E3E;
-  --border-color: #E2E8F0;
+  --bg-color: #FCF0DA;
+  --card-bg: #FFFFFF;
+  --primary-btn: #F2C46A;
+  --primary-btn-hover: #AEAC78;
+  --text-color: #4C4541;
+  --text-muted: #6D665F;
+  --navbar-bg: #FCF0DA;
+  --footer-bg: #4C4541;
+  --danger: #4C4541;
+  --border-color: #AEAC78;
+  --accent-color: #F2C46A;
 }
+
 
 /* RESET DASAR */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 body {
@@ -80,7 +91,7 @@ nav a:hover {
 
 .badge {
   background-color: var(--primary-btn);
-  color: #ffffff;
+  color: var(--text-color);
   font-size: 0.75rem;
   padding: 2px 8px;
   border-radius: 50%;
@@ -100,7 +111,7 @@ nav a:hover {
 
 .btn-login:hover {
   background-color: var(--primary-btn);
-  color: #ffffff;
+  color: var(--text-color);
 }
 
 footer {
@@ -142,7 +153,7 @@ footer {
 
 .btn-primary {
   background-color: var(--primary-btn);
-  color: #ffffff;
+  color: var(--text-color);
   padding: 12px 30px;
   border: none;
   border-radius: 30px;
@@ -271,7 +282,7 @@ footer {
 
 .btn-pesan {
   background-color: var(--primary-btn);
-  color: #ffffff;
+  color: var(--text-color);
   border: none;
   padding: 10px;
   border-radius: 8px;
@@ -318,6 +329,36 @@ footer {
   margin: 20px 0;
 }
 
+.buyer-name-field {
+  display: grid;
+  gap: 7px;
+  max-width: 480px;
+  margin: 16px 0;
+}
+
+.buyer-name-field label {
+  font-weight: 700;
+}
+
+.buyer-name-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.buyer-name-field input:focus {
+  border-color: var(--primary-btn-hover);
+  outline: 3px solid rgba(242, 196, 106, 0.4);
+}
+
+.buyer-name-field small {
+  color: var(--text-muted);
+}
+
 .payment-option {
   display: flex;
   align-items: center;
@@ -325,7 +366,7 @@ footer {
   border: 2px solid var(--border-color);
   border-radius: 10px;
   cursor: pointer;
-  background: #ffffff;
+  background: var(--card-bg);
   transition: border-color 0.2s;
 }
 
@@ -333,9 +374,114 @@ footer {
   border-color: var(--primary-btn);
 }
 
+.payment-option:has(input:checked) {
+  border-color: var(--primary-btn-hover);
+  background: #FFF7E6;
+}
+
 .payment-option input[type="radio"] {
   margin-right: 12px;
   accent-color: var(--primary-btn);
+}
+
+.payment-details {
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-color);
+}
+
+.bank-select-label,
+.payment-detail-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+#bank-select {
+  width: 100%;
+  max-width: 360px;
+  padding: 11px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.va-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--card-bg);
+}
+
+.va-result strong,
+.va-result small {
+  display: block;
+}
+
+.va-result strong {
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+}
+
+.va-result small,
+.qris-payment-details p,
+.qris-disclaimer {
+  color: var(--text-muted);
+}
+
+.va-copy-status {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--accent-color);
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.va-copy-status[hidden] {
+  display: none;
+}
+
+.qris-payment-details {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.qris-payment-details[hidden],
+.payment-details[hidden],
+.va-result[hidden] {
+  display: none;
+}
+
+.qris-code {
+  width: min(260px, 100%);
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--card-bg);
+}
+
+.qris-code svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  shape-rendering: crispEdges;
+}
+
+.qris-disclaimer {
+  max-width: 520px;
+  font-size: 0.88rem;
 }
 
 .total-container {
@@ -509,11 +655,11 @@ hr {
 }
 
 .navbar .nav-links a:hover {
-  background: #f1f4ef;
+  background: #FFF7E6;
 }
 
 .navbar .nav-links a.active {
-  border-bottom: 2px solid #718477;
+  border-bottom: 2px solid var(--primary-btn);
   border-radius: 0;
 }
 
@@ -562,28 +708,34 @@ hr {
 }
 
 .app-notice {
-  max-width: 1100px;
-  margin: 18px auto 0;
-  padding: 14px 18px;
-  border: 1px solid #d9b47a;
-  border-left: 4px solid #bd7c2f;
-  border-radius: 6px;
-  background: #fff8e9;
+  position: fixed;
+  top: 88px;
+  right: 20px;
+  z-index: 1100;
+  max-width: min(520px, calc(100vw - 40px));
+  margin: 0;
+  padding: 16px 20px;
+  border: 2px solid var(--primary-btn-hover);
+  border-left: 7px solid var(--primary-btn);
+  border-radius: 12px;
+  background: var(--accent-color);
   color: var(--text-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  box-shadow: 0 10px 28px rgba(76, 69, 65, 0.2);
+  font-weight: 700;
 }
 
 .app-notice.is-success {
-  border-color: #9dbba0;
-  border-left-color: #4d8054;
-  background: #f0f7ef;
+  border-color: var(--primary-btn-hover);
+  border-left-color: #AEAC78;
+  background: #F2C46A;
 }
 
 .app-notice a {
-  color: #85514c;
+  color: var(--primary-btn-hover);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -640,8 +792,8 @@ hr {
 .order-status {
   padding: 5px 9px;
   border-radius: 4px;
-  background: #f7e9eb;
-  color: #85514c;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-size: 0.83rem;
   font-weight: 700;
 }
@@ -720,15 +872,15 @@ hr {
 }
 
 .seller-tabs button.active {
-  border-color: #536a5b;
-  color: #3f5748;
+  border-color: var(--primary-btn);
+  color: var(--text-color);
 }
 
 .seller-tabs button span {
   min-width: 22px;
   padding: 2px 6px;
   border-radius: 20px;
-  background: #edf2ed;
+  background: var(--bg-color);
   font-size: 0.8rem;
   text-align: center;
 }
@@ -859,7 +1011,7 @@ hr {
 
 .seller-action-button.is-secondary {
   background: transparent;
-  color: #3f5748;
+  color: var(--text-color);
 }
 
 .seller-catalog {
@@ -882,7 +1034,7 @@ hr {
   width: 72px;
   height: 62px;
   border-radius: 5px;
-  background: #edf2ed;
+  background: var(--bg-color);
   object-fit: cover;
 }
 
@@ -903,8 +1055,8 @@ hr {
 .menu-availability {
   padding: 4px 8px;
   border-radius: 4px;
-  background: #edf2ed;
-  color: #3f5748;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-size: 0.8rem;
   white-space: nowrap;
 }
@@ -1017,7 +1169,7 @@ hr {
 
 .eyebrow {
   margin-bottom: 4px;
-  color: #85514c;
+  color: var(--primary-btn-hover);
   font-size: 0.76rem;
   font-weight: 800;
 }
@@ -1107,7 +1259,7 @@ td {
 }
 
 th {
-  background: #f7e9eb;
+  background: var(--accent-color);
 }
 
 td .quantity-control {
@@ -1140,8 +1292,9 @@ td .btn-secondary,
   }
 
   .app-notice {
-    margin-right: 16px;
-    margin-left: 16px;
+    top: 12px;
+    right: 12px;
+    max-width: calc(100vw - 24px);
   }
 }
 
@@ -1223,7 +1376,7 @@ td .btn-secondary,
 .seller-action-button {
   border-color: var(--primary-btn);
   background: var(--primary-btn);
-  color: #fff;
+  color: var(--text-color);
 }
 
 .home-page .hero-actions .btn-primary:hover,
@@ -1240,7 +1393,7 @@ td .btn-secondary,
 }
 
 .seller-action-button.is-secondary:hover {
-  background: #f8e9ec;
+  background: var(--bg-color);
 }
 
 .buyer-dashboard-main .buyer-welcome {
@@ -1256,7 +1409,7 @@ td .btn-secondary,
 .seller-action-button {
   border-color: var(--primary-btn);
   background: var(--primary-btn);
-  color: #fff;
+  color: var(--text-color);
 }
 
 .buyer-shop-link:hover,
@@ -1272,7 +1425,7 @@ td .btn-secondary,
 }
 
 .seller-action-button.is-secondary:hover {
-  background: #f8e9ec;
+  background: var(--bg-color);
 }
 
 .buyer-order-stats {
@@ -1318,8 +1471,8 @@ td .btn-secondary,
   margin: 8px 0 16px;
   padding: 5px 9px;
   border-radius: 5px;
-  background: #f8e9ec;
-  color: #784a52;
+  background: var(--accent-color);
+  color: var(--text-color);
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -1449,12 +1602,12 @@ td .btn-secondary,
   justify-content: space-between;
   gap: 24px;
   padding: 28px max(5%, calc((100% - 1100px) / 2));
-  background: #e9efe9;
+  background: linear-gradient(110deg, var(--bg-color), var(--accent-color));
 }
 
 .seller-callout .eyebrow {
   margin-bottom: 6px;
-  color: #536a5b;
+  color: var(--text-color);
   font-size: 0.76rem;
   font-weight: 800;
 }
@@ -1526,7 +1679,7 @@ td .btn-secondary,
   width: 100%;
   min-height: 44px;
   padding: 10px 13px;
-  border: 1px solid #e5dce0;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   outline: none;
   background: #fff;
@@ -1537,18 +1690,18 @@ td .btn-secondary,
 }
 
 .seller-filters input::placeholder {
-  color: #94858a;
+  color: var(--text-muted);
 }
 
 .seller-filters input:focus,
 .seller-filters select:focus {
   border-color: var(--primary-btn);
-  box-shadow: 0 0 0 3px rgba(217, 143, 157, 0.16);
+  box-shadow: 0 0 0 3px rgba(242, 196, 106, 0.32);
 }
 
 .seller-order-card {
-  border-color: #eadfe3;
-  border-left: 4px solid #e9c0c8;
+  border-color: var(--border-color);
+  border-left: 4px solid var(--accent-color);
   box-shadow: 0 5px 18px rgba(74, 65, 68, 0.045);
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
@@ -1585,7 +1738,7 @@ td .btn-secondary,
 
 .seller-payment-row {
   padding: 13px 0;
-  border-color: #eee5e8;
+  border-color: var(--border-color);
 }
 
 .seller-payment-row > span {
@@ -1599,11 +1752,11 @@ td .btn-secondary,
 .seller-order-history {
   padding: 10px 12px;
   border-radius: 7px;
-  background: #fbf7f8;
+  background: var(--bg-color);
 }
 
 .seller-order-history summary {
-  color: #76555d;
+  color: var(--text-color);
   font-size: 0.9rem;
 }
 
@@ -1615,7 +1768,7 @@ td .btn-secondary,
   min-height: 40px;
   padding: 9px 14px;
   border-radius: 7px;
-  box-shadow: 0 2px 5px rgba(130, 78, 88, 0.12);
+  box-shadow: 0 2px 5px rgba(76, 69, 65, 0.12);
 }
 
 .seller-order-actions .seller-action-button.is-secondary {
@@ -1627,7 +1780,7 @@ td .btn-secondary,
 }
 
 .buyer-orders-panel {
-  border-color: #eadfe3;
+  border-color: var(--border-color);
   box-shadow: 0 5px 18px rgba(74, 65, 68, 0.045);
 }
 
@@ -1641,9 +1794,9 @@ td .btn-secondary,
   align-items: center;
   gap: 5px;
   padding: 8px 11px;
-  border: 1px solid #ebd4da;
+  border: 1px solid var(--border-color);
   border-radius: 7px;
-  background: #fff8f9;
+  background: var(--bg-color);
   color: var(--primary-btn-hover);
   text-decoration: none;
   transition: background 160ms ease, border-color 160ms ease;
@@ -1651,19 +1804,19 @@ td .btn-secondary,
 
 .buyer-orders-panel .section-heading a:hover {
   border-color: var(--primary-btn);
-  background: #f9e9ed;
+  background: var(--accent-color);
 }
 
 .buyer-orders-list .order-card {
-  border-color: #eee3e7;
+  border-color: var(--border-color);
   border-radius: 8px;
   box-shadow: 0 3px 12px rgba(74, 65, 68, 0.04);
 }
 
 .buyer-orders-list .order-status,
 .buyer-latest-status {
-  background: #f9e9ed;
-  color: #80515c;
+  background: var(--accent-color);
+  color: var(--text-color);
 }
 
 .buyer-orders-list .buyer-payment-status strong {
@@ -1672,13 +1825,13 @@ td .btn-secondary,
 
 .seller-stats article,
 .buyer-order-stats article {
-  border-color: #eadfe3;
+  border-color: var(--border-color);
   box-shadow: 0 3px 12px rgba(74, 65, 68, 0.035);
 }
 
 .seller-stats article strong,
 .buyer-order-stats article strong {
-  color: #76555d;
+  color: var(--text-color);
 }
 
 @media (max-width: 760px) {
@@ -1693,13 +1846,13 @@ td .btn-secondary,
 }
 
 body {
-  background-image: repeating-linear-gradient(135deg, rgba(176, 115, 129, 0.035) 0, rgba(176, 115, 129, 0.035) 1px, transparent 1px, transparent 18px);
+  background-image: repeating-linear-gradient(135deg, rgba(174, 172, 120, 0.045) 0, rgba(174, 172, 120, 0.045) 1px, transparent 1px, transparent 18px);
   background-attachment: fixed;
 }
 
 body.home-page,
 body:has(main[data-protected-page="pembeli"]) {
-  background-image: repeating-linear-gradient(135deg, rgba(176, 115, 129, 0.035) 0, rgba(176, 115, 129, 0.035) 1px, transparent 1px, transparent 18px);
+  background-image: repeating-linear-gradient(135deg, rgba(174, 172, 120, 0.045) 0, rgba(174, 172, 120, 0.045) 1px, transparent 1px, transparent 18px);
   background-attachment: fixed;
 }
 
@@ -1710,9 +1863,9 @@ body:has(main[data-protected-page="pembeli"]) {
   gap: 24px;
   margin: 0 auto 24px;
   padding: 24px max(5%, calc((100% - 1100px) / 2));
-  border-top: 1px solid rgba(209, 174, 183, 0.45);
-  border-bottom: 1px solid rgba(209, 174, 183, 0.45);
-  background: rgba(255, 253, 249, 0.74);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-color);
 }
 
 .home-order-callout .eyebrow {
@@ -1741,9 +1894,9 @@ body:has(main[data-protected-page="pembeli"]) {
 
 .buyer-welcome {
   padding: 20px 22px;
-  border: 1px solid rgba(217, 143, 157, 0.24);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  background: linear-gradient(110deg, rgba(255, 253, 249, 0.96), rgba(250, 233, 237, 0.76));
+  background: linear-gradient(110deg, var(--card-bg), var(--bg-color));
 }
 
 .buyer-welcome .eyebrow {
@@ -1761,7 +1914,7 @@ body:has(main[data-protected-page="pembeli"]) {
 .buyer-payment-total {
   min-height: 122px;
   padding: 18px;
-  border: 1px solid #eadfe3;
+  border: 1px solid var(--border-color);
   border-radius: 9px;
   background: rgba(255, 253, 249, 0.96);
   box-shadow: 0 6px 18px rgba(74, 65, 68, 0.045);
@@ -1781,7 +1934,7 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .buyer-overview-stat strong {
-  color: #76555d;
+  color: var(--text-color);
   font-size: 2rem;
   line-height: 1.1;
 }
@@ -1797,8 +1950,8 @@ body:has(main[data-protected-page="pembeli"]) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border-color: rgba(217, 143, 157, 0.48);
-  background: linear-gradient(125deg, #fff8f9, #f7e7eb);
+  border-color: var(--border-color);
+  background: linear-gradient(125deg, var(--bg-color), var(--accent-color));
 }
 
 .buyer-payment-total > div {
@@ -1807,7 +1960,7 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .buyer-payment-total > strong {
-  color: #874e5b;
+  color: var(--text-color);
   font-size: 1.5rem;
   text-align: right;
   white-space: nowrap;
@@ -1818,11 +1971,11 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .buyer-orders-panel .section-heading h2 {
-  color: #493f42;
+  color: var(--text-color);
 }
 
 .buyer-orders-list .order-card {
-  border-left: 3px solid #e8bdc6;
+  border-left: 3px solid var(--accent-color);
   background: #fff;
 }
 
@@ -1833,24 +1986,24 @@ body:has(main[data-protected-page="pembeli"]) {
 .seller-dashboard .page-heading {
   margin: 4px 0 24px;
   padding: 20px 22px;
-  border: 1px solid rgba(217, 143, 157, 0.26);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  background: linear-gradient(110deg, rgba(255, 253, 249, 0.96), rgba(250, 233, 237, 0.78));
+  background: linear-gradient(110deg, var(--card-bg), var(--bg-color));
 }
 
 .seller-dashboard .seller-stats article {
   position: relative;
   overflow: hidden;
   border-radius: 9px;
-  border-top: 3px solid rgba(217, 143, 157, 0.58);
-  background: rgba(255, 253, 249, 0.96);
+  border-top: 3px solid var(--accent-color);
+  background: var(--card-bg);
 }
 
 .seller-orders-section {
   padding: 20px;
-  border: 1px solid rgba(225, 210, 216, 0.85);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  background: rgba(255, 253, 249, 0.76);
+  background: var(--bg-color);
 }
 
 .seller-order-items li {
@@ -1859,7 +2012,7 @@ body:has(main[data-protected-page="pembeli"]) {
   align-items: center;
   gap: 12px;
   padding: 7px 0;
-  border-bottom: 1px solid #f1e9ec;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .seller-item-name {
@@ -1872,10 +2025,10 @@ body:has(main[data-protected-page="pembeli"]) {
   justify-self: center;
   min-width: 44px;
   padding: 3px 7px;
-  border: 1px solid #eedde2;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  background: #fff7f8;
-  color: #80515c;
+  background: var(--accent-color);
+  color: var(--text-color);
   font-size: 0.82rem;
   font-weight: 700;
   text-align: center;
@@ -1889,7 +2042,7 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .seller-payment-row > strong {
-  color: #874e5b;
+  color: var(--text-color);
   font-size: 1.05rem;
   white-space: nowrap;
 }
@@ -1955,13 +2108,14 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .home-page .hero-actions .btn-primary {
-  border-color: #8e4e5c;
-  background: #b65f70;
-  color: #fff;
+  border-color: var(--primary-btn);
+  background: var(--primary-btn);
+  color: var(--text-color);
 }
 
 .home-page .hero-actions .btn-primary:hover {
-  background: #984c5c;
+  background: var(--primary-btn-hover);
+  color: #fff;
 }
 
 .home-page .hero-actions .btn-secondary {
@@ -1975,15 +2129,15 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .home-page .features .card {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .home-page .features .card h4 {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .home-page .features .card p {
-  color: #62545a;
+  color: var(--text-muted);
 }
 
 .seller-portal-home .seller-hero .eyebrow,
@@ -1994,13 +2148,14 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .seller-portal-home .seller-hero .btn-primary {
-  border-color: #8e4e5c;
-  background: #b65f70;
-  color: #fff;
+  border-color: var(--primary-btn);
+  background: var(--primary-btn);
+  color: var(--text-color);
 }
 
 .seller-portal-home .seller-hero .btn-primary:hover {
-  background: #984c5c;
+  background: var(--primary-btn-hover);
+  color: #fff;
 }
 
 .seller-portal-home .seller-hero .btn-secondary {
@@ -2010,15 +2165,15 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .seller-portal-summary {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .seller-portal-summary h2 {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .seller-portal-summary p:last-child {
-  color: #62545a;
+  color: var(--text-muted);
 }
 
 .seller-order-items li > strong {
@@ -2064,7 +2219,7 @@ body:has(main[data-protected-page="pembeli"]) {
   justify-content: flex-start;
   gap: 10px;
   padding: 10px 0 12px;
-  border-bottom: 1px solid #eee5e8;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .seller-payment-status-line > span {
@@ -2076,7 +2231,7 @@ body:has(main[data-protected-page="pembeli"]) {
   width: fit-content;
   padding: 4px 9px;
   border-radius: 5px;
-  background: #fae8ec;
+  background: var(--accent-color);
   color: var(--primary-btn-hover);
   font-size: 0.83rem;
 }
@@ -2108,8 +2263,8 @@ body:has(main[data-protected-page="pembeli"]) {
   max-width: 1100px;
   margin: 24px auto 38px;
   padding: 22px 0;
-  border-top: 1px solid rgba(209, 174, 183, 0.58);
-  border-bottom: 1px solid rgba(209, 174, 183, 0.58);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   background: linear-gradient(90deg, transparent, rgba(255, 253, 249, 0.5), transparent);
 }
 
@@ -2140,13 +2295,13 @@ body:has(main[data-protected-page="pembeli"]) {
 .buyer-dashboard-main .buyer-welcome {
   padding: 12px 0 18px;
   border: 0 !important;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55) !important;
+  border-bottom: 1px solid rgba(174, 172, 120, 0.55) !important;
 }
 
 .buyer-dashboard-main .buyer-overview-stat,
 .buyer-dashboard-main .buyer-payment-total {
   border: 0 !important;
-  border-right: 1px solid rgba(210, 182, 190, 0.62) !important;
+  border-right: 1px solid rgba(174, 172, 120, 0.62) !important;
 }
 
 .buyer-dashboard-main .buyer-payment-total {
@@ -2157,12 +2312,12 @@ body:has(main[data-protected-page="pembeli"]) {
 .buyer-dashboard-main .buyer-orders-panel {
   padding: 20px 0;
   border: 0 !important;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55) !important;
+  border-bottom: 1px solid rgba(174, 172, 120, 0.55) !important;
 }
 
 .buyer-dashboard-main .buyer-orders-list .order-card {
   border: 0 !important;
-  border-bottom: 1px solid #e8dce0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
 @media (max-width: 650px) {
@@ -2179,7 +2334,7 @@ body:has(main[data-protected-page="pembeli"]) {
   }
 
   .buyer-dashboard-main .buyer-payment-total {
-    border-top: 1px solid rgba(210, 182, 190, 0.62) !important;
+    border-top: 1px solid rgba(174, 172, 120, 0.62) !important;
     border-left: 0 !important;
   }
 }
@@ -2200,7 +2355,7 @@ body:has(main[data-protected-page="pembeli"]) {
 .seller-order-items li > strong {
   display: table-cell !important;
   padding: 8px 6px;
-  border-bottom: 1px solid #f1e9ec;
+  border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
 }
 
@@ -2262,13 +2417,13 @@ body:has(main[data-protected-page="pembeli"]) {
   padding-right: 0;
   padding-left: 0;
   border: 0;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .buyer-dashboard-main .buyer-overview-stat,
 .buyer-dashboard-main .buyer-payment-total {
   border: 0;
-  border-right: 1px solid rgba(210, 182, 190, 0.62);
+  border-right: 1px solid var(--border-color);
 }
 
 .buyer-dashboard-main .buyer-payment-total {
@@ -2280,12 +2435,12 @@ body:has(main[data-protected-page="pembeli"]) {
   padding-right: 0;
   padding-left: 0;
   border: 0;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .buyer-dashboard-main .buyer-orders-list .order-card {
   border: 0;
-  border-bottom: 1px solid #e8dce0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .cart-checkout-bar {
@@ -2362,7 +2517,7 @@ body:has(main[data-protected-page="pembeli"]) {
   }
 
   .buyer-dashboard-main .buyer-payment-total {
-    border-top: 1px solid rgba(210, 182, 190, 0.62);
+    border-top: 1px solid var(--border-color);
     border-left: 0;
   }
 }
@@ -2389,7 +2544,17 @@ body:has(main[data-protected-page="pembeli"]) {
 }
 
 .cart-table th {
-  background: #f8e9ed;
+  background: var(--accent-color);
+  color: var(--text-color);
+  border-color: var(--primary-btn-hover);
+}
+
+.cart-table tbody tr:nth-child(even) {
+  background: #FFF7E6;
+}
+
+.cart-table tbody tr:hover {
+  background: #FCE3A5;
 }
 
 .cart-checkout-bar {
@@ -2399,9 +2564,9 @@ body:has(main[data-protected-page="pembeli"]) {
   gap: 30px;
   margin-top: 30px;
   padding: 22px 24px;
-  border: 1px solid #ead9df;
+  border: 1px solid var(--border-color);
   border-radius: 9px;
-  background: linear-gradient(110deg, #fffdf9, #f9e9ed);
+  background: linear-gradient(110deg, var(--bg-color), var(--accent-color));
 }
 
 .cart-total-block {
@@ -2455,7 +2620,7 @@ body:has(main[data-protected-page="pembeli"]) {
 .seller-order-items li > strong {
   display: table-cell !important;
   padding: 8px 6px;
-  border-bottom: 1px solid #f1e9ec;
+  border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
 }
 
@@ -2522,13 +2687,13 @@ body:has(main[data-protected-page="pembeli"]) {
   padding-right: 0;
   padding-left: 0;
   border: 0 !important;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55) !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
 .buyer-dashboard-main .buyer-overview-stat,
 .buyer-dashboard-main .buyer-payment-total {
   border: 0 !important;
-  border-right: 1px solid rgba(210, 182, 190, 0.62) !important;
+  border-right: 1px solid var(--border-color) !important;
 }
 
 .buyer-dashboard-main .buyer-payment-total {
@@ -2540,12 +2705,12 @@ body:has(main[data-protected-page="pembeli"]) {
   padding-right: 0;
   padding-left: 0;
   border: 0 !important;
-  border-bottom: 1px solid rgba(209, 174, 183, 0.55) !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
 .buyer-dashboard-main .buyer-orders-list .order-card {
   border: 0 !important;
-  border-bottom: 1px solid #e8dce0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
 @media (max-width: 760px) {
@@ -2576,7 +2741,7 @@ body:has(main[data-protected-page="pembeli"]) {
   }
 
   .buyer-dashboard-main .buyer-payment-total {
-    border-top: 1px solid rgba(210, 182, 190, 0.62) !important;
+    border-top: 1px solid var(--border-color) !important;
     border-left: 0 !important;
   }
 }
@@ -2627,7 +2792,7 @@ body:has(main[data-protected-page="pembeli"]) {
   gap: 10px;
   margin-top: 2px;
   padding: 9px 0 11px;
-  border-bottom: 1px solid #eee5e8;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .seller-payment-status-line > span {
@@ -2639,23 +2804,23 @@ body:has(main[data-protected-page="pembeli"]) {
   width: fit-content;
   padding: 4px 9px;
   border-radius: 5px;
-  background: #fae8ec;
-  color: #8b4b59;
+  background: var(--accent-color);
+  color: var(--text-color);
   font-size: 0.83rem;
   font-weight: 700;
 }
 
 .seller-portal-summary h2,
 .seller-portal-summary p:last-child {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .home-page .features .card h4 {
-  color: #493d41;
+  color: var(--text-color);
 }
 
 .home-page .features .card p {
-  color: #62545a;
+  color: var(--text-muted);
 }
 
 @media (max-width: 650px) {
@@ -2666,5 +2831,14 @@ body:has(main[data-protected-page="pembeli"]) {
 
   .seller-payment-status-line {
     align-items: flex-start;
+  }
+
+  .va-result {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .va-result .btn-secondary {
+    width: 100%;
   }
 }

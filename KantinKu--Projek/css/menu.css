@@ -1,11 +1,12 @@
+
 :root{  
-    --bg:#F7F0F3;  
-    --card:#FFFDF9;  
-    --btn:#D98F9D;  
-    --btn2:#C77887;  
-    --text:#4A4144;  
-    --muted:#746B6E;  
-    --border:#E5DADD;  
+    --bg:#FCF0DA;  
+    --card:#FCF0DA;  
+    --btn:#F2C46A;  
+    --btn2:#AEAC78;  
+    --text:#4C4541;  
+    --muted:#6D665F;  
+    --border:#AEAC78;  
 }  
   
 *{  
@@ -28,7 +29,6 @@ button{
     font:inherit;  
     cursor:pointer;  
 }  
-  
   
 /* HEADER */  
   
@@ -65,9 +65,8 @@ nav a:last-child{
     padding:11px 17px;  
     border-radius:25px;  
     background:var(--btn);  
-    color:white;  
+    color:var(--text);  
 }  
-  
   
 /* MAIN */  
   
@@ -87,7 +86,6 @@ main>p{
     margin-bottom:35px;  
 }  
   
-  
 /* BEST SELLER */  
   
 .best-seller{  
@@ -97,7 +95,7 @@ main>p{
 .best-seller>h2,  
 main>section>h2{  
     margin-bottom:20px;  
-    font-family:Georgia,serif;  
+    font-family:Georgia,'Times New Roman',serif;  
     font-size:32px;  
 }  
   
@@ -110,12 +108,11 @@ main>section>h2{
     margin-bottom:8px;  
     padding:5px 10px;  
     border-radius:20px;  
-    background:#F5E1E5;  
+    background:#FCF0DA;  
     color:var(--btn2);  
     font-size:11px;  
     font-weight:bold;  
 }  
-
 
 /* RAPIN CARD ATAS */  
 
@@ -143,7 +140,6 @@ main>section>h2{
     font-weight:bold;  
 }  
   
-  
 /* CARD CONTAINER */  
   
 .menu-container{  
@@ -151,7 +147,6 @@ main>section>h2{
     grid-template-columns:repeat(3,1fr);  
     gap:28px;  
 }  
-  
   
 /* CARD */  
   
@@ -169,7 +164,6 @@ main>section>h2{
     transform:translateY(-5px);  
 }  
   
-  
 /* IMAGE */  
   
 .menu-card>img{  
@@ -177,9 +171,8 @@ main>section>h2{
     height:285px;  
     display:block;  
     object-fit:cover;  
-    background:#EEF5F8;  
+    background:#FCF0DA;  
 }  
-  
   
 /* CONTENT */  
   
@@ -211,7 +204,6 @@ main>section>h2{
     font-size:18px;  
 }  
   
-  
 /* QUANTITY */  
   
 .quantity-control{  
@@ -239,7 +231,6 @@ main>section>h2{
     text-align:center;  
 }  
   
-  
 /* BUTTON */  
   
 .btn-pesan{  
@@ -255,7 +246,6 @@ main>section>h2{
 .btn-pesan:hover{  
     background:var(--btn2);  
 }  
-  
   
 /* LINK */  
   
@@ -274,10 +264,9 @@ main>section>h2{
     border:1px solid var(--border);  
     font-weight:bold;  
 }  
- 
- 
-/* TAMBAHAN KERANJANG */ 
- 
+
+/* TAMBAHAN KERANJANG */  
+
 .cart{ 
     display:flex; 
     align-items:center; 
@@ -310,7 +299,6 @@ main>section>h2{
     background:var(--btn2); 
 } 
  
- 
 /* POPUP */ 
  
 .overlay{ 
@@ -319,7 +307,7 @@ main>section>h2{
     display:none; 
     align-items:center; 
     justify-content:center; 
-    background:rgba(74,65,68,.35); 
+    background:rgba(45,0,0,.35); 
     z-index:1000; 
 } 
  
@@ -342,7 +330,7 @@ main>section>h2{
  
 .popup h2{ 
     margin-bottom:20px; 
-    font-family:Georgia,serif; 
+    font-family:Georgia,'Times New Roman',serif; 
 } 
  
 .close{ 
@@ -421,7 +409,6 @@ main>section>h2{
     color:var(--text); 
 } 
  
- 
 /* NOTIFIKASI */ 
  
 .notif{ 
@@ -443,8 +430,7 @@ main>section>h2{
 .notif.show{ 
     opacity:1; 
     transform:translateY(0); 
-} 
-  
+}  
   
 /* RESPONSIVE */  
   
@@ -491,7 +477,7 @@ main>section>h2{
 }
 
 body:has(main[data-protected-page="pembeli"]) {
-    background: var(--bg-color);
+    background: var(--bg);
 }
 
 body:has(main[data-protected-page="pembeli"]) > main {
@@ -515,14 +501,14 @@ body:has(main[data-protected-page="pembeli"]) > main {
 
 .menu-toolbar .eyebrow {
     margin-bottom: 6px;
-    color: #536a5b;
+    color: #AEAC78;
     font-size: 0.75rem;
     font-weight: 800;
 }
 
 .menu-intro,
 .menu-search > span {
-    color: var(--text-muted);
+    color: var(--muted);
 }
 
 .menu-search {
@@ -537,15 +523,15 @@ body:has(main[data-protected-page="pembeli"]) > main {
     width: 100%;
     min-height: 44px;
     padding: 10px 13px;
-    border: 1px solid #d9dfd8;
+    border: 1px solid var(--border);
     border-radius: 7px;
     background: white;
-    color: var(--text-color);
+    color: var(--text);
     font: inherit;
 }
 
 .menu-search input:focus {
-    outline: 2px solid #a9b8aa;
+    outline: 2px solid #AEAC78;
     outline-offset: 1px;
 }
 
@@ -553,7 +539,7 @@ body:has(main[data-protected-page="pembeli"]) > main {
     display: flex;
     gap: 8px;
     margin: 0 0 12px;
-    border-bottom: 1px solid #dfe4de;
+    border-bottom: 1px solid var(--border);
 }
 
 .category-tabs button {
@@ -561,14 +547,14 @@ body:has(main[data-protected-page="pembeli"]) > main {
     border: 0;
     border-bottom: 2px solid transparent;
     background: transparent;
-    color: var(--text-muted);
+    color: var(--muted);
     font: inherit;
     font-weight: 700;
     cursor: pointer;
 }
 
 .category-tabs button:hover {
-    color: #3f5748;
+    color: #4C4541;
 }
 
 .category-tabs button.active {
@@ -579,7 +565,7 @@ body:has(main[data-protected-page="pembeli"]) > main {
 .menu-results {
     min-height: 24px;
     margin: 0 0 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 0.88rem;
 }
 
@@ -603,17 +589,17 @@ body:has(main[data-protected-page="pembeli"]) .menu-container {
 body:has(main[data-protected-page="pembeli"]) .menu-card {
     min-width: 0;
     padding: 0;
-    border: 1px solid #e0e5df;
+    border: 1px solid var(--border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--card);
     text-align: left;
-    box-shadow: 0 4px 15px rgba(43, 56, 46, 0.06);
+    box-shadow: 0 4px 15px rgba(45, 0, 0, 0.06);
     transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
 body:has(main[data-protected-page="pembeli"]) .menu-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(43, 56, 46, 0.12);
+    box-shadow: 0 10px 22px rgba(45, 0, 0, 0.12);
 }
 
 body:has(main[data-protected-page="pembeli"]) .menu-card > img {
@@ -635,8 +621,8 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     margin-bottom: 6px;
     padding: 3px 7px;
     border-radius: 4px;
-    background: #edf2ed;
-    color: #536a5b;
+    background: #FCF0DA;
+    color: #AEAC78;
     font-size: 0.72rem;
     font-weight: 700;
 }
@@ -651,7 +637,7 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     min-height: 40px;
     overflow: hidden;
     margin-bottom: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 0.85rem;
     line-height: 1.45;
     -webkit-box-orient: vertical;
@@ -688,8 +674,8 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
 
 .keranjang-link a {
     border-radius: 6px;
-    border-color: #718477;
-    color: #3f5748;
+    border-color: #AEAC78;
+    color: #4C4541;
 }
 
 .add-order-dialog {
@@ -700,15 +686,15 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     max-height: 90vh;
     margin: auto;
     padding: 24px;
-    border: 1px solid #dce3dc;
+    border: 1px solid var(--border);
     border-radius: 10px;
-    background: #fff;
-    color: var(--text-color);
+    background: var(--card);
+    color: var(--text);
     box-shadow: 0 22px 70px rgba(27, 38, 29, 0.24);
 }
 
 .add-order-dialog::backdrop {
-    background: rgba(24, 34, 26, 0.56);
+    background: rgba(45, 0, 0, 0.56);
     backdrop-filter: blur(2px);
 }
 
@@ -724,13 +710,13 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 1.5rem;
     cursor: pointer;
 }
 
 .dialog-close:hover {
-    background: #eff3ee;
+    background: #FCF0DA;
 }
 
 .dialog-product {
@@ -744,13 +730,13 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
     width: 86px;
     height: 86px;
     border-radius: 7px;
-    background: #edf2ed;
+    background: #FCF0DA;
     object-fit: cover;
 }
 
 .dialog-product .eyebrow {
     margin-bottom: 2px;
-    color: #536a5b;
+    color: #AEAC78;
     font-size: 0.7rem;
     font-weight: 800;
 }
@@ -760,7 +746,7 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
 }
 
 .dialog-product #dialog-product-price {
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 0.87rem;
 }
 
@@ -783,10 +769,10 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
 .dialog-quantity-row button {
     width: 36px;
     height: 36px;
-    border: 1px solid #dce3dc;
+    border: 1px solid var(--border);
     border-radius: 6px;
-    background: #f2f5f1;
-    color: var(--text-color);
+    background: #FCF0DA;
+    color: var(--text);
 }
 
 .dialog-quantity-row output {
@@ -797,11 +783,11 @@ body:has(main[data-protected-page="pembeli"]) .menu-card > img {
 
 .dialog-total-row {
     padding-top: 14px;
-    border-top: 1px solid #e0e5df;
+    border-top: 1px solid var(--border);
 }
 
 .dialog-total-row strong {
-    color: #3f5748;
+    color: #4C4541;
     font-size: 1.15rem;
 }
 

@@ -151,7 +151,7 @@ const KantinKu = (() => {
           ? `<span class="nav-greeting">Hai, ${escapeHtml(account.username)}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
           : sellerPortal
             ? '<a class="btn-login" href="../pages/auth-penjual.html">Masuk / Daftar Penjual</a>'
-              : '<a class="btn-login" href="../pages/auth.html">Masuk / Daftar Pembeli</a>'}
+              : ''}
       </div>`;
     updateCartBadge();
   }
@@ -178,7 +178,7 @@ const KantinKu = (() => {
 
   function protectPage() {
     const content = document.querySelector('[data-protected-page]');
-    if (!content) return;
+    if (!content || content.dataset.protectedPage === 'pembeli') return;
     const requiredRole = content.dataset.protectedPage;
     const account = user();
     if (account?.role === requiredRole) return;
@@ -186,7 +186,7 @@ const KantinKu = (() => {
     content.hidden = true;
     if (!account) {
       const next = encodeURIComponent(location.pathname.split('/').pop() || '../index.html');
-      const authPage = requiredRole === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
+      const authPage = '../pages/auth-penjual.html';
       notify('Silakan masuk atau daftar terlebih dahulu untuk membuka halaman ini.', 'warning', {
         href: `${authPage}?next=${next}`,
         label: `Masuk sebagai ${requiredRole}`
@@ -209,7 +209,7 @@ const KantinKu = (() => {
   function logout() {
     const account = user();
     localStorage.removeItem(sessionKey);
-    location.href = account?.role === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
+    location.href = account?.role === 'penjual' ? '../pages/auth-penjual.html' : '../index.html';
   }
 
   document.addEventListener('DOMContentLoaded', () => {

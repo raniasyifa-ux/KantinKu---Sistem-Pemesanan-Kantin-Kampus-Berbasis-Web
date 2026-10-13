@@ -63,6 +63,7 @@ function belongsToStore(order) {
 }
 
 function getPaymentStatus(order) {
+  if (order.paymentStatus?.startsWith('Simulasi')) return 'Menunggu verifikasi';
   if (order.paymentStatus) return order.paymentStatus;
   return order.metode === 'Tunai' ? 'Menunggu pembayaran di tempat' : 'Menunggu verifikasi';
 }
@@ -71,7 +72,12 @@ function renderSellerOrder(order) {
   const safe = KantinKu.escapeHtml;
   const items = (order.items || []).map(item => `<li><span class="seller-item-name">${safe(item.nama)}</span><span class="seller-item-quantity">×${Number(item.jumlah)}</span><strong>${KantinKu.money(Number(item.harga) * Number(item.jumlah))}</strong></li>`).join('');
   const updates = (order.updates || []).map(update => `<li><span>${safe(update.status)}</span><time>${formatSellerDate(update.tanggal)}</time></li>`).join('');
-  const paymentUpdates = (order.paymentUpdates || []).map(update => `<li><span>${safe(update.status)}</span><time>${formatSellerDate(update.tanggal)}</time></li>`).join('');
+  const paymentUpdates = (order.paymentUpdates || []).map(update => {
+    const status = update.status?.includes('simulasi')
+      ? 'Menunggu verifikasi pembayaran oleh penjual'
+      : update.status;
+    return `<li><span>${safe(status)}</span><time>${formatSellerDate(update.tanggal)}</time></li>`;
+  }).join('');
   const paymentStatus = getPaymentStatus(order);
   let paymentAction = '';
   if (paymentStatus === 'Menunggu verifikasi') {
@@ -84,11 +90,13 @@ function renderSellerOrder(order) {
   const fulfillmentAction = nextStatus && paymentStatus === 'Disetujui'
     ? `<button class="seller-action-button is-secondary" type="button" data-seller-action="advance-order" data-order-id="${safe(order.id)}">${nextStatus === 'Diproses' ? 'Terima pesanan' : nextStatus === 'Siap diambil' ? 'Tandai siap diambil' : 'Selesaikan pesanan'}</button>`
     : '';
-  const buyerEmail = safe(order.userId || 'Email tidak tersedia');
+  const buyerContact = order.userId && order.userId !== 'guest'
+    ? `<a class="seller-buyer-contact" href="mailto:${encodeURIComponent(order.userId)}">${safe(order.userId)}</a>`
+    : '';
 
   return `<article class="seller-order-card">
     <header class="seller-order-heading"><div><p class="eyebrow">${safe(order.id)}</p><strong>${safe(order.buyerName || 'Pembeli')}</strong><small>${formatSellerDate(order.tanggal)}</small></div><span class="order-status">${safe(order.status || 'Menunggu konfirmasi')}</span></header>
-    <a class="seller-buyer-contact" href="mailto:${encodeURIComponent(order.userId || '')}">${buyerEmail}</a>
+    ${buyerContact}
     <ul class="seller-order-items">${items}</ul>
     <div class="seller-payment-row"><div class="seller-payment-method"><span>Metode pembayaran</span><strong>${safe(order.metode || '-')}</strong></div><div class="seller-payment-total"><span>Total pesanan</span><strong>${KantinKu.money(order.total)}</strong></div></div>
     <div class="seller-payment-status-line"><span>Status pembayaran</span><strong class="payment-status-label">${safe(paymentStatus)}</strong></div>
@@ -195,7 +203,7 @@ function handleSellerAction(event) {
       updatePayment(order, 'Disetujui');
     } else if (action === 'confirm-cash' && getPaymentStatus(order) === 'Menunggu pembayaran di tempat') {
       updatePayment(order, 'Disetujui');
-    } else if (action === 'advance-order' && order.paymentStatus === 'Disetujui' && fulfillmentSteps[order.status]) {
+    } else if (action === 'advance-order' && getPaymentStatus(order) === 'Disetujui' && fulfillmentSteps[order.status]) {
       order.status = fulfillmentSteps[order.status];
       order.updates = Array.isArray(order.updates) ? order.updates : [];
       order.updates.push({ status: order.status, tanggal: new Date().toISOString() });

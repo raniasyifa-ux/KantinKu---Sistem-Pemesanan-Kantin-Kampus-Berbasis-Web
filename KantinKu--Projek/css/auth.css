@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
 :root {
-  --primary-pink: #D98F9D;
-  --primary-hover: #C57B89;
-  --light-pink: #F7F0F3;
-  --text-dark: #4A4144;
-  --text-muted: #6C6265;
-  --soft-white: #FFFDF9;
-  --danger: #E53E3E;
+  --primary-pink: #F2C46A;
+  --primary-hover: #AEAC78;
+  --light-pink: #FCF0DA;
+  --text-dark: #4C4541;
+  --text-muted: #6D665F;
+  --soft-white: #FFFFFF;
+  --danger: #4C4541;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.auth-header h2 {
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 .auth-body {
@@ -23,7 +25,13 @@
   align-items: center;
   min-height: 100vh;
   background: var(--light-pink);
-  background-image: repeating-linear-gradient(135deg, rgba(176, 115, 129, 0.035) 0, rgba(176, 115, 129, 0.035) 1px, transparent 1px, transparent 18px);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(174, 172, 120, 0.08) 0,
+    rgba(174, 172, 120, 0.08) 1px,
+    transparent 1px,
+    transparent 18px
+  );
   background-attachment: fixed;
   padding: 20px;
 }
@@ -34,8 +42,8 @@
   border-radius: 16px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #EDF2F7;
+  box-shadow: 0 10px 30px rgba(76, 69, 65, 0.08);
+  border: 1px solid #AEAC78;
 }
 
 .auth-header {
@@ -70,10 +78,10 @@
 .form-group input {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid #E2E8F0;
+  border: 1.5px solid #AEAC78;
   border-radius: 8px;
   outline: none;
-  background: #F8FAFC;
+  background: #FCF0DA;
   font-size: 14px;
   color: var(--text-dark);
 }
@@ -106,7 +114,7 @@
 
 .btn-primary {
   background: var(--primary-pink);
-  color: var(--soft-white);
+  color: var(--text-dark);
   padding: 12px 32px;
   border: none;
   border-radius: 30px;
@@ -129,7 +137,7 @@
 
 .auth-role-links a {
   padding: 9px 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #AEAC78;
   border-radius: 6px;
   color: var(--text-muted);
   text-align: center;
@@ -140,23 +148,23 @@
 
 .auth-role-links a.active {
   border-color: var(--primary-pink);
-  background: #f7e9eb;
+  background: #F2C46A;
   color: var(--text-dark);
 }
 
 .auth-message {
   margin-bottom: 18px;
   padding: 12px 14px;
-  border-left: 4px solid #4d8054;
+  border-left: 4px solid #AEAC78;
   border-radius: 5px;
-  background: #f0f7ef;
+  background: #FCF0DA;
   color: var(--text-dark);
   font-size: 13px;
 }
 
 .auth-message.is-error {
-  border-left-color: #b44c4c;
-  background: #fff0ef;
+  border-left-color: var(--danger);
+  background: #FCF0DA;
 }
 
 .auth-submit {

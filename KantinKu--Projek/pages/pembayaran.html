@@ -10,13 +10,22 @@
 
     <header class="navbar" data-app-header data-page="payment"></header>
 
-    <main class="container" data-protected-page="pembeli">
+    <main class="container">
         <h1>Pembayaran KantinKu</h1>
         <p style="color: var(--text-muted); margin-bottom: 20px;">Silakan periksa pesanan dan pilih metode pembayaran.</p>
 
         <div class="pembayaran-card">
             <h2>Ringkasan Pesanan</h2>
             <div id="ringkasanPesanan" class="summary-box" style="margin-top: 15px;"></div>
+
+            <hr>
+
+            <h2>Data Pembeli</h2>
+            <div class="buyer-name-field">
+                <label for="buyer-name">Nama pembeli</label>
+                <input id="buyer-name" name="buyerName" type="text" maxlength="60" autocomplete="name" placeholder="Masukkan nama Anda" required>
+                <small>Nama ini akan ditampilkan kepada penjual bersama pesanan.</small>
+            </div>
 
             <hr>
 
@@ -33,13 +42,41 @@
                 </label>
             </div>
 
+            <section id="bank-payment-details" class="payment-details" hidden>
+                <label class="bank-select-label" for="bank-select">Pilih bank tujuan</label>
+                <select id="bank-select">
+                    <option value="BCA" selected>BCA</option>
+                    <option value="BNI">BNI</option>
+                    <option value="BRI">BRI</option>
+                    <option value="Mandiri">Mandiri</option>
+                </select>
+                <div id="va-result" class="va-result" hidden aria-live="polite">
+                    <div>
+                        <span class="payment-detail-label">Virtual Account</span>
+                        <strong id="va-number"></strong>
+                        <small>Nomor VA ini belum terhubung ke layanan transfer. Minta penjual memverifikasi pembayaran.</small>
+                    </div>
+                    <button id="copy-va-button" class="btn-secondary" type="button">Salin VA</button>
+                </div>
+                <p id="va-copy-status" class="va-copy-status" role="status" aria-live="polite" hidden></p>
+            </section>
+
+            <section id="qris-payment-details" class="payment-details qris-payment-details" hidden>
+                <div>
+                    <h3>Bayar dengan QRIS</h3>
+                    <p>Kode QRIS belum terhubung ke layanan pembayaran. Tekan OK setelah pembayaran dikonfirmasi.</p>
+                </div>
+                <div id="qris-code" class="qris-code" role="img" aria-label="Ilustrasi kode QRIS"></div>
+                <button id="qris-continue" class="btn-primary" type="button">OK, Lanjutkan Pesanan</button>
+            </section>
+
             <div class="total-container">
                 <h3>Total Pembayaran: <span id="totalPembayaran" style="color: var(--primary-btn);">Rp0</span></h3>
             </div>
 
             <div class="action-buttons" style="margin-top: 25px;">
-                <button class="btn-primary" onclick="konfirmasiPembayaran()">Konfirmasi Pembayaran</button>
-                <button class="btn-secondary" onclick="kembaliKeHome()">Kembali</button>
+                <button id="confirm-payment-button" class="btn-primary" type="button" onclick="konfirmasiPembayaran()">Konfirmasi Pembayaran</button>
+                <button class="btn-secondary" type="button" onclick="kembaliKeHome()">Kembali</button>
             </div>
         </div>
     </main>
