@@ -1,6 +1,7 @@
 let selectedItem = null;
 let selectedQuantity = 1;
 let selectedCategory = 'Semua';
+const favoritesKey = 'kantinku_favorites';
 
 document.addEventListener('DOMContentLoaded', () => {
     renderMenu();
@@ -24,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dialog-confirm').addEventListener('click', confirmAddToCart);
     dialog.addEventListener('close', () => { selectedItem = null; });
     document.addEventListener('click', event => {
+        const favoriteButton = event.target.closest('[data-favorite-item]');
+        if (favoriteButton) {
+            toggleFavorite(favoriteButton.dataset.favoriteItem);
+            return;
+        }
         const button = event.target.closest('[data-add-item]');
         if (button) openAddDialog(button.dataset.addItem);
     });
@@ -32,8 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderMenu() {
     const products = KantinKu.catalog().filter(item => item.aktif !== false);
+    const favorites = readFavorites();
+    const favoriteCount = document.getElementById('favorite-count');
+    if (favoriteCount) favoriteCount.textContent = products.filter(item => favorites.includes(item.id)).length;
     const query = document.getElementById('menu-search').value.trim().toLocaleLowerCase('id-ID');
-    const filtered = products.filter(item => (selectedCategory === 'Semua' || item.kategori === selectedCategory)
+    const filtered = products.filter(item => (selectedCategory === 'Semua'
+        || (selectedCategory === 'Favorit' ? favorites.includes(item.id) : item.kategori === selectedCategory))
         && `${item.nama} ${item.deskripsi} ${item.kategori}`.toLocaleLowerCase('id-ID').includes(query));
     const groups = [
         ['Makanan', document.getElementById('makanan')],
@@ -54,8 +64,10 @@ function renderMenu() {
 function renderMenuCard(item) {
     const safe = KantinKu.escapeHtml;
     const image = safe(encodeURI(item.gambar || ''));
+    const favorite = readFavorites().includes(item.id);
     return `<article class="menu-card">
         <img src="${image}" alt="${safe(item.nama)}" loading="lazy">
+        <button class="favorite-button" type="button" data-favorite-item="${safe(item.id)}" aria-label="${favorite ? 'Hapus' : 'Tambah'} ${safe(item.nama)} ${favorite ? 'dari' : 'ke'} favorit" aria-pressed="${favorite}">${favorite ? '★' : '☆'}</button>
         <div class="menu-card-content">
             <span class="menu-category-label">${safe(item.kategori)}</span>
             <h3>${safe(item.nama)}</h3>
@@ -65,9 +77,29 @@ function renderMenuCard(item) {
     </article>`;
 }
 
+function readFavorites() {
+    try {
+        const stored = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
+        return Array.isArray(stored) ? stored.filter(item => typeof item === 'string') : [];
+    } catch {
+        return [];
+    }
+}
+
+function toggleFavorite(itemId) {
+    const favorites = new Set(readFavorites());
+    const added = !favorites.has(itemId);
+    if (added) favorites.add(itemId);
+    else favorites.delete(itemId);
+    localStorage.setItem(favoritesKey, JSON.stringify([...favorites]));
+    renderMenu();
+    KantinKu.notify(
+        added ? 'Menu ditambahkan ke favorit.' : 'Menu dihapus dari favorit.',
+        'success'
+    );
+}
+
 function openAddDialog(itemId) {
-    const account = KantinKu.user();
-    if (!account || account.role !== 'pembeli') return;
     selectedItem = KantinKu.catalog().find(item => item.id === itemId && item.aktif !== false);
     if (!selectedItem) return;
     selectedQuantity = 1;
@@ -101,4 +133,8 @@ function confirmAddToCart() {
     else items.push(cartItem);
     KantinKu.saveCart(items);
     document.getElementById('add-order-dialog').close();
+    KantinKu.notify(`${selectedItem.nama} berhasil ditambahkan ke keranjang.`, 'success', {
+        href: '../pages/keranjang.html',
+        label: 'Lihat keranjang'
+    });
 }

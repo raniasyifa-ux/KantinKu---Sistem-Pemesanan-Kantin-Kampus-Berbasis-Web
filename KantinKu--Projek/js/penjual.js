@@ -37,7 +37,7 @@ function renderSellerDashboard() {
 }
 
 function renderSellerOrders() {
-  const allOrders = KantinKu.orders().filter(order => belongsToStore(order));
+  const allOrders = KantinKu.orders().filter(order => belongsToStore(order) && order.paymentStatus === 'Disetujui');
   const search = document.getElementById('order-search').value.trim().toLocaleLowerCase('id-ID');
   const selectedStatus = document.getElementById('status-filter').value;
   const orders = allOrders.filter(order => {
@@ -47,7 +47,7 @@ function renderSellerOrders() {
   }).sort((first, second) => new Date(second.tanggal) - new Date(first.tanggal));
 
   document.getElementById('count-new').textContent = allOrders.filter(order => order.status === 'Menunggu konfirmasi').length;
-  document.getElementById('count-payment').textContent = allOrders.filter(order => ['Menunggu verifikasi', 'Menunggu pembayaran di tempat'].includes(getPaymentStatus(order))).length;
+  document.getElementById('count-payment').textContent = allOrders.filter(order => getPaymentStatus(order) === 'Disetujui').length;
   document.getElementById('count-progress').textContent = allOrders.filter(order => ['Diproses', 'Siap diambil'].includes(order.status)).length;
   document.getElementById('count-done').textContent = allOrders.filter(order => order.status === 'Selesai').length;
   document.getElementById('seller-order-count').textContent = `${orders.length} pesanan`;
@@ -84,14 +84,17 @@ function renderSellerOrder(order) {
   const fulfillmentAction = nextStatus && paymentStatus === 'Disetujui'
     ? `<button class="seller-action-button is-secondary" type="button" data-seller-action="advance-order" data-order-id="${safe(order.id)}">${nextStatus === 'Diproses' ? 'Terima pesanan' : nextStatus === 'Siap diambil' ? 'Tandai siap diambil' : 'Selesaikan pesanan'}</button>`
     : '';
-  const buyerEmail = safe(order.userId || 'Email tidak tersedia');
+
+  const paymentLabel = paymentStatus === 'Disetujui' && ['simulasi', 'local-unverified'].includes(order.paymentMode)
+    ? 'Konfirmasi lokal · belum diverifikasi bank'
+    : paymentStatus;
 
   return `<article class="seller-order-card">
     <header class="seller-order-heading"><div><p class="eyebrow">${safe(order.id)}</p><strong>${safe(order.buyerName || 'Pembeli')}</strong><small>${formatSellerDate(order.tanggal)}</small></div><span class="order-status">${safe(order.status || 'Menunggu konfirmasi')}</span></header>
-    <a class="seller-buyer-contact" href="mailto:${encodeURIComponent(order.userId || '')}">${buyerEmail}</a>
+    <p class="seller-buyer-contact">Identitas pembeli: nomor pesanan</p>
     <ul class="seller-order-items">${items}</ul>
     <div class="seller-payment-row"><div class="seller-payment-method"><span>Metode pembayaran</span><strong>${safe(order.metode || '-')}</strong></div><div class="seller-payment-total"><span>Total pesanan</span><strong>${KantinKu.money(order.total)}</strong></div></div>
-    <div class="seller-payment-status-line"><span>Status pembayaran</span><strong class="payment-status-label">${safe(paymentStatus)}</strong></div>
+    <div class="seller-payment-status-line"><span>Status pembayaran</span><strong class="payment-status-label">${safe(paymentLabel)}</strong></div>
     <details class="seller-order-history"><summary>Lihat progres pesanan dan pembayaran</summary><div class="seller-history-columns"><div><h3>Status pesanan</h3><ol>${updates || '<li>Pesanan dibuat</li>'}</ol></div><div><h3>Status pembayaran</h3><ol>${paymentUpdates || `<li>${safe(paymentStatus)}</li>`}</ol></div></div></details>
     <div class="seller-order-actions">${paymentAction}${fulfillmentAction}</div>
   </article>`;

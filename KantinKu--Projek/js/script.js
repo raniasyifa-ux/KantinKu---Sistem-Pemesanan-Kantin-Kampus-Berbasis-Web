@@ -1,6 +1,7 @@
 const KantinKu = (() => {
   const sessionKey = 'kantinku_session';
   const ordersKey = 'kantinku_orders';
+  const buyerOrdersKey = 'kantinku_buyer_orders';
   const catalogKey = 'kantinku_catalog';
   const storeId = 'kantinku';
   const defaultCatalog = [
@@ -41,8 +42,8 @@ const KantinKu = (() => {
     return read(sessionKey, null);
   }
 
-  function cartKey(account = user()) {
-    return `kantinku_cart_${encodeURIComponent((account?.email || 'guest').toLowerCase())}`;
+  function cartKey() {
+    return 'kantinku_cart_guest';
   }
 
   function cart() {
@@ -78,6 +79,20 @@ const KantinKu = (() => {
 
   function saveOrders(items) {
     localStorage.setItem(ordersKey, JSON.stringify(items));
+  }
+
+  function buyerOrders() {
+    const orderIds = read(buyerOrdersKey, []);
+    if (!Array.isArray(orderIds)) return [];
+    return orders().filter(order => orderIds.includes(order.id));
+  }
+
+  function saveBuyerOrderId(orderId) {
+    const orderIds = read(buyerOrdersKey, []);
+    const savedIds = Array.isArray(orderIds) ? orderIds : [];
+    if (!savedIds.includes(orderId)) {
+      localStorage.setItem(buyerOrdersKey, JSON.stringify([orderId, ...savedIds]));
+    }
   }
 
   function catalog() {
@@ -135,23 +150,30 @@ const KantinKu = (() => {
     if (!header) return;
     const account = user();
     const page = header.dataset.page;
-    const sellerPortal = account?.role === 'penjual' || document.body.dataset.portal === 'penjual';
+    const sellerPortal = document.body.dataset.portal === 'penjual';
+    const rootPage = page === 'home' || page === 'seller-home';
     const links = sellerPortal
-      ? [['../index-penjual.html', 'Beranda Toko', 'seller-home'], ['../pages/penjual.html', 'Dashboard Toko', 'seller']]
-      : [['../index.html', 'Beranda', 'home'], ['../pages/menu.html', 'Menu', 'menu'], ['../pages/keranjang.html', 'Keranjang', 'cart'], ['../pages/pembayaran.html', 'Pembayaran', 'payment'], ['../pages/status.html', 'Pesanan Saya', 'status']];
+      ? rootPage
+        ? [['index-penjual.html', 'Beranda Toko', 'seller-home'], ['pages/penjual.html', 'Dashboard Toko', 'seller']]
+        : [['../index-penjual.html', 'Beranda Toko', 'seller-home'], ['../pages/penjual.html', 'Dashboard Toko', 'seller']]
+      : rootPage
+        ? [['index.html', 'Beranda', 'home'], ['pages/menu.html', 'Menu', 'menu'], ['pages/keranjang.html', 'Keranjang', 'cart'], ['pages/pembayaran.html', 'Pembayaran', 'payment'], ['pages/status.html', 'Pesanan Saya', 'status']]
+        : [['../index.html', 'Beranda', 'home'], ['../pages/menu.html', 'Menu', 'menu'], ['../pages/keranjang.html', 'Keranjang', 'cart'], ['../pages/pembayaran.html', 'Pembayaran', 'payment'], ['../pages/status.html', 'Pesanan Saya', 'status']];
 
-    const homeUrl = sellerPortal ? '../index-penjual.html' : '../index.html';
+    const homeUrl = sellerPortal
+      ? rootPage ? 'index-penjual.html' : '../index-penjual.html'
+      : rootPage ? 'index.html' : '../index.html';
     header.innerHTML = `
       <a class="logo" href="${homeUrl}" aria-label="KantinKu Beranda"><span>Kantin</span>Ku</a>
       <nav class="nav-links" aria-label="Navigasi utama">
         ${links.map(([href, label, id]) => `<a href="${href}" class="${page === id ? 'active' : ''}">${label}${id === 'cart' ? ' <span id="cart-badge" class="badge" hidden>0</span>' : ''}</a>`).join('')}
       </nav>
       <div class="nav-auth">
-        ${account
-          ? `<span class="nav-greeting">Hai, ${escapeHtml(account.username)}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
-          : sellerPortal
-            ? '<a class="btn-login" href="../pages/auth-penjual.html">Masuk / Daftar Penjual</a>'
-              : '<a class="btn-login" href="../pages/auth.html">Masuk / Daftar Pembeli</a>'}
+        ${sellerPortal
+          ? account?.role === 'penjual'
+            ? `<span class="nav-greeting">Hai, ${escapeHtml(account.username)}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
+            : `<a class="btn-login" href="${rootPage ? 'pages/auth-penjual.html' : '../pages/auth-penjual.html'}">Masuk / Daftar Penjual</a>`
+          : ''}
       </div>`;
     updateCartBadge();
   }
@@ -160,13 +182,7 @@ const KantinKu = (() => {
     const buyerAction = document.getElementById('home-buyer-action');
     if (!buyerAction) return;
 
-    const account = user();
-    if (account?.role === 'penjual') {
-      location.replace('../index-penjual.html');
-      return;
-    }
-
-    buyerAction.href = '../pages/menu.html';
+    buyerAction.href = 'pages/menu.html';
     buyerAction.textContent = 'Jelajahi menu';
   }
 
@@ -180,6 +196,7 @@ const KantinKu = (() => {
     const content = document.querySelector('[data-protected-page]');
     if (!content) return;
     const requiredRole = content.dataset.protectedPage;
+    if (requiredRole === 'pembeli') return;
     const account = user();
     if (account?.role === requiredRole) return;
 
@@ -200,7 +217,7 @@ const KantinKu = (() => {
   function guardPortalEntry() {
     const portal = document.body.dataset.portal;
     const account = user();
-    if (!portal || !account || account.role === portal) return;
+    if (portal !== 'penjual' || !account || account.role === portal) return;
     const content = document.querySelector('[data-portal-content]');
     if (content) content.hidden = true;
     notify(`Portal ${portal} terkunci karena sesi ${account.role} masih aktif. Keluar terlebih dahulu untuk berpindah portal.`, 'warning');
@@ -222,7 +239,7 @@ const KantinKu = (() => {
     });
   });
 
-  return { user, cart, saveCart, orders, saveOrders, catalog, saveCatalog, storeId, money, notify, escapeHtml, updateCartBadge };
+  return { user, cart, saveCart, orders, saveOrders, buyerOrders, saveBuyerOrderId, catalog, saveCatalog, storeId, money, notify, escapeHtml, updateCartBadge };
 })();
 
 window.KantinKu = KantinKu;

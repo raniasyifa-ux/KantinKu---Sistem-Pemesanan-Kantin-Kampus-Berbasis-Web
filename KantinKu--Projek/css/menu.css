@@ -1,11 +1,11 @@
 :root{  
-    --bg:#F7F0F3;  
-    --card:#FFFDF9;  
-    --btn:#D98F9D;  
-    --btn2:#C77887;  
-    --text:#4A4144;  
-    --muted:#746B6E;  
-    --border:#E5DADD;  
+    --bg:#f3e5d2;
+    --card:#ffffff;
+    --btn:#C8553D;
+    --btn2:#A8432F;
+    --text:#3B2A25;
+    --muted:#8A7B73;
+    --border:#E8DDD0;
 }  
   
 *{  
@@ -21,7 +21,6 @@ html{
 body{  
     background:var(--bg);  
     color:var(--text);  
-    font-family:Arial,sans-serif;  
 }  
   
 button{  
@@ -97,7 +96,6 @@ main>p{
 .best-seller>h2,  
 main>section>h2{  
     margin-bottom:20px;  
-    font-family:Georgia,serif;  
     font-size:32px;  
 }  
   
@@ -110,7 +108,7 @@ main>section>h2{
     margin-bottom:8px;  
     padding:5px 10px;  
     border-radius:20px;  
-    background:#F5E1E5;  
+    background:#F7EEE3;
     color:var(--btn2);  
     font-size:11px;  
     font-weight:bold;  
@@ -342,7 +340,6 @@ main>section>h2{
  
 .popup h2{ 
     margin-bottom:20px; 
-    font-family:Georgia,serif; 
 } 
  
 .close{ 

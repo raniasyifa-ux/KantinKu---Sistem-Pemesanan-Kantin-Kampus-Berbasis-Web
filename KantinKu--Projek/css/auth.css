@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
 :root {
-  --primary-pink: #D98F9D;
-  --primary-hover: #C57B89;
-  --light-pink: #F7F0F3;
-  --text-dark: #4A4144;
-  --text-muted: #6C6265;
-  --soft-white: #FFFDF9;
-  --danger: #E53E3E;
+  --primary-color: #C8553D;
+  --primary-hover: #A8432F;
+  --page-background: #F3E5D2;
+  --text-dark: #3B2A25;
+  --text-muted: #8A7B73;
+  --soft-white: #ffffff;
+  --danger: #c64040;
+  --secondary-color: #8A7B73;
+  --accent-color: #E2B659;
+  --border-color: #E8DDD0;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .auth-body {
@@ -22,8 +23,8 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: var(--light-pink);
-  background-image: repeating-linear-gradient(135deg, rgba(176, 115, 129, 0.035) 0, rgba(176, 115, 129, 0.035) 1px, transparent 1px, transparent 18px);
+  background: var(--page-background);
+  background-image: radial-gradient(ellipse at top, rgba(226, 182, 89, 0.18), transparent 60%);
   background-attachment: fixed;
   padding: 20px;
 }
@@ -35,7 +36,7 @@
   width: 100%;
   max-width: 420px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #EDF2F7;
+  border: 1px solid var(--border-color);
 }
 
 .auth-header {
@@ -79,7 +80,7 @@
 }
 
 .form-group input:focus {
-  border-color: var(--primary-pink);
+  border-color: var(--primary-color);
   background: var(--soft-white);
 }
 
@@ -92,7 +93,7 @@
 
 .forgot-link, .switch-auth a {
   font-size: 13px;
-  color: var(--primary-pink);
+  color: var(--primary-color);
   font-weight: 600;
   text-decoration: none;
 }
@@ -105,7 +106,7 @@
 }
 
 .btn-primary {
-  background: var(--primary-pink);
+  background: var(--primary-color);
   color: var(--soft-white);
   padding: 12px 32px;
   border: none;
@@ -139,8 +140,8 @@
 }
 
 .auth-role-links a.active {
-  border-color: var(--primary-pink);
-  background: #f7e9eb;
+  border-color: var(--primary-color);
+  background: #f7eee3;
   color: var(--text-dark);
 }
 
