@@ -78,21 +78,15 @@ function handleLogin(event) {
   const form = event.currentTarget;
   const userOrEmail = form.elements.namedItem('userOrEmail').value.trim().toLowerCase();
   const password = form.elements.namedItem('password').value;
-  const users = getUsers();
-  const account = users.find(item => item.username.toLowerCase() === userOrEmail || item.email.toLowerCase() === userOrEmail);
+  const account = getUsers().find(item => item.username.toLowerCase() === userOrEmail || item.email.toLowerCase() === userOrEmail);
 
   if (!account || account.password !== password) {
     showMessage('Username/email atau password tidak cocok.', 'error');
     return;
   }
   if (account.role !== selectedRole) {
-    if (selectedRole === 'penjual' && account.role === 'pembeli') {
-      account.role = 'penjual';
-      localStorage.setItem('kantinku_db', JSON.stringify(users));
-    } else {
-      showMessage(`Akun ini terdaftar sebagai ${account.role}.`, 'error');
-      return;
-    }
+    showMessage(`Akun ini terdaftar sebagai ${account.role}. Gunakan tautan akun ${account.role}.`, 'error');
+    return;
   }
 
   localStorage.setItem('kantinku_session', JSON.stringify(account));

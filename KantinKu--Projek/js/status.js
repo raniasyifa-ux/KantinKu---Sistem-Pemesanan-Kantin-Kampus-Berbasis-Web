@@ -8,11 +8,7 @@ function formatOrderDate(value) {
 }
 
 function renderOrders() {
-  const account = KantinKu.user();
-  const orders = KantinKu.orders()
-    .filter(order => account?.role === 'pembeli'
-      ? order.userId === account.email.toLowerCase()
-      : !account && order.userId === 'guest')
+  const orders = KantinKu.buyerOrders()
     .sort((first, second) => new Date(second.tanggal) - new Date(first.tanggal));
   const active = orders.filter(order => order.status !== 'Selesai');
   const history = orders.filter(order => order.status === 'Selesai');
@@ -29,23 +25,26 @@ function renderOrders() {
     ? history.map(renderOrderCard).join('')
     : '<p>Riwayat pesanan selesai akan muncul di sini.</p>';
   document.getElementById('detailPesanan').textContent = orders.length
-    ? `Pesanan terakhir: ${orders[0].id} · ${orders[0].status}`
+    ? `Nomor pesanan: ${orders[0].id} · ${orders[0].status}`
     : 'Belum ada pesanan. Pilih menu untuk memulai.';
-  document.getElementById('statusPesanan').textContent = orders[0]?.status || 'Belum ada pesanan';
+  document.getElementById('statusPesanan').textContent = orders[0]
+    ? `${orders[0].status} · ${isLocalPayment(orders[0]) ? 'Konfirmasi dari penjual' : orders[0].paymentStatus || 'Menunggu konfirmasi'}`
+    : 'Belum ada pesanan';
 }
 
 function renderOrderCard(order) {
   const safe = KantinKu.escapeHtml;
-  const paymentStatus = order.paymentStatus?.startsWith('Simulasi')
-    ? 'Menunggu verifikasi'
-    : order.paymentStatus || 'Menunggu verifikasi';
   const lines = order.items.map(item => `<li>${safe(item.nama)} × ${item.jumlah}</li>`).join('');
   const updates = (order.updates || []).map(update => `<li><span>${safe(update.status)}</span><time>${formatOrderDate(update.tanggal)}</time></li>`).join('');
   return `<article class="order-card">
     <div class="order-card-heading"><div><strong>${safe(order.id)}</strong><small>${formatOrderDate(order.tanggal)}</small></div><span class="order-status">${safe(order.status)}</span></div>
-    <p class="buyer-payment-status">Pembayaran: <strong>${safe(paymentStatus)}</strong></p>
+    <p class="buyer-payment-status">Status pembayaran: <strong>${safe(isLocalPayment(order) ? 'Konfirmasi dari penjual' : order.paymentStatus || 'Menunggu verifikasi')}</strong></p>
     <ul class="order-items">${lines}</ul>
     <details><summary>Lacak pesanan</summary><ol class="order-timeline">${updates}</ol></details>
     <div class="order-card-total"><span>${safe(order.metode || '-')}</span><strong>${KantinKu.money(order.total)}</strong></div>
   </article>`;
+}
+
+function isLocalPayment(order) {
+  return ['simulasi', 'local-unverified'].includes(order.paymentMode);
 }
