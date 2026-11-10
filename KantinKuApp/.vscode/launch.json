@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "KantinKu Pembeli (Main)",
+            "request": "launch",
+            "mainClass": "app.Main",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "KantinKu Penjual (Dashboard)",
+            "request": "launch",
+            "mainClass": "app.MainPenjual",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "KantinKu Antrian (Monitor)",
+            "request": "launch",
+            "mainClass": "app.MainAntri",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Test Runner",
+            "request": "launch",
+            "mainClass": "tests.TestRunner",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Comprehensive System Test",
+            "request": "launch",
+            "mainClass": "tests.ComprehensiveSystemTest",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

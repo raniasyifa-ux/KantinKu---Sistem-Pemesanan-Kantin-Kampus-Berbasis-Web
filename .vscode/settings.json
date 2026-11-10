@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "KantinKuApp/src"
+    ],
+    "java.project.outputPath": "KantinKuApp/out",
+    "java.project.referencedLibraries": [
+        "KantinKuApp/lib/**/*.jar"
+    ]
+}

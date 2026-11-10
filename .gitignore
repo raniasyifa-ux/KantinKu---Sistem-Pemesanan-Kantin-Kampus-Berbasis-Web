@@ -1,0 +1,22 @@
+# Compiled class files
+*.class
+**/out/
+**/bin/
+
+# Temporary and duplicate extract folders
+KantinKuApp_KEL1_mungkin_fix*
+KantinKuApp_KEL1_fix*
+*.zip
+*.rar
+
+# IDE and editor files
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
