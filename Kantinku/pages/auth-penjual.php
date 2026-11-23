@@ -11,7 +11,7 @@ header('Pragma: no-cache');
 $judulHalaman = "Akun Penjual - KantinKu";
 ?>
 <title><?php echo $judulHalaman; ?></title>
-  <link rel="stylesheet" href="../css/auth.css?v=20261110-2">
+  <link rel="stylesheet" href="../css/auth.css?v=20261123-4">
 </head>
 <body class="auth-body seller-auth-body" data-auth-role="penjual">
   <div class="auth-card">
@@ -19,7 +19,7 @@ $judulHalaman = "Akun Penjual - KantinKu";
       <div class="auth-header"><h2>Masuk ke toko</h2><p id="login-description">Kelola menu dan pesanan KantinKu</p></div>
       <form onsubmit="handleLogin(event)" novalidate autocomplete="off">
         <div class="form-group"><label>Username / Email</label><input type="text" name="userOrEmail" placeholder="Username atau email penjual" required></div>
-        <div class="form-group password-group"><label>Password</label><div class="password-input"><input type="password" name="password" placeholder="Password" required><button type="button" class="password-toggle" data-password-toggle aria-label="Tampilkan password">◉</button></div></div>
+        <div class="form-group password-group"><label>Password</label><div class="password-input"><input type="password" name="password" placeholder="Password" required><button type="button" class="password-toggle is-hidden" data-password-toggle aria-label="Tampilkan password"><span aria-hidden="true">👁</span></button></div></div>
         <div class="form-options"><a href="#" class="forgot-link" onclick="switchAuth('reset')">Lupa password?</a></div>
         <button type="submit" class="btn-primary auth-submit">Masuk ke dashboard</button>
       </form>
@@ -29,9 +29,9 @@ $judulHalaman = "Akun Penjual - KantinKu";
     <div id="register-box" hidden>
       <div class="auth-header"><h2>Daftarkan toko</h2><p id="register-description">Buat akun penjual untuk mengelola menu dan menerima pesanan.</p></div>
       <form onsubmit="handleRegister(event)" novalidate autocomplete="off">
-        <div class="form-group"><label>Nama toko / Username (4-12 karakter)</label><input type="text" name="username" placeholder="Contoh: KantinBunda" required></div>
+        <div class="form-group"><label>Nama toko / Username (4-12 karakter)</label><input type="text" name="username" placeholder="Contoh: KantinBunda" required minlength="4" maxlength="12"></div>
         <div class="form-group"><label>Email toko</label><input type="email" name="email" placeholder="toko@email.com" required></div>
-        <div class="form-group password-group"><label>Password (min. 8 karakter, huruf dan angka)</label><div class="password-input"><input type="password" name="password" placeholder="Buat password" required><button type="button" class="password-toggle" data-password-toggle aria-label="Tampilkan password">◉</button></div></div>
+        <div class="form-group password-group"><label>Password (min. 8 karakter, huruf dan angka)</label><div class="password-input"><input type="password" name="password" placeholder="Buat password" required><button type="button" class="password-toggle is-hidden" data-password-toggle aria-label="Tampilkan password"><span aria-hidden="true">👁</span></button></div></div>
         <button type="submit" class="btn-primary auth-submit">Buat akun penjual</button>
       </form>
       <p class="switch-auth">Sudah punya akun toko? <a href="#" onclick="switchAuth('login')">Masuk di sini</a></p>
@@ -41,12 +41,12 @@ $judulHalaman = "Akun Penjual - KantinKu";
       <form onsubmit="handleResetPassword(event)" novalidate autocomplete="off">
         <div class="form-group"><label>Username</label><input type="text" name="resetUsername" placeholder="Username terdaftar" required minlength="4" maxlength="12"></div>
         <div class="form-group"><label>Email toko</label><input type="email" name="resetEmail" placeholder="Email terdaftar" required></div>
-        <div class="form-group password-group"><label>Password baru</label><div class="password-input"><input type="password" name="newPassword" placeholder="Password baru" required><button type="button" class="password-toggle" data-password-toggle aria-label="Tampilkan password">◉</button></div></div>
+        <div class="form-group password-group"><label>Password baru</label><div class="password-input"><input type="password" name="newPassword" placeholder="Password baru" required><button type="button" class="password-toggle is-hidden" data-password-toggle aria-label="Tampilkan password"><span aria-hidden="true">👁</span></button></div></div>
         <button type="submit" class="btn-primary auth-submit">Simpan password</button>
       </form>
       <p class="switch-auth"><a href="#" onclick="switchAuth('login')">Kembali ke login toko</a></p>
     </div>
   </div>
-  <script src="../js/auth.js?v=20261110-2"></script>
+  <script src="../js/auth.js?v=20261123-4"></script>
 </body>
 </html>

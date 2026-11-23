@@ -14,16 +14,14 @@ $user = 'root';
 $password = '';
 $database = 'db_kantinku';
 
-$koneksi = mysqli_connect(
+$koneksi = @mysqli_connect(
     $host,
     $user,
     $password,
     $database
 );
 
-if (!$koneksi) {
-    die('Koneksi database gagal: ' . mysqli_connect_error());
+if ($koneksi) {
+    mysqli_set_charset($koneksi, 'utf8mb4');
 }
-
-mysqli_set_charset($koneksi, 'utf8mb4');
 ?>

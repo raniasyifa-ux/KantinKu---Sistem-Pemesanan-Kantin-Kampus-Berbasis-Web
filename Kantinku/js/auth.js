@@ -25,12 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('click', event => {
+  const dismiss = event.target.closest('[data-dismiss-feedback]');
+  if (dismiss) {
+    dismiss.closest('.auth-feedback')?.remove();
+    return;
+  }
+
   const toggle = event.target.closest('[data-password-toggle]');
   if (!toggle) return;
   const input = toggle.closest('.password-input').querySelector('input');
   const visible = input.type === 'text';
   input.type = visible ? 'password' : 'text';
   toggle.classList.toggle('is-visible', !visible);
+  toggle.classList.toggle('is-hidden', visible);
   toggle.setAttribute('aria-label', visible ? 'Tampilkan password' : 'Sembunyikan password');
 });
 
@@ -47,16 +54,27 @@ function showMessage(message, type = 'success', form = document.querySelector('#
   element.replaceChildren();
   element.setAttribute('role', type === 'error' ? 'alert' : 'status');
   const messages = String(message).split(/\r?\n/).filter(Boolean);
-  if (messages.length > 1) {
+  if (type === 'error') {
     const list = document.createElement('ul');
+    list.className = 'auth-feedback-list';
     messages.forEach(text => {
       const item = document.createElement('li');
-      item.textContent = text;
+      item.className = 'auth-feedback-message';
+      const content = document.createElement('span');
+      content.className = 'auth-feedback-content';
+      content.textContent = text;
+      item.append(content);
       list.append(item);
     });
-    element.append(list);
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'auth-feedback-close';
+    close.setAttribute('aria-label', 'Tutup pesan');
+    close.setAttribute('data-dismiss-feedback', '');
+    close.textContent = '×';
+    element.append(list, close);
   } else {
-    element.textContent = messages[0] || '';
+    element.textContent = messages.join('\n');
   }
 }
 
@@ -71,9 +89,17 @@ async function requestAuth(data) {
     body: JSON.stringify(data)
   });
   const contentType = response.headers.get('content-type') || '';
-  const result = contentType.includes('application/json')
-    ? await response.json()
-    : { success: false, message: 'Server tidak mengembalikan respons JSON. Pastikan migrasi database sudah diimpor dan Apache XAMPP aktif.' };
+  let result;
+  try {
+    result = contentType.includes('application/json')
+      ? await response.json()
+      : null;
+  } catch {
+    result = null;
+  }
+  if (!result) {
+    throw new Error('Server tidak dapat memproses permintaan. Pastikan MySQL dan Apache XAMPP aktif.');
+  }
   if (!response.ok || !result.success) {
     const error = new Error(result.message || 'Permintaan akun gagal diproses.');
     error.fields = result.fields;
@@ -93,6 +119,7 @@ function clearFields(form, fields) {
       input.type = 'password';
       const toggle = input.closest('.password-input').querySelector('[data-password-toggle]');
       toggle?.classList.remove('is-visible');
+      toggle?.classList.add('is-hidden');
       toggle?.setAttribute('aria-label', 'Tampilkan password');
     }
   });
@@ -104,6 +131,7 @@ function resetForm(form) {
     input.type = 'password';
     const toggle = input.closest('.password-input').querySelector('[data-password-toggle]');
     toggle?.classList.remove('is-visible');
+    toggle?.classList.add('is-hidden');
     toggle?.setAttribute('aria-label', 'Tampilkan password');
   });
   form.querySelectorAll('.is-invalid').forEach(input => {
@@ -143,9 +171,9 @@ async function handleRegister(event) {
   if (!username) {
     invalidFields.push('username');
     errors.push('Username belum diisi.');
-  } else if (!/^[a-zA-Z0-9]{4,12}$/.test(username)) {
+  } else if (!/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{4,12}$/.test(username)) {
     invalidFields.push('username');
-    errors.push('Username harus 4-12 karakter huruf atau angka.');
+    errors.push('Username harus 4-12 karakter, menggunakan huruf, angka, atau spasi.');
   }
   if (!email) {
     invalidFields.push('email');
@@ -220,9 +248,9 @@ async function handleResetPassword(event) {
   if (!username) {
     invalidFields.push('resetUsername');
     errors.push('Username belum diisi.');
-  } else if (!/^[a-zA-Z0-9]{4,12}$/.test(username)) {
+  } else if (!/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{4,12}$/.test(username)) {
     invalidFields.push('resetUsername');
-    errors.push('Username harus 4-12 karakter huruf atau angka.');
+    errors.push('Username harus 4-12 karakter, menggunakan huruf, angka, atau spasi.');
   }
   if (!email) {
     invalidFields.push('resetEmail');

@@ -3,9 +3,6 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 session_start();
 
-require_once __DIR__ . '/../koneksi.php';
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 function authResponse(int $status, array $data): void
 {
     http_response_code($status);
@@ -33,6 +30,11 @@ function publicAccount(array $account): array
 }
 
 try {
+    require_once __DIR__ . '/../koneksi.php';
+    if (!$koneksi) {
+        throw new RuntimeException('Database tidak dapat dihubungi.');
+    }
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $data = authInput();
     $action = $data['action'] ?? '';
 
@@ -42,8 +44,8 @@ try {
         $password = $data['password'] ?? '';
         $role = $data['role'] ?? '';
 
-        if (!preg_match('/^[a-zA-Z0-9]{4,12}$/', $username)) {
-            authResponse(422, ['success' => false, 'message' => 'Username harus 4-12 karakter huruf atau angka.', 'fields' => ['username']]);
+        if (!preg_match('/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{4,12}$/', $username)) {
+            authResponse(422, ['success' => false, 'message' => 'Username harus 4-12 karakter, menggunakan huruf, angka, atau spasi.', 'fields' => ['username']]);
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             authResponse(422, ['success' => false, 'message' => 'Format email tidak valid. Periksa kembali alamat email.', 'fields' => ['email']]);
@@ -146,7 +148,7 @@ try {
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) ||
             !in_array($role, ['pembeli', 'penjual'], true) ||
-            !preg_match('/^[a-zA-Z0-9]{4,12}$/', $username) ||
+            !preg_match('/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{4,12}$/', $username) ||
             !preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $password) ||
             preg_match('/\s/', $password)) {
             authResponse(422, ['success' => false, 'message' => 'Email, username, atau password baru tidak valid. Periksa format masing-masing kolom.', 'fields' => ['resetUsername', 'resetEmail', 'newPassword']]);
