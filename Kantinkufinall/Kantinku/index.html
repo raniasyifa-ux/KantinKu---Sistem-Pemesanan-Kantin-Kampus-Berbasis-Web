@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pesan makanan dan minuman favorit dari KantinKu, kantin kampus yang praktis dan mudah dipantau.">
+  <title>KantinKu - Home</title>
+  <link rel="stylesheet" href="css/style.css?v=20261123-1">
+</head>
+<body class="home-page" data-portal="pembeli">
+
+  <header class="navbar" data-app-header data-page="home"></header>
+
+  <main data-portal-content>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">KANTIN KAMPUS, LEBIH PRAKTIS</p>
+      <h1>Menu favoritmu, siap dipesan.</h1>
+      <p>Pilih makanan atau minuman favorit, pesan dari mana saja, lalu pantau pesananmu sampai siap diambil.</p>
+      <div class="hero-actions">
+        <a id="home-buyer-action" href="pages/auth-pembeli.php" class="btn-primary">Masuk ke portal pembeli</a>
+        <a id="home-dashboard-action" href="pages/auth-pembeli.php?view=register" class="btn-secondary">Daftarkan akun pembeli</a>
+        <a href="index-penjual.html" class="btn-seller">Buka portal penjual</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-menu" aria-labelledby="popular-menu-title">
+    <div class="popular-menu-heading">
+      <p class="eyebrow">MENU FAVORIT</p>
+      <h2 id="popular-menu-title">Pilihan yang paling banyak dicari</h2>
+      <p>Mulai dari makanan pengganjal lapar sampai minuman yang menyegarkan.</p>
+    </div>
+    <div class="popular-menu-grid">
+      <article class="popular-menu-card">
+        <img src="images/NASI GORENG.jpeg" alt="Sepiring nasi goreng dengan telur dan ayam" loading="lazy">
+        <div class="popular-menu-copy">
+          <span>Makanan favorit</span>
+          <h3>Nasi Goreng</h3>
+          <p>Nasi goreng gurih dengan telur dan ayam.</p>
+          <strong>Rp15.000</strong>
+        </div>
+      </article>
+      <article class="popular-menu-card">
+        <img src="images/PEMPEK.jpeg" alt="Seporsi pempek dengan kuah cuko" loading="lazy">
+        <div class="popular-menu-copy">
+          <span>Best seller</span>
+          <h3>Pempek</h3>
+          <p>Pempek ikan dengan kuah cuko khas.</p>
+          <strong>Rp15.000</strong>
+        </div>
+      </article>
+      <article class="popular-menu-card">
+        <img src="images/KOPI SUSU.jpeg" alt="Segelas es kopi susu dingin" loading="lazy">
+        <div class="popular-menu-copy">
+          <span>Minuman favorit</span>
+          <h3>Es Kopi Susu</h3>
+          <p>Kopi susu dingin dengan rasa creamy.</p>
+          <strong>Rp12.000</strong>
+        </div>
+      </article>
+    </div>
+    <a class="btn-primary popular-menu-action" href="pages/menu.html">Lihat semua menu</a>
+  </section>
+
+  <section class="home-order-callout">
+    <div>
+      <p class="eyebrow">PESANANMU, SELALU TERPANTAU</p>
+      <h2>Pesan dulu, cek progresnya kapan saja.</h2>
+      <p>Lihat progres pesanan dan riwayat pembelian setelah masuk ke akun pembeli.</p>
+      <a id="home-order-action" class="btn-primary" href="pages/auth-pembeli.php">Masuk untuk membuka pesanan</a>
+    </div>
+    <img class="home-story-image" src="images/NASI GORENG.jpeg" alt="Sajian nasi goreng kantin">
+  </section>
+
+  <section class="features">
+    <div class="features-heading">
+      <p class="eyebrow">LEBIH MUDAH SETIAP HARI</p>
+      <h3>Kenyamanan pesan, dalam setiap langkah.</h3>
+      <p>Dari memilih hidangan sampai mengambil pesanan, semuanya terasa lebih sederhana.</p>
+    </div>
+    <div class="feature-cards">
+      <div class="card">
+        <span class="feature-number">01</span>
+        <h4>Cepat & Praktis</h4>
+        <p>Pilih menu dan siapkan pesanan tanpa perlu mengantre panjang.</p>
+      </div>
+      <div class="card">
+        <span class="feature-number">02</span>
+        <h4>Pilihan Menu Lengkap</h4>
+        <p>Temukan hidangan dan minuman favorit dari pilihan kantin.</p>
+      </div>
+      <div class="card">
+        <span class="feature-number">03</span>
+        <h4>Pesanan Terpantau</h4>
+        <p>Cek perkembangan pesanan dengan nomor pesananmu.</p>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p>
+  </footer>
+
+  <script src="js/script.js?v=20261123-1"></script>
+</body>
+</html>
