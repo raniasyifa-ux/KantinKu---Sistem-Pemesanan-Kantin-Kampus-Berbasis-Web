@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KantinKu - Pembayaran</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=20261109-2">
 </head>
 <body data-portal="pembeli">
 
@@ -17,12 +17,6 @@
             <p>Periksa ringkasan pesanan dan pilih cara pembayaran.</p>
         </div>
         <div class="pembayaran-card">
-            <label class="buyer-name-field" for="buyer-name">
-                Nama pembeli
-                <input id="buyer-name" name="buyerName" type="text" required minlength="2" maxlength="60" autocomplete="name" placeholder="Masukkan nama untuk pesanan">
-                <small>Nama ini akan dicantumkan pada detail pesanan.</small>
-            </label>
-
             <h2>Ringkasan Pesanan</h2>
             <div id="ringkasanPesanan" class="summary-box" style="margin-top: 15px;"></div>
 
@@ -36,21 +30,7 @@
                 <label class="payment-option">
                     <input type="radio" name="metode" value="Tunai / COD"> Tunai / COD
                 </label>
-                <label class="payment-option">
-                    <input type="radio" name="metode" value="Transfer Bank"> Transfer Bank
-                </label>
             </div>
-
-            <label class="bank-selection" id="bank-selection" hidden>
-                Pilih bank untuk Virtual Account
-                <select id="bank-name">
-                    <option value="BCA">BCA</option>
-                    <option value="BNI">BNI</option>
-                    <option value="BRI">BRI</option>
-                    <option value="Mandiri">Mandiri</option>
-                    <option value="Permata">Permata</option>
-                </select>
-            </label>
 
             <div class="total-container">
                 <h3>Total Pembayaran: <span id="totalPembayaran" style="color: var(--primary-btn);">Rp0</span></h3>
@@ -73,16 +53,11 @@
                 <div class="payment-qr-frame"><div id="payment-qr-code"></div></div>
                 <p class="payment-total-row">Total pesanan <strong class="payment-amount"></strong></p>
             </section>
-            <section class="payment-method-panel" id="payment-bank-panel" hidden>
-                <p>Bank tujuan: <strong id="payment-bank-name"></strong></p>
-                <div class="virtual-account-number"><span>Nomor Virtual Account</span><strong id="payment-virtual-account"></strong></div>
-                <p class="payment-total-row">Total pesanan <strong class="payment-amount"></strong></p>
-                <button class="btn-secondary" id="copy-virtual-account" type="button">Salin nomor VA</button>
-            </section>
             <section class="payment-method-panel" id="payment-cash-panel" hidden>
                 <p>Tunjukkan nomor pesanan di kasir untuk pembayaran tunai.</p>
                 <p class="payment-total-row">Total pesanan <strong class="payment-amount"></strong></p>
             </section>
+            <p class="payment-error" id="payment-error" role="alert" hidden></p>
             <button class="btn-primary confirm-payment-button" id="confirm-payment" type="button"><span class="confirm-payment-icon" aria-hidden="true">✓</span><span>Konfirmasi pesanan</span></button>
         </div>
     </dialog>
@@ -91,8 +66,8 @@
         <p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p>
     </footer>
 
-    <script src="../js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="../js/pembayaran.js"></script>
+    <script src="../js/script.js?v=20261109-2"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="../js/pembayaran.js?v=20261109-2"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 let selectedItem = null;
 let selectedQuantity = 1;
 let selectedCategory = 'Semua';
+let menuCatalog = [];
 const favoritesKey = 'kantinku_favorites';
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderMenu();
     document.getElementById('menu-search').addEventListener('input', renderMenu);
     document.querySelectorAll('[data-category]').forEach(button => button.addEventListener('click', () => {
         selectedCategory = button.dataset.category;
@@ -34,10 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (button) openAddDialog(button.dataset.addItem);
     });
     window.addEventListener('storage', renderMenu);
+    KantinKu.loadCatalog('../api/menu.php')
+        .then(items => {
+            menuCatalog = items;
+            renderMenu();
+        })
+        .catch(error => {
+            document.getElementById('menu-results').textContent = 'Menu gagal dimuat. Periksa koneksi database lalu muat ulang halaman.';
+            document.querySelectorAll('.menu-container').forEach(container => { container.replaceChildren(); });
+            KantinKu.notify(error.message || 'Menu gagal dimuat dari database.', 'warning');
+            console.error('Gagal memuat katalog:', error);
+        });
 });
 
 function renderMenu() {
-    const products = KantinKu.catalog().filter(item => item.aktif !== false);
+    const products = menuCatalog.filter(item => item.aktif !== false);
     const favorites = readFavorites();
     const favoriteCount = document.getElementById('favorite-count');
     if (favoriteCount) favoriteCount.textContent = products.filter(item => favorites.includes(item.id)).length;
@@ -100,7 +111,7 @@ function toggleFavorite(itemId) {
 }
 
 function openAddDialog(itemId) {
-    selectedItem = KantinKu.catalog().find(item => item.id === itemId && item.aktif !== false);
+    selectedItem = menuCatalog.find(item => item.id === itemId && item.aktif !== false);
     if (!selectedItem) return;
     selectedQuantity = 1;
     const image = document.getElementById('dialog-product-image');

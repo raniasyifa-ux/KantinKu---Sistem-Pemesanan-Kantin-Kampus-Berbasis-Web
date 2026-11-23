@@ -370,24 +370,6 @@ footer {
   accent-color: var(--primary-btn);
 }
 
-.bank-selection {
-  display: grid;
-  gap: 8px;
-  margin: 16px 0;
-  color: var(--text-color);
-  font-weight: 700;
-}
-
-.bank-selection select {
-  min-height: 46px;
-  padding: 10px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  background: #fff9f0;
-  color: var(--text-color);
-  font: inherit;
-}
-
 .payment-dialog {
   width: min(92vw, 520px);
   max-height: 90vh;
@@ -486,37 +468,17 @@ footer {
   text-align: right;
 }
 
-.virtual-account-number {
-  display: grid;
-  gap: 8px;
-  margin: 18px 0;
-  padding: 16px;
-  border: 1px dashed var(--primary-btn);
-  border-radius: 12px;
-  background: #fff;
+.payment-error {
+  margin: 8px 0;
+  color: #9b2525;
+  font-weight: 700;
   text-align: left;
-}
-
-.virtual-account-number span {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-.virtual-account-number strong {
-  color: var(--primary-btn);
-  font-size: clamp(1.15rem, 5vw, 1.55rem);
-  letter-spacing: 0.08em;
-  overflow-wrap: anywhere;
 }
 
 .confirm-payment-button {
   width: 100%;
   min-height: 48px;
   margin-top: 8px;
-}
-
-.payment-dialog-content #copy-virtual-account {
-  min-height: 44px;
 }
 
 @media (max-width: 520px) {
@@ -682,7 +644,7 @@ hr {
 
 .navbar .nav-links {
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -705,19 +667,7 @@ hr {
 
 .navbar .nav-links a.active {
   border-bottom: 2px solid #718477;
-  border-radius: 0;
-}
-
-.navbar .nav-links a:last-child {
-  padding: 9px 12px;
   border-radius: 7px;
-  background: transparent;
-  color: var(--text-muted);
-}
-
-.navbar .nav-links a:last-child:hover,
-.navbar .nav-links a:last-child.active {
-  color: var(--text-color);
 }
 
 .navbar .nav-auth {
@@ -2666,7 +2616,6 @@ main > section:not(.best-seller) {
 }
 
 .payment-method-panel[hidden],
-.bank-selection[hidden],
 [hidden] {
   display: none !important;
 }
@@ -3500,7 +3449,7 @@ nav a:hover {
   .payment-dialog {
     width: min(90vw, 430px);
     max-width: calc(100vw - 32px);
-    max-height: min(74dvh, 600px);
+    max-height: min(calc(100dvh - 24px), 600px);
     border-radius: 20px;
   }
 
@@ -3554,11 +3503,6 @@ nav a:hover {
 
   .payment-dialog .payment-total-row {
     margin: 8px 0;
-  }
-
-  .payment-dialog .virtual-account-number {
-    margin: 10px 0;
-    padding: 12px;
   }
 
   .payment-dialog .confirm-payment-button {
@@ -3890,7 +3834,7 @@ nav a:hover {
 }
 
 .cart-table tbody tr:not(:has(.empty-cell)):hover {
-  background: #fff1df;
+  background: inherit;
 }
 
 .cart-table tbody tr:nth-child(even):not(:has(.empty-cell)) {
@@ -3898,7 +3842,7 @@ nav a:hover {
 }
 
 .cart-table tbody tr:nth-child(even):not(:has(.empty-cell)):hover {
-  background: #fff1df;
+  background: #fff9f0;
 }
 
 .cart-table td:nth-child(1) {
@@ -4855,6 +4799,47 @@ body.seller-portal-home main.seller-portal-content > section.seller-hero {
   max-width: 280px;
 }
 
+/* Keep buyer home and navigation visuals consistent with the seller portal. */
+.home-page:not(.seller-portal-home) .hero {
+  min-height: 480px;
+  height: auto;
+}
+
+.navbar .nav-links a,
+.navbar .nav-links a:hover,
+.navbar .nav-links a.active,
+.navbar .nav-links a.active:hover,
+.navbar .nav-links a:last-child,
+.navbar .nav-links a:last-child:hover,
+.navbar .nav-links a:last-child.active {
+  color: var(--text-muted);
+  padding: 8px 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+}
+
+.navbar .nav-links a:hover,
+.navbar .nav-links a:last-child:hover {
+  color: var(--text-muted);
+  background: #f1f4ef;
+}
+
+.navbar .nav-links a.active,
+.navbar .nav-links a.active:hover,
+.navbar .nav-links a:last-child.active {
+  color: var(--text-color);
+  background: #f1f4ef;
+  border-bottom: 2px solid #718477;
+}
+
+@media (max-width: 650px) {
+  .home-page:not(.seller-portal-home) .hero {
+    min-height: 400px;
+  }
+}
+
 .buyer-dashboard-main .buyer-welcome {
   position: relative;
   overflow: hidden;
@@ -5383,4 +5368,27 @@ body.seller-portal-home main.seller-portal-content > section.seller-hero {
   .seller-portal-home .seller-hero h1 {
     max-width: 210px;
   }
+}
+
+body.home-page:not(.seller-portal-home) > main[data-portal-content] {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.home-page:not(.seller-portal-home) > main[data-portal-content] > .hero {
+  width: 100%;
+  max-width: none;
+  height: calc(100vh - 72px);
+  height: calc(100svh - 72px);
+  min-height: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-image:
+    linear-gradient(100deg, rgba(59, 42, 37, 0.76), rgba(59, 42, 37, 0.18)),
+    url('../images/NASI GORENG.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

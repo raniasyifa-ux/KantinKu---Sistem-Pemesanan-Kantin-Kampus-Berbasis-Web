@@ -1,17 +1,26 @@
+<?php
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+$judulHalaman = "Dashboard Penjual - KantinKu";
+$namaPenjual = "Penjual KantinKu";
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Penjual - KantinKu</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title><?php echo $judulHalaman; ?></title>
+  <link rel="stylesheet" href="../css/style.css?v=20261109-2">
 </head>
 <body data-portal="penjual">
   <header class="navbar" data-app-header data-page="seller"></header>
   <main class="container seller-dashboard" data-protected-page="penjual">
     <div class="page-heading">
-      <div><p class="eyebrow">TOKO KANTINKU</p><h1>Kelola toko</h1><p>Atur menu, cek pembayaran, dan kabari pembeli tentang pesanannya.</p></div>
-      <button type="button" class="btn-primary" id="add-menu-button">＋ Tambah menu</button>
+      <div>
+  <p class="eyebrow"><?php echo $namaPenjual; ?></p>
+  <h1>Kelola toko</h1>
+  <p>Atur menu, cek pembayaran, dan kabari pembeli tentang pesanannya.</p>
+</div>      <button type="button" class="btn-primary" id="add-menu-button">＋ Tambah menu</button>
     </div>
     <section class="seller-stats" aria-label="Ringkasan penjualan">
       <article><span>Menunggu konfirmasi</span><strong id="count-new">0</strong></article>
@@ -36,6 +45,7 @@
     <section class="seller-orders-section" data-seller-panel="catalog" hidden>
       <div class="section-heading seller-tools catalog-tools">
         <div><h2>Menu Toko</h2><span id="catalog-result-count">Menu yang aktif akan muncul di halaman pembeli.</span></div>
+        <button type="button" class="btn-primary" data-add-menu>＋ Tambah menu</button>
         <div class="seller-filters catalog-filters">
           <label><span class="visually-hidden">Cari Menu</span><input id="catalog-search" type="search" placeholder="Cari nama menu"></label>
           <label><span class="visually-hidden">Kategori Menu</span><select id="catalog-category"><option value="Semua">Semua Kategori</option><option value="Makanan">Makanan</option><option value="Minuman">Minuman</option></select></label>
@@ -56,7 +66,7 @@
     </form>
   </dialog>
   <footer><p>&copy; 2026 KantinKu. Hak Cipta Dilindungi.</p></footer>
-  <script src="../js/script.js"></script>
-  <script src="../js/penjual.js"></script>
+  <script src="../js/script.js?v=20261109-2"></script>
+  <script src="../js/penjual.js?v=20261109-2"></script>
 </body>
 </html>

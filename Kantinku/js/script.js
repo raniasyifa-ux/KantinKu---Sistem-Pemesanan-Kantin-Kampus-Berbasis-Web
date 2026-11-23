@@ -1,4 +1,17 @@
 const KantinKu = (() => {
+  function requireLocalhost() {
+    const isLocalhost = location.protocol === 'http:' && location.hostname === 'localhost';
+    if (isLocalhost) return true;
+
+    document.documentElement.innerHTML = `
+      <head><meta charset="UTF-8"><title>Kantinku - Akses Ditolak</title></head>
+      <body><main style="max-width:640px;margin:15vh auto;padding:32px;font-family:Segoe UI,sans-serif;text-align:center">
+        <h1>Akses melalui XAMPP diperlukan</h1>
+        <p>Buka aplikasi melalui <strong>http://localhost/Kantinku/</strong> setelah Apache XAMPP aktif.</p>
+      </main></body>`;
+    return false;
+  }
+
   const sessionKey = 'kantinku_session';
   const ordersKey = 'kantinku_orders';
   const buyerOrdersKey = 'kantinku_buyer_orders';
@@ -106,6 +119,16 @@ const KantinKu = (() => {
     localStorage.setItem(catalogKey, JSON.stringify(items));
   }
 
+  async function loadCatalog(endpoint) {
+    const response = await fetch(endpoint);
+    const result = await response.json();
+    if (!response.ok || !result.success || !Array.isArray(result.data)) {
+      throw new Error(result.message || 'Katalog gagal dimuat dari database.');
+    }
+    saveCatalog(result.data);
+    return result.data;
+  }
+
   function money(amount) {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency', currency: 'IDR', maximumFractionDigits: 0
@@ -149,13 +172,14 @@ const KantinKu = (() => {
     const header = document.querySelector('[data-app-header]');
     if (!header) return;
     const account = user();
+    const displayName = value => String(value || '').toLocaleLowerCase('id-ID').replace(/(^|[\s-])\S/g, character => character.toLocaleUpperCase('id-ID'));
     const page = header.dataset.page;
     const sellerPortal = document.body.dataset.portal === 'penjual';
     const rootPage = page === 'home' || page === 'seller-home';
     const links = sellerPortal
       ? rootPage
-        ? [['index-penjual.html', 'Beranda Toko', 'seller-home'], ['pages/penjual.html', 'Dashboard Toko', 'seller']]
-        : [['../index-penjual.html', 'Beranda Toko', 'seller-home'], ['../pages/penjual.html', 'Dashboard Toko', 'seller']]
+        ? [['index-penjual.html', 'Beranda Toko', 'seller-home'], ['pages/penjual.php', 'Dashboard Toko', 'seller']]
+        : [['../index-penjual.html', 'Beranda Toko', 'seller-home'], ['../pages/penjual.php', 'Dashboard Toko', 'seller']]
       : rootPage
         ? [['index.html', 'Beranda', 'home'], ['pages/menu.html', 'Menu', 'menu'], ['pages/keranjang.html', 'Keranjang', 'cart'], ['pages/pembayaran.html', 'Pembayaran', 'payment'], ['pages/status.html', 'Pesanan Saya', 'status']]
         : [['../index.html', 'Beranda', 'home'], ['../pages/menu.html', 'Menu', 'menu'], ['../pages/keranjang.html', 'Keranjang', 'cart'], ['../pages/pembayaran.html', 'Pembayaran', 'payment'], ['../pages/status.html', 'Pesanan Saya', 'status']];
@@ -171,9 +195,11 @@ const KantinKu = (() => {
       <div class="nav-auth">
         ${sellerPortal
           ? account?.role === 'penjual'
-            ? `<span class="nav-greeting">Hai, ${escapeHtml(account.username)}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
-            : `<a class="btn-login" href="${rootPage ? 'pages/auth-penjual.html' : '../pages/auth-penjual.html'}">Masuk / Daftar Penjual</a>`
-          : ''}
+            ? `<span class="nav-greeting">Hai, ${escapeHtml(displayName(account.username))}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
+            : `<a class="btn-login" href="${rootPage ? 'pages/auth-penjual.php' : '../pages/auth-penjual.php'}">Masuk / Daftar Penjual</a>`
+          : account?.role === 'pembeli'
+            ? `<span class="nav-greeting">Hai, ${escapeHtml(displayName(account.username))}</span><button class="btn-login" type="button" data-logout>Keluar</button>`
+            : `<a class="btn-login" href="${rootPage ? 'pages/auth-pembeli.php' : '../pages/auth-pembeli.php'}">Masuk / Daftar Pembeli</a>`}
       </div>`;
     updateCartBadge();
   }
@@ -182,8 +208,22 @@ const KantinKu = (() => {
     const buyerAction = document.getElementById('home-buyer-action');
     if (!buyerAction) return;
 
-    buyerAction.href = 'pages/menu.html';
-    buyerAction.textContent = 'Jelajahi menu';
+    const account = user();
+    const isBuyer = account?.role === 'pembeli';
+    buyerAction.href = isBuyer ? 'pages/menu.html' : 'pages/auth-pembeli.php';
+    buyerAction.textContent = isBuyer ? 'Jelajahi menu' : 'Masuk ke portal pembeli';
+
+    const dashboardAction = document.getElementById('home-dashboard-action');
+    if (dashboardAction) {
+      dashboardAction.href = isBuyer ? 'pages/pembeli.html' : 'pages/auth-pembeli.php?view=register';
+      dashboardAction.textContent = isBuyer ? 'Lihat pesanan saya' : 'Daftarkan akun pembeli';
+    }
+
+    const orderCallout = document.getElementById('home-order-action');
+    if (orderCallout) {
+      orderCallout.href = isBuyer ? 'pages/pembeli.html' : 'pages/auth-pembeli.php';
+      orderCallout.textContent = isBuyer ? 'Buka pesanan' : 'Masuk untuk membuka pesanan';
+    }
   }
 
   function escapeHtml(value) {
@@ -196,14 +236,14 @@ const KantinKu = (() => {
     const content = document.querySelector('[data-protected-page]');
     if (!content) return;
     const requiredRole = content.dataset.protectedPage;
-    if (requiredRole === 'pembeli') return;
     const account = user();
     if (account?.role === requiredRole) return;
 
     content.hidden = true;
     if (!account) {
-      const next = encodeURIComponent(location.pathname.split('/').pop() || '../index.html');
-      const authPage = requiredRole === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
+      const currentPage = location.pathname.split('/').pop() || 'index.html';
+      const next = encodeURIComponent(`../pages/${currentPage}`);
+      const authPage = requiredRole === 'penjual' ? '../pages/auth-penjual.php' : '../pages/auth-pembeli.php';
       notify('Silakan masuk atau daftar terlebih dahulu untuk membuka halaman ini.', 'warning', {
         href: `${authPage}?next=${next}`,
         label: `Masuk sebagai ${requiredRole}`
@@ -217,19 +257,32 @@ const KantinKu = (() => {
   function guardPortalEntry() {
     const portal = document.body.dataset.portal;
     const account = user();
-    if (portal !== 'penjual' || !account || account.role === portal) return;
+    if (!portal || !account || account.role === portal) return;
     const content = document.querySelector('[data-portal-content]');
     if (content) content.hidden = true;
     notify(`Portal ${portal} terkunci karena sesi ${account.role} masih aktif. Keluar terlebih dahulu untuk berpindah portal.`, 'warning');
   }
 
-  function logout() {
+  async function logout() {
     const account = user();
-    localStorage.removeItem(sessionKey);
-    location.href = account?.role === 'penjual' ? '../pages/auth-penjual.html' : '../pages/auth.html';
+    const inPagesDirectory = /\/pages\/[^/]+$/i.test(location.pathname);
+    const authPath = account?.role === 'penjual' ? 'auth-penjual.php' : 'auth-pembeli.php';
+    const authUrl = inPagesDirectory ? authPath : `pages/${authPath}`;
+    const logoutApi = inPagesDirectory ? '../api/auth.php' : 'api/auth.php';
+    try {
+      await fetch(logoutApi, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } finally {
+      localStorage.removeItem(sessionKey);
+      location.replace(authUrl);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    if (!requireLocalhost()) return;
     renderHeader();
     guardPortalEntry();
     renderHomeActions();
@@ -239,7 +292,7 @@ const KantinKu = (() => {
     });
   });
 
-  return { user, cart, saveCart, orders, saveOrders, buyerOrders, saveBuyerOrderId, catalog, saveCatalog, storeId, money, notify, escapeHtml, updateCartBadge };
+  return { user, cart, saveCart, orders, saveOrders, buyerOrders, saveBuyerOrderId, catalog, saveCatalog, loadCatalog, storeId, money, notify, escapeHtml, updateCartBadge };
 })();
 
 window.KantinKu = KantinKu;
